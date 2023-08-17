@@ -103,6 +103,8 @@
         .tweetContent {
           display: flex;
           height: 75%;
+          color: #171725;
+          font-size: 16px;
         }
 
         .bottomInfo {
@@ -123,6 +125,9 @@
               display: flex;
               justify-content: center;
               align-items: center;
+              font-size: 14px;
+              color: #6C757D;
+              font-weight: 700;
             }
           }
 
@@ -140,6 +145,9 @@
               display: flex;
               justify-content: center;
               align-items: center;
+              font-size: 14px;
+              color: #6C757D;
+              font-weight: 700;
             }
           }
         }

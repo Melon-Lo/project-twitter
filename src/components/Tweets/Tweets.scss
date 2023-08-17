@@ -1,6 +1,6 @@
 .tweetsContainer {
   border: 1px solid #E6ECF0;
-  width: 50vw;
+  width: 40vw;
   height: 100vh;
 
   .topSection {
@@ -13,7 +13,9 @@
       border-bottom: 1px solid #E6ECF0;
       height: 50px;
       margin: 0;
-      font-weight: 800;
+      font-weight: 700;
+      color: #171725;
+      font-size: 24px;
     }
 
     .AddTweetBox {
@@ -25,7 +27,6 @@
         padding: 20px;
         width: 50px;
         height: 50px;
-        
       }
 
       .addTweetContent {
@@ -36,6 +37,7 @@
         align-items: flex-start;
         padding: 15px 5px;
         color: #6C757D;
+        font-size: 18px;
       }
 
       .submitButton {
@@ -48,70 +50,96 @@
         border-radius: 50px;
         background-color: #FF6600;
         color: white;
+        font-size: 16px;
       }
     }
   }
 
   .bottomSection {
-    
-    .tweetsBox {
+    display: flex;
+    flex-direction: column;
+
+    .tweetItem {
       display: flex;
-      flex-direction: column;
+      height: 136px;
 
-      .tweetItem {
-        display: flex;
-        height: 136px;
+      .avatarBox {
+        padding: 20px;
+        width: 50px;
+        height: 50px;
+        border-radius: 50%;
+      }
 
-        .avatarBox {
-          padding: 20px;
-          width: 50px;
-          height: 50px;
-          border-radius: 50%;
+      .tweetInfo {
+        width: 100%;
+
+        .topInfo {
+          display: flex;
+          justify-content: flex-start;
+          align-items: flex-end;
+          height: 15%;
+          padding: 5px 0;
+
+          .name {
+            font-weight: 700;
+            margin: 0 1px;
+            font-size: 16px;
+          }
+
+          .account {
+            font-size: 14px;
+            color: #6C757D;
+            margin: 0 1px;
+            font-size: 14px;
+          }
+
+          .time {
+            font-size: 14px;
+            color: #6C757D;
+            margin: 0 1px;
+          }
         }
 
-        .tweetInfo {
-          width: 100%;
+        .tweetContent {
+          display: flex;
+          height: 75%;
+        }
 
-          .topInfo {
+        .bottomInfo {
+          display: flex;
+          height: 15%;
+
+          .comments {
+            margin: 3px;
             display: flex;
-            justify-content: flex-start;
-            align-items: flex-end;
-            height: 15%;
-            padding: 5px 0;
 
-            .name {
-              font-weight: 700;
-              margin: 0 1px;
+            .iconBox {
+              display: flex;
+              justify-content: center;
+              align-items: center;
             }
 
-            .account {
-              font-size: 14px;
-              color: #6C757D;
-              margin: 0 1px;
-            }
-
-            .time {
-              font-size: 14px;
-              color: #6C757D;
-              margin: 0 1px;
+            .number {
+              display: flex;
+              justify-content: center;
+              align-items: center;
             }
           }
 
-          .tweetContent {
+          .likes {
+            margin: 3px;
             display: flex;
-            height: 75%;
-          }
 
-          .bottomInfo {
-            display: flex;
-            height: 15%;
-
-            .comments {
-              margin: 3px;
+            .iconBox {
+              display: flex;
+              justify-content: center;
+              align-items: center;
             }
 
-            .likes {
-              margin: 3px;
+            .number {
+              display: flex;
+              justify-content: center;
+              align-items: center;
             }
           }
         }

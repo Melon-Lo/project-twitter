@@ -1,0 +1,137 @@
+.tweetsContainer {
+  border: 1px solid #E6ECF0;
+  width: 50vw;
+  height: 100vh;
+
+  .topSection {
+    border-bottom: 10px solid #E6ECF0;
+
+    .title {
+      display: flex;
+      align-items: center;
+      padding-left: 15px;
+      border-bottom: 1px solid #E6ECF0;
+      height: 50px;
+      margin: 0;
+      font-weight: 800;
+    }
+
+    .AddTweetBox {
+      position: relative;
+      display: flex;
+      height: 130px;
+
+      .avatarBox {
+        padding: 20px;
+        width: 50px;
+        height: 50px;
+        
+      }
+
+      .addTweetContent {
+        width: 100%;
+        height: 100%;
+        display: flex;
+        justify-content: flex-start;
+        align-items: flex-start;
+        padding: 15px 5px;
+        color: #6C757D;
+      }
+
+      .submitButton {
+        position: absolute;
+        right: 10px;
+        bottom: 10px;
+        width: 64px;
+        height: 40px;
+        border: none;
+        border-radius: 50px;
+        background-color: #FF6600;
+        color: white;
+      }
+    }
+  }
+
+  .bottomSection {
+    
+    .tweetsBox {
+      display: flex;
+      flex-direction: column;
+
+      .tweetItem {
+        display: flex;
+        height: 136px;
+
+        .avatarBox {
+          padding: 20px;
+          width: 50px;
+          height: 50px;
+          border-radius: 50%;
+        }
+
+        .tweetInfo {
+          width: 100%;
+
+          .topInfo {
+            display: flex;
+            justify-content: flex-start;
+            align-items: flex-end;
+            height: 15%;
+            padding: 5px 0;
+
+            .name {
+              font-weight: 700;
+              margin: 0 1px;
+            }
+
+            .account {
+              font-size: 14px;
+              color: #6C757D;
+              margin: 0 1px;
+            }
+
+            .time {
+              font-size: 14px;
+              color: #6C757D;
+              margin: 0 1px;
+            }
+          }
+
+          .tweetContent {
+            display: flex;
+            height: 75%;
+          }
+
+          .bottomInfo {
+            display: flex;
+            height: 15%;
+
+            .comments {
+              margin: 3px;
+            }
+
+            .likes {
+              margin: 3px;
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+// avatar style
+
+.avatar {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+// icon style
+
+.icon {
+  width: 16px;
+  height: 16px;
+}

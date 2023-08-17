@@ -1,12 +1,12 @@
 import './App.css';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
-import { HomePage } from 'pages/HomePage';
-import { AdminLoginPage } from 'pages/AdminLoginPage';
-import { AdminPage } from 'pages/AdminPage';
-import { LoginPage } from 'pages/LoginPage';
-import { SettingPage } from 'pages/SettingPage';
-import { SignUpPage } from 'pages/SignUpPage';
-import { UserPage } from 'pages/UserPage';
+import { HomePage } from 'pages/HomePage/HomePage';
+import { AdminLoginPage } from 'pages/AdminLoginPage/AdminLoginPage';
+import { AdminPage } from 'pages/AdminPage/AdminPage';
+import { LoginPage } from 'pages/LoginPage/LoginPage';
+import { SettingPage } from 'pages/SettingPage/SettingPage';
+import { SignUpPage } from 'pages/SignUpPage/SignUpPage';
+import { UserPage } from 'pages/UserPage/UserPage';
 
 
 function App() {

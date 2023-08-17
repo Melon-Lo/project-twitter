@@ -1,3 +1,5 @@
+import './SideBar.scss'
+
 export const SideBar = () => {
   return (
     <div className="sideBarContainer">
@@ -8,7 +10,7 @@ export const SideBar = () => {
             <div className="function">個人資料</div>
             <div className="function">設定</div>
           </div>
-        <div className="articlesButton">推文</div>
+        <button className="tweetsButton">推文</button>
       </div>
       <div className="bottomSection">
         <div className="logoutBox">登出</div>

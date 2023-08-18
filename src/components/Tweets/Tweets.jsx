@@ -5,7 +5,7 @@ import closeIcon from 'assets/icons/close@2x.png'
 import { useContext } from 'react'
 import { ModalContext } from 'context/ModalContext'
 import clsx from 'clsx'
-import { BrowserRouter, Link } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 
 // tweet types
 

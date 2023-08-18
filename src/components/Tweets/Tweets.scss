@@ -113,7 +113,7 @@
           font-size: 16px;
         }
 
-        .bottomInfo {
+        .iconInfo {
           display: flex;
           height: 15%;
 
@@ -156,6 +156,20 @@
               font-size: 14px;
               color: #6C757D;
               font-weight: 700;
+            }
+          }
+        }
+
+        .replyInfo {
+          display: flex;
+
+          .replyTo {
+            font-size: 14px;
+            color: #6C757D;
+            font-weight: 400;
+
+            b {
+              color: #FF6600;
             }
           }
         }

@@ -4,6 +4,7 @@ import LikeIcon from 'assets/icons/like_2@2x.png'
 import closeIcon from 'assets/icons/close@2x.png'
 import { useContext } from 'react'
 import { ModalContext } from 'context/ModalContext'
+import clsx from 'clsx'
 
 // tweet types
 
@@ -57,10 +58,10 @@ const Tweet = ({ children }) => {
 
 // modal types
 
-const Modal = ({ placeholder, buttonContext, setShowModal, setShowReplyModal, type }) => {
+const Modal = ({ placeholder, buttonContext, showModal, setShowModal, showReplyModal, setShowReplyModal, type }) => {
 
   return (
-    <div className="addTweetModalBox">
+    <div className={clsx('', {postModalBox: showModal, replyModalBox: showReplyModal })}>
       <div className="topBar">
         <div className="iconBox" onClick={() =>{
           if(type === 'post') {
@@ -72,9 +73,9 @@ const Modal = ({ placeholder, buttonContext, setShowModal, setShowReplyModal, ty
           <img className="closeIcon" src={closeIcon} alt="closeIcon"/>
         </div>
       </div>
-      {/* {showReplyModal &&
+      {showReplyModal &&
         <Tweet children={<ReplyInfo />} />
-      } */}
+      }
       <div className="avatarBox"><img className="avatar" src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8M3x8cmFuZG9tJTIwcGVvcGxlfGVufDB8fDB8fHww&auto=format&fit=crop&w=600&q=60" alt="avatar" /></div>
       <textarea className="addTweetContent" type="text" placeholder={placeholder}></textarea>
       <button className="submitButton">
@@ -97,7 +98,8 @@ export const Tweets = () => {
           <Modal 
             type={'reply'}
             placeholder={'推你的回覆'} 
-            buttonContext={'回覆'} 
+            buttonContext={'回覆'}
+            showReplyModal={showReplyModal} 
             setShowReplyModal={setShowReplyModal} 
           />
         }
@@ -106,6 +108,7 @@ export const Tweets = () => {
             type={'post'}
             placeholder={'有什麼新鮮事？'} 
             buttonContext={'推文'} 
+            showModal={showModal}
             setShowModal={setShowModal}
           />
         }

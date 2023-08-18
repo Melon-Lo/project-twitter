@@ -20,6 +20,7 @@ function App() {
           <Route path="setting" element={<SettingPage />}></Route>
           <Route path="user" element={<UserPage />}></Route>
           <Route path="admin" element={<AdminPage />}></Route>
+          <Route path="main" element={<HomePage />}></Route>
           <Route path="*" element={<HomePage />}></Route>
         </Routes>
       </BrowserRouter>

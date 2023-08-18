@@ -1,15 +1,44 @@
 import './Tweets.scss'
 import ChatIcon from 'assets/icons/Chat_2@2x.png'
 import LikeIcon from 'assets/icons/like_2@2x.png'
+import closeIcon from 'assets/icons/close@2x.png'
+import { useContext } from 'react'
+import { ModalContext } from 'context/ModalContext'
+
+
+const AddTweetModal = () => {
+  const { setShowModal} = useContext(ModalContext)
+  
+  return (
+    <div className="addTweetModalBox">
+      <div className="topBar">
+        <div className="iconBox" onClick={() => setShowModal(false)}>
+          <img className="closeIcon" src={closeIcon} alt="closeIcon"/>
+        </div>
+      </div>
+      <div className="avatarBox"><img className="avatar" src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8M3x8cmFuZG9tJTIwcGVvcGxlfGVufDB8fDB8fHww&auto=format&fit=crop&w=600&q=60" alt="avatar" /></div>
+      <textarea className="addTweetContent" type="text" placeholder="有什麼新鮮事？"></textarea>
+      {/* <div className="addTweetContent">有什麼新鮮事？</div> */}
+      <button className="submitButton">
+        推文
+      </button>
+    </div>
+  )
+}
 
 export const Tweets = () => {
+  const { showModal, setShowModal} = useContext(ModalContext)
+
   return (
     <div className="tweetsContainer">
       <div className="topSection">
         <p className="title">首頁</p>
+        {showModal &&
+          <AddTweetModal />
+        }
         <div className="AddTweetBox">
           <div className="avatarBox"><img className="avatar" src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8M3x8cmFuZG9tJTIwcGVvcGxlfGVufDB8fDB8fHww&auto=format&fit=crop&w=600&q=60" alt="avatar" /></div>
-          <div className="addTweetContent">有什麼新鮮事？</div>
+          <div className="addTweetContent" onClick={() => setShowModal(true)}>有什麼新鮮事？</div>
           <button className="submitButton">
             推文
           </button>
@@ -102,7 +131,8 @@ export const Tweets = () => {
               </div>
             </div>
           </div>
-        </div><div className="tweetItem">
+        </div>
+        <div className="tweetItem">
           <div className="avatarBox"><img className="avatar" src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8M3x8cmFuZG9tJTIwcGVvcGxlfGVufDB8fDB8fHww&auto=format&fit=crop&w=600&q=60" alt="avatar" /></div>
           <div className="tweetInfo">
             <div className="topInfo">
@@ -130,7 +160,8 @@ export const Tweets = () => {
               </div>
             </div>
           </div>
-        </div><div className="tweetItem">
+        </div>
+        <div className="tweetItem">
           <div className="avatarBox"><img className="avatar" src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8M3x8cmFuZG9tJTIwcGVvcGxlfGVufDB8fDB8fHww&auto=format&fit=crop&w=600&q=60" alt="avatar" /></div>
           <div className="tweetInfo">
             <div className="topInfo">
@@ -158,7 +189,8 @@ export const Tweets = () => {
               </div>
             </div>
           </div>
-        </div><div className="tweetItem">
+        </div>
+        <div className="tweetItem">
           <div className="avatarBox"><img className="avatar" src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8M3x8cmFuZG9tJTIwcGVvcGxlfGVufDB8fDB8fHww&auto=format&fit=crop&w=600&q=60" alt="avatar" /></div>
           <div className="tweetInfo">
             <div className="topInfo">

@@ -8,15 +8,15 @@ const Reply = () => {
   return (
     <div className="reply">
       <div className="replyLeft">
-        <img className="avatar" src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8M3x8cmFuZG9tJTIwcGVvcGxlfGVufDB8fDB8fHww&auto=format&fit=crop&w=600&q=60" alt="avatar" />
+        <img className="avatar" src="https://marketplace.canva.com/EAFltIh8PKg/1/0/1600w/canva-cute-anime-cartoon-illustration-girl-avatar-J7nVyTlhTAE.jpg" alt="avatar" />
       </div>
       <div className="replyRight">
         <div className="data">
-          <div className="name">Andy</div>
-          <div className="account">@andy</div>
+          <div className="name">Anna</div>
+          <div className="account">@anna</div>
           <div className="time">．3小時</div>
         </div>
-        <div className="replyTo">回覆<b> @Apple</b></div>
+        <div className="replyTo">回覆<b> @chris</b></div>
         <div className="content">沒錯，每天都要加油！</div>
       </div>
     </div>
@@ -30,9 +30,7 @@ export const ReplyList = () => {
     <div className="replyContainer">
       <div className="topSection">
         <div className="title">
-          <div className="iconBox" onClick={() => {
-            navigate('/main')
-          }}>
+          <div className="iconBox" onClick={() => navigate('/main')}>
             <img className="icon" src={BackIcon} alt="backIcon" />
           </div>
           <p>推文</p>
@@ -40,21 +38,21 @@ export const ReplyList = () => {
         <div className="tweet">
           <div className="tweetTop">
             <div className="avatarBox">
-              <img className="avatar" src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8M3x8cmFuZG9tJTIwcGVvcGxlfGVufDB8fDB8fHww&auto=format&fit=crop&w=600&q=60" alt="avatar" />
+              <img className="avatar" src="https://avatoon.me/wp-content/uploads/2021/09/Cartoon-Pic-Ideas-for-DP-Profile-02-768x768.png" alt="avatar" />
             </div>
             <div className="info">
-              <div className="name">Apple</div>
-              <div className="account">@apple</div>
+              <div className="name">Chris</div>
+              <div className="account">@chris</div>
             </div>
           </div>
           <div className="tweetMiddle">
-            <div className="content">今天要加油哦！</div>
+            <div className="content">今天天氣真好</div>
             <div className="time">上午11:00．2023年8月19日</div>
           </div>
           <div className="tweetBottom">
             <div className="dataCount">
-              <div className="count"><b>34</b>回覆</div>
-              <div className="count"><b>808</b>喜歡次數</div>
+              <div className="count"><b>13</b>回覆</div>
+              <div className="count"><b>99</b>喜歡次數</div>
             </div>
             <div className="iconSection">
               <div className="iconBox">
@@ -68,6 +66,9 @@ export const ReplyList = () => {
         </div>
       </div>
       <div className="bottomSection">
+        <Reply />
+        <Reply />
+        <Reply />
         <Reply />
       </div>
     </div>

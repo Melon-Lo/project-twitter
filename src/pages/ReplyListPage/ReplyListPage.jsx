@@ -3,6 +3,7 @@ import { SideBar } from "components/SideBar/SideBar";
 import { Recommendation } from 'components/Recommendation/Recommendation';
 import { useContext } from 'react';
 import { ModalContext } from 'context/ModalContext';
+import { ReplyList } from 'components/ReplyList/ReplyList';
 
 export const ReplyListPage = () => {
   const { showReplyModal } = useContext(ModalContext)
@@ -12,6 +13,7 @@ export const ReplyListPage = () => {
         <div className="grayBackground"></div>
       }
       <SideBar />
+      <ReplyList />
       <Recommendation />
     </div>
   )

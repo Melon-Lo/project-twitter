@@ -2,6 +2,7 @@ import './Tweet.scss'
 import ChatIcon from 'assets/icons/Chat_2@2x.png'
 import LikeIcon from 'assets/icons/like_2@2x.png'
 import { Link } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 
 // tweet types
 
@@ -39,16 +40,18 @@ export const ReplyInfo = () => {
 }
 
 export const Tweet = ({ children }) => {
+  const navigate = useNavigate()
+
   return (
     <div className="tweetItem">
-      <div className="avatarBox"><img className="avatar" src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8M3x8cmFuZG9tJTIwcGVvcGxlfGVufDB8fDB8fHww&auto=format&fit=crop&w=600&q=60" alt="avatar" /></div>
+      <div className="avatarBox"><img className="avatar" src="https://avatoon.me/wp-content/uploads/2021/09/Cartoon-Pic-Ideas-for-DP-Profile-02-768x768.png" alt="avatar" /></div>
       <div className="tweetInfo">
         <div className="topInfo">
-          <div className="name">Anna</div>
+          <div className="name">Chris</div>
           <div className="account">@Anna</div>
           <div className="time">·3小時</div>
         </div>
-        <div className="tweetContent">今天天氣真好</div>
+        <div className="tweetContent" onClick={() => navigate('/reply_list')}>今天天氣真好</div>
         {children}
       </div>
     </div>

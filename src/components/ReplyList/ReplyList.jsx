@@ -2,6 +2,7 @@ import './ReplyList.scss'
 import BackIcon from 'assets/icons/back@2x.png'
 import ReplyIcon from 'assets/icons/reply@2x.png'
 import LikeIcon from 'assets/icons/like_2@2x.png'
+import { useNavigate } from 'react-router'
 
 const Reply = () => {
   return (
@@ -23,11 +24,15 @@ const Reply = () => {
 }
 
 export const ReplyList = () => {
+  const navigate = useNavigate()
+
   return (
     <div className="replyContainer">
       <div className="topSection">
         <div className="title">
-          <div className="iconBox">
+          <div className="iconBox" onClick={() => {
+            navigate('/main')
+          }}>
             <img className="icon" src={BackIcon} alt="backIcon" />
           </div>
           <p>推文</p>

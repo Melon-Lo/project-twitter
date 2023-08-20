@@ -128,69 +128,6 @@
     }
   }
 
-  .bottomSection {
-
-    .reply {
-      display: flex;
-      padding: 15px;
-      border-bottom: 1px solid #E6ECF0;
-      
-      .replyLeft {
-        margin-right: 15px;
-
-        // .avatar {
-        // }
-      }
-
-      .replyRight {
-
-        .data {
-          display: flex;
-          align-items: center;
-          padding: 5px 0;
-
-          .name {
-            color: #171725;
-            font-size: 16px;
-            font-weight: 700;
-            margin-right: 5px;
-          }
-
-          .account {
-            color: #6C757D;
-            font-size: 14px;
-            font-weight: 400;
-          }
-
-          .time {
-            color: #6C757D;
-            font-size: 14px;
-            font-weight: 400;
-          }
-        }
-
-        .replyTo {
-          padding: 5px 0;
-          color: #6C757D;
-          font-size: 14px;
-          font-weight: 400;
-
-          b {
-            color: #FF6600;
-            cursor: pointer;
-          }
-        }
-
-        .content {
-          padding: 5px 0;
-          color: #171725;
-          font-size: 16px;
-          font-weight: 400;
-        }
-      }
-    }
-  }
-
   // scrollbar style 
 
   &::-webkit-scrollbar {

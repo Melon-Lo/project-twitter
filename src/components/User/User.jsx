@@ -3,10 +3,44 @@ import { useContext } from 'react'
 import { ModalContext } from 'context/ModalContext'
 import BackIcon from 'assets/icons/back@2x.png'
 import { Tweet, IconInfo } from 'components/Tweet/Tweet'
+import { Reply } from 'components/Reply/Reply'
+
+const UserTweet = () => {
+  const { setShowReplyModal } = useContext(ModalContext)
+  return (
+    <>
+      <Tweet children={<IconInfo setShowReplyModal={setShowReplyModal} />} />
+      <Tweet children={<IconInfo setShowReplyModal={setShowReplyModal} />} />
+      <Tweet children={<IconInfo setShowReplyModal={setShowReplyModal} />} />
+      <Tweet children={<IconInfo setShowReplyModal={setShowReplyModal} />} />
+    </>
+  )
+}
+
+const UserReply = () => {
+  return (
+    <>
+      <Reply />
+      <Reply />
+      <Reply />
+      <Reply />
+    </>
+  )
+}
+
+const UserLike = () => {
+  const { setShowReplyModal } = useContext(ModalContext)
+  return (
+    <>
+      <Tweet children={<IconInfo setShowReplyModal={setShowReplyModal} />} />
+      <Tweet children={<IconInfo setShowReplyModal={setShowReplyModal} />} />
+      <Tweet children={<IconInfo setShowReplyModal={setShowReplyModal} />} />
+      <Tweet children={<IconInfo setShowReplyModal={setShowReplyModal} />} />
+    </>
+  ) 
+}
 
 export const User = () => {
-  const { setShowReplyModal } = useContext(ModalContext)
-
   return (
     <div className="userContainer">
       <div className="topSection">
@@ -51,10 +85,9 @@ export const User = () => {
           <div className="option">喜歡的內容</div>
         </div>
         <div className="content">
-          <Tweet children={<IconInfo setShowReplyModal={setShowReplyModal} />} />
-          <Tweet children={<IconInfo setShowReplyModal={setShowReplyModal} />} />
-          <Tweet children={<IconInfo setShowReplyModal={setShowReplyModal} />} />
-          <Tweet children={<IconInfo setShowReplyModal={setShowReplyModal} />} />
+          <UserTweet />
+          {/* <UserReply /> */}
+          {/* <UserLike /> */}
         </div>
       </div>
     </div>

@@ -1,4 +1,4 @@
-import './Tweets.scss'
+import './TweetList.scss'
 import { useContext } from 'react'
 import { ModalContext } from 'context/ModalContext'
 import { Tweet, IconInfo } from 'components/Tweet/Tweet'

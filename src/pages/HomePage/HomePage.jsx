@@ -1,6 +1,6 @@
 import './HomePage.scss'
 import { SideBar } from "components/SideBar/SideBar";
-import { Tweets } from "components/Tweets/Tweets";
+import { Tweets } from "components/TweetList/TweetList";
 import { Recommendation } from 'components/Recommendation/Recommendation';
 import { useContext } from 'react';
 import { ModalContext } from 'context/ModalContext';

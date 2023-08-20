@@ -1,9 +1,15 @@
 import './Modal.scss'
+
+// import dependencies
 import { Link } from 'react-router-dom'
 import clsx from 'clsx'
-import closeIcon from 'assets/icons/close@2x.png'
-import { Tweet, ReplyInfo } from 'components/Tweet/Tweet'
 import { useLocation } from 'react-router-dom'
+
+// import components
+import { Tweet, ReplyInfo } from 'components/Tweet/Tweet'
+
+// import icons
+import { ReactComponent as Close } from 'assets/icons/close.svg'
 
 const CloseIcon = () => {
   const path = useLocation().pathname
@@ -17,7 +23,7 @@ const CloseIcon = () => {
 
   return (
     <Link to={toPath}>
-      <img className="closeIcon" src={closeIcon} alt="closeIcon"/>
+      <Close className='closeIcon' />
     </Link>
   )
 }
@@ -34,7 +40,7 @@ export const Modal = ({ placeholder, buttonContext, showModal, setShowModal, sho
     <div className={clsx('', {postModalBox: showModal, replyModalBox: showReplyModal })}>
       <div className="topBar">
         <div className="iconBox" onClick={() => checkModalType()}>
-          <CloseIcon />
+          <CloseIcon onClick={() => checkModalType()}/>
         </div>
       </div>
       {showReplyModal &&

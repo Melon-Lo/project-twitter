@@ -1,19 +1,23 @@
 import './SideBar.scss'
-import LogoIcon from 'assets/icons/logo@2x.png'
-import HomeIcon from 'assets/icons/home_2@2x.png'
-import UserIcon from 'assets/icons/user_2@2x.png'
-import CogIcon from 'assets/icons/cog_2@2x.png'
-import LogoutIcon from 'assets/icons/logout@2x.png'
+
+// import icons
+import { ReactComponent as LogoIcon } from 'assets/icons/logo.svg'
+import { ReactComponent as HomeHollowIcon } from 'assets/icons/home_hollow.svg'
+import { ReactComponent as UserHollowIcon } from 'assets/icons/user_hollow.svg'
+import { ReactComponent as CogHollowIcon } from 'assets/icons/cog_hollow.svg'
+import { ReactComponent as LogoutIcon } from 'assets/icons/logout.svg'
 
 export const SideBar = () => {
   return (
     <div className="sideBarContainer">
       <div className="topSection">
-        <div className="logoBox"><img className="logo" src={LogoIcon} alt="logoIcon" /></div>
+        <div className="logoBox">
+          <LogoIcon />
+        </div>
         <div className="pages">
             <div className="page">
               <div className="iconBox">
-                <img className="icon" src={HomeIcon} alt="homeIcon" />
+                <HomeHollowIcon />
               </div>
               <div className="pageTitle">
                 首頁
@@ -21,7 +25,7 @@ export const SideBar = () => {
             </div>
             <div className="page">
               <div className="iconBox">
-                <img className="icon" src={UserIcon} alt="userIcon" />
+                <UserHollowIcon />
               </div>
               <div className="pageTitle">
                 個人資料
@@ -29,7 +33,7 @@ export const SideBar = () => {
             </div>
             <div className="page">
               <div className="iconBox">
-                <img className="icon" src={CogIcon} alt="cogIcon" />
+                <CogHollowIcon />
               </div>
               <div className="pageTitle">
                 設定
@@ -40,13 +44,12 @@ export const SideBar = () => {
       </div>
       <div className="bottomSection">
         <div className="iconBox">
-          <img className="icon" src={LogoutIcon} alt="logoutIcon" />
+          <LogoutIcon />
         </div>
         <div className="title">
           登出
         </div>
       </div>
     </div>
-
   )
 }

@@ -1,11 +1,16 @@
 import './User.scss'
+
+// import dependencies
 import { useContext } from 'react'
 import { ModalContext } from 'context/ModalContext'
 import { TabContext } from 'context/TabContext'
-import BackIcon from 'assets/icons/back@2x.png'
+
+// import components
 import { Tweet, IconInfo } from 'components/Tweet/Tweet'
 import { Reply } from 'components/Reply/Reply'
-import clsx from 'clsx'
+
+// import icons
+import { ReactComponent as BackIcon } from 'assets/icons/back.svg'
 
 const UserTweet = () => {
   const { setShowReplyModal } = useContext(ModalContext)
@@ -45,16 +50,12 @@ const UserLike = () => {
 export const User = () => {
   const { tab, setTab } = useContext(TabContext)
 
-  function getTabClassName() {
-    
-  }
-
   return (
     <div className="userContainer">
       <div className="topSection">
         <div className="title">
           <div className="iconBox">
-            <img className="icon" src={BackIcon} alt="backIcon" />
+            <BackIcon />
           </div>
           <div className="titleContent">
             <div className="name">Liz</div>

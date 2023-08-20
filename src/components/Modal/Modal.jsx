@@ -9,8 +9,8 @@ const CloseIcon = () => {
   const path = useLocation().pathname
   let toPath = ''
 
-  if (path === '/main/tweet' || path === '/main/reply_modal') {
-    toPath = '/main'
+  if (path === '/home/tweet' || path === '/home/reply_modal') {
+    toPath = '/home'
   } else if (path === '/reply_list/reply_modal') {
     toPath = '/reply_list'
   }

@@ -6,6 +6,7 @@ import ReplyIcon from 'assets/icons/reply@2x.png'
 import LikeIcon from 'assets/icons/like_2@2x.png'
 import { useNavigate } from 'react-router'
 import { Modal } from 'components/Modal/Modal'
+import { Link } from 'react-router-dom'
 
 const Reply = () => {
   return (
@@ -34,7 +35,7 @@ export const ReplyList = () => {
     <div className="replyContainer">
       <div className="topSection">
         <div className="title">
-          <div className="iconBox" onClick={() => navigate('/main')}>
+          <div className="iconBox" onClick={() => navigate('/home')}>
             <img className="icon" src={BackIcon} alt="backIcon" />
           </div>
           <p>推文</p>
@@ -68,9 +69,12 @@ export const ReplyList = () => {
               <div className="count"><b>99</b>喜歡次數</div>
             </div>
             <div className="iconSection">
-              <div className="iconBox" onClick={() => setShowReplyModal(true)}>
-                <img className="icon" src={ReplyIcon} alt="replyIcon" />
-              </div>
+              <Link to="reply_modal">
+                <div className="iconBox" onClick={() => setShowReplyModal(true)}>
+                  <img className="icon" src={ReplyIcon} alt="replyIcon" />
+                </div>
+              </Link>
+              
               <div className="iconBox">
                 <img className="icon" src={LikeIcon} alt="likeIcon" />
               </div>

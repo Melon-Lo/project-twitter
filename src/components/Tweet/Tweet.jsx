@@ -2,6 +2,7 @@ import './Tweet.scss'
 import ChatIcon from 'assets/icons/Chat_2@2x.png'
 import LikeIcon from 'assets/icons/like_2@2x.png'
 import { useNavigate } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 
 // tweet types
 
@@ -9,9 +10,11 @@ export const IconInfo = ({ setShowReplyModal }) => {
   return (
     <div className="iconInfo">
       <div className="comments">
-        <div className="iconBox" onClick={() => setShowReplyModal(true)}>
-          <img className="icon" src={ChatIcon} alt="chatIcon" />
-        </div>
+        <Link to="reply_modal">
+          <div className="iconBox" onClick={() => setShowReplyModal(true)}>
+            <img className="icon" src={ChatIcon} alt="chatIcon" />
+          </div>
+        </Link>
         <div className="number">
           13
         </div>

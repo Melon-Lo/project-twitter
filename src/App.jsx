@@ -1,5 +1,5 @@
 import './App.css';
-import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import { BrowserRouter, Route, Routes, Navigate } from 'react-router-dom';
 import { HomePage } from 'pages/HomePage/HomePage';
 import { ReplyListPage } from 'pages/ReplyListPage/ReplyListPage';
 import { AdminLoginPage } from 'pages/AdminLoginPage/AdminLoginPage';
@@ -22,8 +22,11 @@ function App() {
           <Route path="user" element={<UserPage />}></Route>
           <Route path="admin" element={<AdminPage />}></Route>
           <Route path="reply_list" element={<ReplyListPage />}></Route>
-          <Route path="main" element={<HomePage />}></Route>
-          <Route path="*" element={<HomePage />}></Route>
+          <Route path="reply_list/reply_modal" element={<ReplyListPage />}></Route>
+          <Route path="home" element={<HomePage />}></Route>
+          <Route path="home/tweet" element={<HomePage />}></Route>
+          <Route path="home/reply_modal" element={<HomePage />}></Route>
+          <Route path="*" element={<Navigate to="home" />} />
         </Routes>
       </BrowserRouter>
     </div>

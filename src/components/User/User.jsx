@@ -1,9 +1,11 @@
 import './User.scss'
 import { useContext } from 'react'
 import { ModalContext } from 'context/ModalContext'
+import { TabContext } from 'context/TabContext'
 import BackIcon from 'assets/icons/back@2x.png'
 import { Tweet, IconInfo } from 'components/Tweet/Tweet'
 import { Reply } from 'components/Reply/Reply'
+import clsx from 'clsx'
 
 const UserTweet = () => {
   const { setShowReplyModal } = useContext(ModalContext)
@@ -41,6 +43,12 @@ const UserLike = () => {
 }
 
 export const User = () => {
+  const { tab, setTab } = useContext(TabContext)
+
+  function getTabClassName() {
+    
+  }
+
   return (
     <div className="userContainer">
       <div className="topSection">
@@ -80,14 +88,14 @@ export const User = () => {
       </div>
       <div className="bottomSection">
         <div className="selectionBar">
-          <div className="optionActive">推文</div>
-          <div className="option">回覆</div>
-          <div className="option">喜歡的內容</div>
+          <div className={tab === 'tweet' ? 'optionActive' : 'option'} onClick={() => setTab('tweet')}>推文</div>
+          <div className={tab === 'reply' ? 'optionActive' : 'option'} onClick={() => setTab('reply')}>回覆</div>
+          <div className={tab === 'like' ? 'optionActive' : 'option'} onClick={() => setTab('like')}>喜歡的內容</div>
         </div>
         <div className="content">
-          <UserTweet />
-          {/* <UserReply /> */}
-          {/* <UserLike /> */}
+          {tab === 'tweet' && <UserTweet />}
+          {tab === 'reply' && <UserReply />}
+          {tab === 'like' && <UserLike />}
         </div>
       </div>
     </div>

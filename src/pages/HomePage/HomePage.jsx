@@ -9,7 +9,7 @@ export const HomePage = () => {
   const { showModal, showReplyModal } = useContext(ModalContext)
 
   return (
-    <div className="homepageContainer">
+    <div className="homePageContainer">
       {showModal &&
         <div className="grayBackground"></div>
       }

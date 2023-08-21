@@ -13,7 +13,7 @@ export const Tweets = () => {
   const { showModal, setShowModal, showReplyModal, setShowReplyModal } = useContext(ModalContext)
 
   return (
-    <div className="tweetsContainer">
+    <div className="tweetListContainer">
       <div className="topSection">
         <p className="title">首頁</p>
         {showReplyModal &&

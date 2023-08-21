@@ -16,19 +16,17 @@ export const EditModal = () => {
     <div className="editModalBox">
       <div className="topBar">
         <div className="iconBox" onClick={() => setShowModal(false)}>
-          <CloseIcon />
+          <CloseIcon className="closeIcon" />
         </div>
         <div className="title">
           編輯個人資料
         </div>
-        <div className="buttonBox">
-          <button className="save">儲存</button>
-        </div>
+        <button className="save">儲存</button>
       </div>
       <div className="coverBox">
         <img src="https://i.natgeofe.com/n/c9107b46-78b1-4394-988d-53927646c72b/1095_3x2.jpg" alt="cover"/>
-        <CloseIcon className="icon" />
-        <AddPhotoIcon className="icon" />
+        <CloseIcon style={{fill: 'white'}}className="closeIcon" />
+        <AddPhotoIcon className="photoIcon" />
       </div>
       <div className="editSection">
         <div className="avatarBox">

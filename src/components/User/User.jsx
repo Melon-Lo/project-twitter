@@ -8,6 +8,7 @@ import { TabContext } from 'context/TabContext'
 // import components
 import { Tweet, IconInfo } from 'components/Tweet/Tweet'
 import { Reply } from 'components/Reply/Reply'
+import { EditModal } from 'components/Modal/EditModal'
 
 // import icons
 import { ReactComponent as BackIcon } from 'assets/icons/back.svg'
@@ -49,6 +50,7 @@ const UserLike = () => {
 
 export const User = () => {
   const { tab, setTab } = useContext(TabContext)
+  const { showModal, setShowModal } = useContext(ModalContext)
 
   return (
     <div className="userContainer">
@@ -62,12 +64,15 @@ export const User = () => {
             <div className="tweets">45 推文</div>
           </div>
         </div>
+        {showModal &&
+          <EditModal />
+        }
         <div className="userBox">
           <div className="coverBox">
             <img src="https://i.natgeofe.com/n/c9107b46-78b1-4394-988d-53927646c72b/1095_3x2.jpg" alt="coverImage" />
           </div>
           <div className="infoBox">
-            <button>編輯個人資料</button>
+            <button onClick={() => setShowModal(true)}>編輯個人資料</button>
             <div className="avatarBox">
               <img className="avatar" src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8M3x8cmFuZG9tJTIwcGVvcGxlfGVufDB8fDB8fHww&auto=format&fit=crop&w=600&q=60" alt="avatar" />
             </div>

@@ -1,13 +1,20 @@
 import './ReplyList.scss'
+
+// import dependencies
 import { useContext } from 'react'
 import { ModalContext } from 'context/ModalContext'
-import BackIcon from 'assets/icons/back@2x.png'
-import ReplyIcon from 'assets/icons/reply@2x.png'
-import LikeIcon from 'assets/icons/like_2@2x.png'
 import { useNavigate } from 'react-router'
+
+// import components
 import { Modal } from 'components/Modal/Modal'
 import { Link } from 'react-router-dom'
 import { Reply } from 'components/Reply/Reply'
+
+// import icons
+import { ReactComponent as BackIcon } from 'assets/icons/back.svg'
+import { ReactComponent as ReplyIcon } from 'assets/icons/reply.svg'
+import { ReactComponent as LikeHollowIcon } from 'assets/icons/like_hollow.svg'
+
 
 export const ReplyList = () => {
   const navigate = useNavigate()
@@ -18,7 +25,7 @@ export const ReplyList = () => {
       <div className="topSection">
         <div className="title">
           <div className="iconBox" onClick={() => navigate('/home')}>
-            <img className="icon" src={BackIcon} alt="backIcon" />
+            <BackIcon />
           </div>
           <p>推文</p>
         </div>
@@ -53,12 +60,12 @@ export const ReplyList = () => {
             <div className="iconSection">
               <Link to="reply_modal">
                 <div className="iconBox" onClick={() => setShowReplyModal(true)}>
-                  <img className="icon" src={ReplyIcon} alt="replyIcon" />
+                  <ReplyIcon />
                 </div>
               </Link>
               
               <div className="iconBox">
-                <img className="icon" src={LikeIcon} alt="likeIcon" />
+                <LikeHollowIcon />
               </div>
             </div>
           </div>

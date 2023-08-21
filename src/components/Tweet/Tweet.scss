@@ -54,13 +54,21 @@
 
     .iconInfo {
       display: flex;
+      justify-content: space-between;
+      align-items: center;
+      width: 120px;
       height: 15%;
 
       .comments {
         margin: 3px;
         display: flex;
+        justify-content: space-between;
+        align-items: center;
+        width: 40px;
 
         .iconBox {
+          width: 16px;
+          height: 16px;
           display: flex;
           justify-content: center;
           align-items: center;
@@ -80,8 +88,13 @@
       .likes {
         margin: 3px;
         display: flex;
+        justify-content: space-between;
+        align-items: center;
+        width: 40px;
 
         .iconBox {
+          width: 16px;
+          height: 16px;
           display: flex;
           justify-content: center;
           align-items: center;

@@ -1,8 +1,13 @@
 import './Tweet.scss'
-import ChatIcon from 'assets/icons/Chat_2@2x.png'
-import LikeIcon from 'assets/icons/like_2@2x.png'
+
+// import dependencies
 import { useNavigate } from 'react-router-dom'
 import { Link } from 'react-router-dom'
+
+// import icons
+import { ReactComponent as ChatHollowIcon } from 'assets/icons/chat_hollow.svg'
+import { ReactComponent as LikeHollowIcon } from 'assets/icons/like_hollow.svg'
+
 
 // tweet types
 
@@ -12,7 +17,7 @@ export const IconInfo = ({ setShowReplyModal }) => {
       <div className="comments">
         <Link to="reply_modal">
           <div className="iconBox" onClick={() => setShowReplyModal(true)}>
-            <img className="icon" src={ChatIcon} alt="chatIcon" />
+            <ChatHollowIcon className="icon" />
           </div>
         </Link>
         <div className="number">
@@ -21,7 +26,7 @@ export const IconInfo = ({ setShowReplyModal }) => {
       </div>
       <div className="likes">
         <div className="iconBox">
-          <img className="icon" src={LikeIcon} alt="LikeIcon" />
+          <LikeHollowIcon className="icon" />
         </div>
         <div className="number">
           99

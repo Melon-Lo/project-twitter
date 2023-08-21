@@ -1,6 +1,10 @@
 import './TweetList.scss'
+
+// import dependencies
 import { useContext } from 'react'
 import { ModalContext } from 'context/ModalContext'
+
+// import components
 import { Tweet, IconInfo } from 'components/Tweet/Tweet'
 import { Modal } from 'components/Modal/Modal'
 import { Link } from 'react-router-dom'

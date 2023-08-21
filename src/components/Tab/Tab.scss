@@ -1,0 +1,27 @@
+.selectionBar {
+  display: flex;
+
+  .option {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 130px;
+    padding: 15px;
+    color: #657786;
+    font-size: 15px;
+    font-weight: 700;
+    cursor: pointer;        
+  }
+
+  .optionActive {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 130px;
+    padding: 15px;
+    border-bottom: 3px solid #FF6600;
+    color: #FF6600;
+    font-size: 15px;
+    font-weight: 700;
+  }
+}

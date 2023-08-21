@@ -1,7 +1,6 @@
 import './EditModal.scss'
 
 // import dependencies
-import { Link } from 'react-router-dom'
 import { useContext } from 'react'
 import { ModalContext } from 'context/ModalContext'
 
@@ -40,7 +39,7 @@ export const EditModal = () => {
           </div>
           <div className="introInput">
             <div className="label">自我介紹</div>
-            <textarea name="" id="" cols="30" rows="10">我是一隻小小小小鳥</textarea>
+            <textarea name="" id="" cols="30" rows="10"></textarea>
             <div className="words">9/160</div>
           </div>
         </div>

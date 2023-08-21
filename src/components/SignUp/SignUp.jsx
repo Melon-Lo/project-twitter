@@ -1,5 +1,5 @@
 import './SignUp.scss'
-import LogoIcon from 'assets/icons/logo@2x.png'
+import { ReactComponent as LogoIcon } from 'assets/icons/logo.svg'
 import Swal from 'sweetalert2'
 
 
@@ -7,8 +7,8 @@ import Swal from 'sweetalert2'
 export const TopIcon = ({ title }) => {
   return (
     <>
-      <div className='iconBox'>
-        <img className='icon' src={LogoIcon} alt="Logo" />
+      <div className="iconBox">
+        <LogoIcon className='icon' />
       </div>
       <h2 className='accountTitle'>{title}</h2>
     </>

@@ -1,5 +1,5 @@
 import './SideBar.scss'
-import LogoIcon from 'assets/icons/logo@2x.png'
+import { ReactComponent as LogoIcon } from 'assets/icons/logo.svg'
 import HomeIcon from 'assets/icons/home_2@2x.png'
 import UserIcon from 'assets/icons/user_2@2x.png'
 import CogIcon from 'assets/icons/cog_2@2x.png'
@@ -9,7 +9,9 @@ export const SideBar = () => {
   return (
     <div className="sideBarContainer">
       <div className="topSection">
-        <div className="logoBox"><img className="logo" src={LogoIcon} alt="logoIcon" /></div>
+        <div className="logoBox">
+          <LogoIcon />
+        </div>
         <div className="pages">
             <div className="page">
               <div className="iconBox">

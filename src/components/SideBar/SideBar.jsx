@@ -1,8 +1,8 @@
 import './SideBar.scss'
 
 // import dependencies
-import { useNavigate } from 'react-router-dom'
-import { useContext } from 'react'
+import { useNavigate, useLocation } from 'react-router-dom'
+import { useContext, useEffect } from 'react'
 
 // import icons
 import { ReactComponent as LogoIcon } from 'assets/icons/logo.svg'
@@ -17,7 +17,18 @@ import { PageContext } from 'context/PageContext'
 
 export const SideBar = () => {
   const navigate = useNavigate()
+  const path = useLocation().pathname
   const { page, setPage } = useContext(PageContext)
+
+  useEffect(() => {
+    if(path === '/home') {
+      setPage('home')
+    } else if(path === '/user/self') {
+      setPage('user')
+    } else if(path === '/setting') {
+      setPage('setting')
+    }
+  }, [])
 
   return (
     <div className="sideBarContainer">

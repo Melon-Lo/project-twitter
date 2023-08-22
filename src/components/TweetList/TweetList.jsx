@@ -5,7 +5,7 @@ import { useContext } from 'react'
 import { ModalContext } from 'context/ModalContext'
 
 // import components
-import { Tweet, IconInfo } from 'components/Tweet/Tweet'
+import { Tweet, IconInfo } from 'components/TweetList/Tweet/Tweet'
 import { Modal } from 'components/Modal/Modal'
 import { useNavigate } from 'react-router-dom'
 

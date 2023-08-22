@@ -7,8 +7,9 @@ import { TabContext } from 'context/TabContext'
 import { useNavigate } from 'react-router-dom'
 
 // import components
-import { Tweet, IconInfo } from 'components/Tweet/Tweet'
-import { Reply } from 'components/Reply/Reply'
+import { Tweet, IconInfo } from 'components/TweetList/Tweet/Tweet'
+import { Reply } from 'components/ReplyList/Reply/Reply'
+import { Follow } from 'components/FollowList/Follow/Follow'
 
 const UserTweet = () => {
   const { setShowReplyModal } = useContext(ModalContext)
@@ -91,8 +92,8 @@ export const FollowTab = () => {
         </div>
       </div>
       <div className="content">
-        {followTab === 'follower' && <UserTweet />}
-        {followTab === 'following' && <UserTweet />}
+        {followTab === 'follower' && <Follow />}
+        {followTab === 'following' && <Follow />}
       </div>
     </div>
   )

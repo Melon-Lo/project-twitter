@@ -7,7 +7,7 @@ import { useNavigate } from 'react-router'
 
 // import components
 import { Modal } from 'components/Modal/Modal'
-import { Reply } from 'components/Reply/Reply'
+import { Reply } from 'components/ReplyList/Reply/Reply'
 
 // import icons
 import { ReactComponent as BackIcon } from 'assets/icons/back.svg'

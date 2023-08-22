@@ -52,7 +52,10 @@ export const Tab = () => {
   return (
     <div className="tabContainer">
       <div className="selectionBar">
-        <div className={tab === 'tweet' ? 'optionActive' : 'option'} onClick={() => setTab('tweet')}>推文</div>
+        <div className={tab === 'tweet' ? 'optionActive' : 'option'} onClick={() => {
+          setTab('tweet')
+          console.log('hey')
+        }}>推文</div>
         <div className={tab === 'reply' ? 'optionActive' : 'option'} onClick={() => setTab('reply')}>回覆</div>
         <div className={tab === 'like' ? 'optionActive' : 'option'} onClick={() => setTab('like')}>喜歡的內容</div>
       </div>

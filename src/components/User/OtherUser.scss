@@ -42,24 +42,102 @@
       width: 100%;
       height: 378px;
 
-      .coverBox {
-        width: 100%;
-        height: 50%;
-
-        img {
-          width: 100%;
-          height: 100%;
-          object-fit: cover;
-        }
-      }
-
       .infoBox {
         position: relative;
-        height: 100%;
-        
+        display: flex;
+        align-items: flex-start;
+        flex-direction: column;
+
+        .buttons {
+          position: relative;
+          width: 100%;
+          height: 80px;
+
+          .mailIconBox {
+            position: absolute;
+            top: 20px;
+            right: 180px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 40px;
+            height: 40px;
+            border: 1px solid #FF6600;
+            border-radius: 50%;
+
+            .mailIcon {
+              fill: #FF6600;
+            }
+          }
+
+          // noti icon style
+
+          .notiIconBox {
+            position: absolute;
+            top: 20px;
+            right: 130px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 40px;
+            height: 40px;
+            border: 1px solid #FF6600;
+            border-radius: 50%;
+
+            .notiIcon {
+              fill: #FF6600;
+            }
+          }
+
+          .notiIconBoxActive {
+            position: absolute;
+            top: 20px;
+            right: 130px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 40px;
+            height: 40px;
+            border: none;
+            background-color: #FF6600;
+            border-radius: 50%;
+
+            .notiIconActive {
+              fill: #FFFFFF;
+            }
+          }
+
+          // follow button style
+
+          .follow {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            width: 64px;
+            height: 40px;
+            background-color: transparent;
+            border: 1px solid #FF6600;
+            border-radius: 50px;
+            color: #FF6600;
+            cursor: pointer;
+          }
+
+          .following {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            width: 96px;
+            height: 40px;
+            background-color: #FF6600;
+            border: none;
+            border-radius: 50px;
+            color: #FFFFFF;
+            cursor: pointer;
+          }
+        }
+
         .info {
-          margin-top: 80px;
-          margin-left: 20px;
+          position: absolute;
 
           .name {
             color: #171725;
@@ -96,20 +174,6 @@
           }
         }
 
-        button {
-          position: absolute;
-          top: 20px;
-          right: 16px;
-          width: 128px;
-          height: 40px;
-          color: #FF6600;
-          border: 1px solid #FF6600;
-          background-color: transparent;
-          border-radius: 50px;
-          cursor: pointer;
-          z-index: 5;
-        }
-
         .avatarBox {
           position: absolute;
           top: -20%;
@@ -118,14 +182,13 @@
           height: 140px;
           border: 4px solid white;
           border-radius: 50%;
-          cursor: pointer;
 
           img {
             width: 100%;
             height: 100%;
           }
         }
-      }
+      } 
     }
   }
 

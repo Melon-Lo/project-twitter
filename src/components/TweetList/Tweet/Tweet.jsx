@@ -51,7 +51,9 @@ export const Tweet = ({ children }) => {
 
   return (
     <div className="tweetItem">
-      <div className="avatarBox"><img className="avatar" src="https://avatoon.me/wp-content/uploads/2021/09/Cartoon-Pic-Ideas-for-DP-Profile-02-768x768.png" alt="avatar" /></div>
+      <div className="avatarBox" onClick={() => navigate('/user/other')}>
+        <img className="avatar" src="https://avatoon.me/wp-content/uploads/2021/09/Cartoon-Pic-Ideas-for-DP-Profile-02-768x768.png" alt="avatar" />
+      </div>
       <div className="tweetInfo">
         <div className="topInfo">
           <div className="name">Chris</div>

@@ -14,10 +14,12 @@ import { ReactComponent as CogHollowIcon } from 'assets/icons/cog_hollow.svg'
 import { ReactComponent as CogIcon } from 'assets/icons/cog.svg'
 import { ReactComponent as LogoutIcon } from 'assets/icons/logout.svg'
 import { PageContext } from 'context/PageContext'
+import { ModalContext } from 'context/ModalContext'
 
 export const SideBar = () => {
   const navigate = useNavigate()
   const path = useLocation().pathname
+  const { setShowModal } = useContext(ModalContext)
   const { page, setPage } = useContext(PageContext)
 
   useEffect(() => {
@@ -28,7 +30,7 @@ export const SideBar = () => {
     } else if(path === '/setting') {
       setPage('setting')
     }
-  }, [])
+  }, [path])
 
   return (
     <div className="sideBarContainer">
@@ -71,9 +73,14 @@ export const SideBar = () => {
             </div>
           </div>
         </div>
-        <button className="tweetsButton">推文</button>
+        <button className="tweetsButton" onClick={() => {
+          navigate('/home/tweet')
+          setShowModal(true)
+        }}>
+          推文
+        </button>
       </div>
-      <div className="bottomSection">
+      <div className="bottomSection" onClick={() => navigate('/login')}>
         <div className="iconBox">
           <LogoutIcon />
         </div>

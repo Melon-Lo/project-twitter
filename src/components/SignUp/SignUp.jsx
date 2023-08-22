@@ -83,29 +83,42 @@ export const SignUp = () => {
     
   }
 
-  const handleSign = () => {
-    Swal.fire( {
-      icon: 'success',
-      title: '註冊成功',
-      text: '您已經註冊，即可登入頁面。',
-    })
+  // 註冊按鈕、取消函式功能放一起
+  const handleSign = (event) => {
+    if (event.currentTarget.classList.contains('orange')) {
+      Swal.fire({
+        icon: 'success',
+        title: '註冊成功',
+        text: '您已經註冊，即可登入頁面。',
+      })
+    } else if (event.currentTarget.classList.contains('cancel-link')) {
+      Swal.fire({
+        title: '您確定要取消註冊嗎?',
+        showCancelButton: true,
+        confirmButtonText: '確定',
+      }).then((result) => {
+        /* Read more about isConfirmed, isDenied below */
+        if (result.isConfirmed) {
+          Swal.fire('已取消!', '', 'success')
+        }
+      })
+    }
   }
 
-  const handleCancel = () => {
-    Swal.fire({
-      title: '您確定要取消註冊嗎?',
-      showCancelButton: true,
-      confirmButtonText: '確定',
-    }).then((result) => {
-      /* Read more about isConfirmed, isDenied below */
-      if (result.isConfirmed) {
-        Swal.fire('已取消!', '', 'success')
-      }
-    })
-  }
+  // const handleCancel = () => {
+  //   Swal.fire({
+  //     title: '您確定要取消註冊嗎?',
+  //     showCancelButton: true,
+  //     confirmButtonText: '確定',
+  //   }).then((result) => {
+  //     /* Read more about isConfirmed, isDenied below */
+  //     if (result.isConfirmed) {
+  //       Swal.fire('已取消!', '', 'success')
+  //     }
+  //   })
+  // }
 
   return (
-    // <div className='signWapper'>
       <div className="SignUpcontainer">
         <TopIcon title="建立你的帳號"/>
 
@@ -144,10 +157,9 @@ export const SignUp = () => {
             onClick={handleSign}
           />
           <div className='aLink'>
-            <a href="#" onClick={handleCancel}>取消</a>
+          <a href="#" className='cancel-link' onClick={handleSign}>取消</a>
           </div>
         </div>
       </div>
-    // </div>
   )
 }

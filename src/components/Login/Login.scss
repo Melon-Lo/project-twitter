@@ -53,7 +53,10 @@
               color: #B5B5BE;
               border: 0px solid #F5F8FA;
               background-color: #F5F8FA;
-    
+              &:focus {
+                  color: #696974;
+                }
+
               &::placeholder {
                 color: #B5B5BE;
               }

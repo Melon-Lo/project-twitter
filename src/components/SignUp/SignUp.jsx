@@ -1,4 +1,5 @@
 import './SignUp.scss'
+import { useState } from 'react'
 import { ReactComponent as LogoIcon } from 'assets/icons/logo.svg'
 import Swal from 'sweetalert2'
 
@@ -15,15 +16,18 @@ export const TopIcon = ({ title }) => {
   )
 }
 
-export const AuthInput = ({ label, placeholder, id }) => {
+export const AuthInput = ({ id, text, value, label, placeholder, onChange }) => {
   return (
     <div className='formContainer'>
       <div className='group'>
-        {/* <label> {label} <br />
-          <input type="text" placeholder={placeholder} />
-        </label> */}
         <label htmlFor={id}>{label}</label>
-        <input id={id} type="text" placeholder={placeholder} />
+        <input 
+          id={id}
+          type={text || "text"} 
+          value={value || ""}
+          placeholder={placeholder} 
+          onChange={(event) => onChange?.(event.target.value)}
+        />
 
       </div>
     </div>
@@ -76,6 +80,13 @@ export const OrangeBtn = ({ way, onClick }) => {
 
 
 export const SignUp = () => {
+  // 狀態變數
+  const [account, setAccount] = useState('')
+  const [userName, setUserName] = useState('')
+  const [email, setEmail] = useState('')
+  const [password, setPassword] = useState('')
+  const [passwordAgin, setPasswordAgin] = useState('')
+
 
   const handleSubmit = (event) => {
     event.preventDefault()
@@ -106,19 +117,6 @@ export const SignUp = () => {
     }
   }
 
-  // const handleCancel = () => {
-  //   Swal.fire({
-  //     title: '您確定要取消註冊嗎?',
-  //     showCancelButton: true,
-  //     confirmButtonText: '確定',
-  //   }).then((result) => {
-  //     /* Read more about isConfirmed, isDenied below */
-  //     if (result.isConfirmed) {
-  //       Swal.fire('已取消!', '', 'success')
-  //     }
-  //   })
-  // }
-
   return (
       <div className="SignUpcontainer">
         <TopIcon title="建立你的帳號"/>
@@ -128,27 +126,37 @@ export const SignUp = () => {
           <AuthInput 
             id="account" 
             label="帳號" 
-            placeholder="請輸入帳號" 
+            value={account}
+            placeholder="請輸入帳號"
+            onChange={(accountInputValue) => setAccount(accountInputValue) } 
           />
           <AuthInput
             id="name"
             label="名稱"
+            value={userName}
             placeholder="請輸入使用者名稱"
+            onChange={(nameInputValue) => setUserName(nameInputValue)}
           />
           <AuthInput
             id="Email"
             label="Email"
+            value={email}
             placeholder="請輸入Email"
+            onChange={(EmailInputValue) => setEmail(EmailInputValue)}
           />
           <AuthInput
             id="password"
             label="密碼"
+            value={password}
             placeholder="請設定密碼"
+            onChange={(passwordInputValue) => setPassword(passwordInputValue)}
           />
           <AuthInput
-            id="apassword-two"
+            id="password-2"
             label="密碼確認"
+            value={passwordAgin}
             placeholder="請再次輸入密碼"
+            onChange={(passwordAgnInputValue) => setPasswordAgin(passwordAgnInputValue)}
           />
         </form>
 

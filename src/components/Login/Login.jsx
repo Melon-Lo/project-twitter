@@ -1,5 +1,6 @@
 import './Login.scss'
 import Swal from 'sweetalert2'
+import { useState } from 'react'
 import { Link } from 'react-router-dom'
 import { AuthInput } from 'components/SignUp/SignUp'
 import { TopIcon } from 'components/SignUp/SignUp'
@@ -7,6 +8,8 @@ import { OrangeBtn } from 'components/SignUp/SignUp'
 
 
 export const Login = () => {
+  const [account, setAccount] = useState('')
+  const [password, setPassword] = useState('')
 
   const handleSubmit = (event) => {
     event.preventDefault()
@@ -77,12 +80,16 @@ export const Login = () => {
         <AuthInput
           id="account"
           label="帳號"
+          value={account}
           placeholder="請輸入帳號"
+          onChange={(accountInputValue) => setAccount(accountInputValue)}
         />
         <AuthInput
           id="password"
           label="密碼"
+          value={password}
           placeholder="請輸入密碼"
+          onChange={(passwordInputValue) => setPassword(passwordInputValue)}
         />
       </form>
       <div className='btnGroup'>

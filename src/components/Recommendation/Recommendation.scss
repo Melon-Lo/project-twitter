@@ -2,7 +2,7 @@
   position: fixed;
   top: 16px;
   right: 100px;
-  width: 18%;
+  width: 273px;
   background-color: #FAFAFB;
   border-radius: 16px;
 
@@ -47,13 +47,25 @@
         }
       }
 
-      .followButton {
+      // button styles
+
+      .follow {
         width: 64px;
         height: 40px;
+        background-color: transparent;
         border: 1px solid #FF6600;
         border-radius: 50px;
-        background-color: transparent;
         color: #FF6600;
+        cursor: pointer;
+      }
+
+      .following {
+        width: 96px;
+        height: 40px;
+        background-color: #FF6600;
+        border: none;
+        border-radius: 50px;
+        color: #FFFFFF;
         cursor: pointer;
       }
     }

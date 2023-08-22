@@ -7,8 +7,7 @@ import { useNavigate } from 'react-router'
 
 // import components
 import { Modal } from 'components/Modal/Modal'
-import { Link } from 'react-router-dom'
-import { Reply } from 'components/Reply/Reply'
+import { Reply } from 'components/ReplyList/Reply/Reply'
 
 // import icons
 import { ReactComponent as BackIcon } from 'assets/icons/back.svg'
@@ -58,12 +57,12 @@ export const ReplyList = () => {
               <div className="count"><b>99</b>喜歡次數</div>
             </div>
             <div className="iconSection">
-              <Link to="reply_modal">
-                <div className="iconBox" onClick={() => setShowReplyModal(true)}>
-                  <ReplyIcon />
-                </div>
-              </Link>
-              
+              <div className="iconBox" onClick={() => {
+                setShowReplyModal(true)
+                navigate('reply_modal')
+              }}>
+                <ReplyIcon />
+              </div>
               <div className="iconBox">
                 <LikeHollowIcon />
               </div>

@@ -6,7 +6,7 @@ import clsx from 'clsx'
 import { useLocation } from 'react-router-dom'
 
 // import components
-import { Tweet, ReplyInfo } from 'components/Tweet/Tweet'
+import { Tweet, ReplyInfo } from 'components/TweetList/Tweet/Tweet'
 
 // import icons
 import { ReactComponent as Close } from 'assets/icons/close.svg'

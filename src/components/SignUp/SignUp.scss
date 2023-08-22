@@ -80,6 +80,9 @@
           border: 0px solid transparent;
           border-radius: 50px;
           background-color: #FF6600;
+          &:hover {
+              background-color: #FF7744;
+            }
         }
 
         .aLink {

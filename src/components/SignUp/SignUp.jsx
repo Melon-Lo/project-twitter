@@ -16,7 +16,6 @@ export const TopIcon = ({ title }) => {
 }
 
 export const AuthInput = ({ label, placeholder, id }) => {
-  // const {id} = useId()
   return (
     <div className='formContainer'>
       <div className='group'>
@@ -85,12 +84,14 @@ export const SignUp = () => {
 
   // 註冊按鈕、取消函式功能放一起
   const handleSign = (event) => {
+      //按下註冊 
     if (event.currentTarget.classList.contains('orange')) {
       Swal.fire({
         icon: 'success',
         title: '註冊成功',
         text: '您已經註冊，即可登入頁面。',
       })
+      // 按下取消
     } else if (event.currentTarget.classList.contains('cancel-link')) {
       Swal.fire({
         title: '您確定要取消註冊嗎?',
@@ -157,7 +158,7 @@ export const SignUp = () => {
             onClick={handleSign}
           />
           <div className='aLink'>
-          <a href="#" className='cancel-link' onClick={handleSign}>取消</a>
+            <a href="#" className='cancel-link' onClick={handleSign}>取消</a>
           </div>
         </div>
       </div>

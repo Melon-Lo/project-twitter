@@ -3,6 +3,7 @@ import './EditModal.scss'
 // import dependencies
 import { useContext } from 'react'
 import { ModalContext } from 'context/ModalContext'
+import { useNavigate } from 'react-router-dom'
 
 // import icons
 import { ReactComponent as CloseIcon } from 'assets/icons/close.svg'
@@ -10,11 +11,15 @@ import { ReactComponent as AddPhotoIcon } from 'assets/icons/add_photo_hollow.sv
 
 export const EditModal = () => {
   const { setShowModal } = useContext(ModalContext)
+  const navigate = useNavigate()
 
   return (
     <div className="editModalBox">
       <div className="topBar">
-        <div className="iconBox" onClick={() => setShowModal(false)}>
+        <div className="iconBox" onClick={() => {
+          setShowModal(false)
+          navigate('/user/self')
+        }}>
           <CloseIcon className="closeIcon" />
         </div>
         <div className="title">

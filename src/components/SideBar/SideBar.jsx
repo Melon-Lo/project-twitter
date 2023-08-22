@@ -28,7 +28,7 @@ export const SideBar = () => {
     } else if(path === '/setting') {
       setPage('setting')
     }
-  })
+  }, [])
 
   return (
     <div className="sideBarContainer">

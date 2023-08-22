@@ -4,6 +4,7 @@ import './Tab.scss'
 import { useContext } from 'react'
 import { ModalContext } from 'context/ModalContext'
 import { TabContext } from 'context/TabContext'
+import { useNavigate } from 'react-router-dom'
 
 // import components
 import { Tweet, IconInfo } from 'components/Tweet/Tweet'
@@ -62,3 +63,38 @@ export const Tab = () => {
     </div>
   )
 }
+
+export const FollowTab = () => {
+  const { followTab, setFollowTab } = useContext(TabContext)
+  const navigate = useNavigate()
+
+  return (
+    <div className="tabContainer">
+      <div className="selectionBar">
+        <div 
+          className={followTab === 'follower' ? 'optionActive' : 'option'} 
+          onClick={() => {
+            setFollowTab('follower')
+            navigate('/user/self/follower')
+          }}
+        >
+          追隨者
+        </div>
+        <div 
+          className={followTab === 'following' ? 'optionActive' : 'option'} 
+          onClick={() => {
+            setFollowTab('following')
+            navigate('/user/self/following')
+          }}
+        >
+          正在追隨
+        </div>
+      </div>
+      <div className="content">
+        {followTab === 'follower' && <UserTweet />}
+        {followTab === 'following' && <UserTweet />}
+      </div>
+    </div>
+  )
+}
+

@@ -1,23 +1,46 @@
 import './Modal.scss'
+
+// import dependencies
 import { Link } from 'react-router-dom'
 import clsx from 'clsx'
-import closeIcon from 'assets/icons/close@2x.png'
-import { Tweet, ReplyInfo } from 'components/Tweet/Tweet'
+import { useLocation } from 'react-router-dom'
+
+// import components
+import { Tweet, ReplyInfo } from 'components/TweetList/Tweet/Tweet'
+
+// import icons
+import { ReactComponent as Close } from 'assets/icons/close.svg'
+
+const CloseIcon = () => {
+  const path = useLocation().pathname
+  let toPath = ''
+
+  if (path === '/home/tweet' || path === '/home/reply_modal') {
+    toPath = '/home'
+  } else if (path === '/reply_list/reply_modal') {
+    toPath = '/reply_list'
+  }
+
+  return (
+    <Link to={toPath}>
+      <Close className='closeIcon' />
+    </Link>
+  )
+}
 
 export const Modal = ({ placeholder, buttonContext, showModal, setShowModal, showReplyModal, setShowReplyModal, type }) => {
+  const checkModalType = ()  => {
+    if(type === 'post') {
+      setShowModal(false)
+    } else if(type === 'reply')
+      setShowReplyModal(false)
+  }
+
   return (
     <div className={clsx('', {postModalBox: showModal, replyModalBox: showReplyModal })}>
       <div className="topBar">
-        <div className="iconBox" onClick={() =>{
-          if(type === 'post') {
-            setShowModal(false)
-          } else if(type === 'reply')
-            setShowReplyModal(false)
-          }
-        }>
-          <Link to="/main">
-            <img className="closeIcon" src={closeIcon} alt="closeIcon"/>
-          </Link>
+        <div className="iconBox" onClick={() => checkModalType()}>
+          <CloseIcon onClick={() => checkModalType()}/>
         </div>
       </div>
       {showReplyModal &&

@@ -1,0 +1,129 @@
+.followListContainer {
+  border: 1px solid #E6ECF0;
+  width: 45vw;
+  height: 100vh;
+  overflow-y: scroll;
+
+  .topSection {
+
+    .title {
+      display: flex;
+      align-items: center;
+      border-bottom: 1px solid #E6ECF0;
+      height: 50px;
+      margin: 0;
+
+      .iconBox {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 24px;
+        height: 24px;
+        margin: 0 10px;
+        cursor: pointer;
+      }
+
+      .titleContent {
+        .name {
+          color: #171725;
+          font-size: 18px;
+          font-weight: 700;
+        }
+
+        .tweets {
+          color: #6C757D;
+          font-size: 13px;
+          font-weight: 500;
+        }
+      }
+    }
+
+    .userBox {
+      position: relative;
+      width: 100%;
+      height: 378px;
+
+      .coverBox {
+        width: 100%;
+        height: 50%;
+
+        img {
+          width: 100%;
+          height: 100%;
+          object-fit: cover;
+        }
+      }
+
+      .infoBox {
+        .info {
+          margin-top: 80px;
+          margin-left: 20px;
+
+          .name {
+            color: #171725;
+            font-size: 18px;
+            font-weight: 700;
+          }
+
+          .account {
+            color: #6C757D;
+            font-size: 14px;
+            font-weight: 400;
+          }
+
+          .description {
+            margin: 5px 0;
+            color: #171725;
+            font-size: 14px;
+            font-weight: 400;
+          }
+
+          .countData {
+            display: flex;
+            justify-content: space-between;
+            width: 180px;
+            margin: 10px 0;
+            color: #6C757D;
+            font-size: 14px;
+            font-weight: 400;
+
+            b {
+              color: #171725;
+              cursor: pointer;
+            }
+          }
+        }
+
+        button {
+          position: absolute;
+          top: 55%;
+          right: 16px;
+          width: 128px;
+          height: 40px;
+          color: #FF6600;
+          border: 1px solid #FF6600;
+          background-color: transparent;
+          border-radius: 50px;
+          cursor: pointer;
+          z-index: 5;
+        }
+
+        .avatarBox {
+          position: absolute;
+          top: 30%;
+          left: 20px;
+          width: 140px;
+          height: 140px;
+          border: 4px solid white;
+          border-radius: 50%;
+
+          img {
+            width: 100%;
+            height: 100%;
+          }
+        }
+      }
+    }
+  }
+}
+

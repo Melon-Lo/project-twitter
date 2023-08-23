@@ -1,5 +1,6 @@
 import './Setting.scss'
-import { useState } from 'react'
+import Swal from 'sweetalert2';
+import { useState, useEffect } from 'react'
 
 // 信箱格式規範
 const emailRule = /^\w+((-\w+)|(\.\w+))*\@[A-Za-z0-9]+((\.|-)[A-Za-z0-9]+)*\.[A-Za-z]+$/;
@@ -16,6 +17,8 @@ export const Setting = () => {
   const [accountIsValid, setAccountIsValid] = useState(false)
   const [nameIsValid, setNameIsValid] = useState(false)
   const [emailIsValid, setEmailIsValid] = useState(false)
+  const [passwordIsValid, setPasswordIsValid] = useState(false)
+  const [passwordCheckIsValid, setPasswordCheckIsValid] = useState(false)
 
   // 設置驗證提示，若沒通過則跳出
   const [accountAlert, setAccountAlert] = useState(false)
@@ -53,16 +56,30 @@ export const Setting = () => {
     }
   }
 
+  useEffect(() => {
+    account ? setAccountIsValid(true) : setAccountIsValid(false)
+    name ? setNameIsValid(true) : setNameIsValid(false)
+    email ? setEmailIsValid(true) : setEmailIsValid(false)
+    password ? setPasswordIsValid(true) : setPasswordCheckIsValid(false)
+    passwordCheck ? setPasswordCheckIsValid(true) : setPasswordCheckIsValid(false)
+  })
+
   // 表單送出函式，當驗證全通過時才會送出
   function onFormSubmit(e) {
     e.preventDefault()
-
-    // 若「密碼」與「密碼再確認」不相同，不送出
-    if(password !== passwordCheck) {
-      return alert("兩次輸入的密碼不相符！")
+    // 認證不通過：不送出
+    if(!accountIsValid || !nameIsValid || !emailIsValid || !passwordIsValid || !passwordCheckIsValid) {
+      return
     }
 
-    // console.log 出資料
+    // 「密碼」與「密碼再確認」不相同：不送出，彈出警告視窗
+    if(password !== passwordCheck) {
+      Swal.fire("兩次輸入的密碼不相符！")
+      return
+    }
+
+    // 認證通過：送出資料，彈出成功視窗
+    Swal.fire("修改成功！")
     console.log(account, name, email, password)
 
     // 送出後清空
@@ -146,7 +163,7 @@ export const Setting = () => {
         <div className="buttonBox">
           {/* 若驗證未通過，送出鈕樣式不同，點按也不會送出 */}
           <button 
-            className={accountIsValid & nameIsValid & emailIsValid ? 'valid' : 'invalid'}
+            className={accountIsValid & nameIsValid & emailIsValid & passwordIsValid & passwordCheckIsValid ? 'valid' : 'invalid'}
             onClick={(e) => onFormSubmit(e)}
           >
             儲存

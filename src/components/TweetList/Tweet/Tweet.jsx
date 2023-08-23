@@ -60,7 +60,7 @@ export const Tweet = ({ children }) => {
           <div className="account">@Anna</div>
           <div className="time">·3小時</div>
         </div>
-        <div className="tweetContent" onClick={() => navigate('/reply_list')}>今天天氣真好</div>
+        <div className="tweetContent" onClick={() => navigate('/reply_list')}>Nulla Lorem mollit cupidatat irure. Laborum magna nulla duis ullamco cillum dolor. Voluptate exercitation incididunt aliquip deserunt reprehenderit elit laborum. </div>
         {children}
       </div>
     </div>

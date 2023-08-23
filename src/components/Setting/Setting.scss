@@ -27,7 +27,8 @@
 
     .settingForm {
       width: 40vw;
-      padding: 20px;
+      margin: 30px 0;
+      // padding: 20px;
 
       .input {
         position: relative;
@@ -76,7 +77,7 @@
       width: 40vw;
 
       .save {
-        right: 30px;
+        margin-right: 25px;
         top: 100%;
         width: 88px;
         height: 46px;

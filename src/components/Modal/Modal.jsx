@@ -46,7 +46,9 @@ export const Modal = ({ placeholder, buttonContext, showModal, setShowModal, sho
       {showReplyModal &&
         <Tweet children={<ReplyInfo />} />
       }
-      <div className="avatarBox"><img className="avatar" src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8M3x8cmFuZG9tJTIwcGVvcGxlfGVufDB8fDB8fHww&auto=format&fit=crop&w=600&q=60" alt="avatar" /></div>
+      <div className="modalAvatarBox">
+        <img className="avatar" src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8M3x8cmFuZG9tJTIwcGVvcGxlfGVufDB8fDB8fHww&auto=format&fit=crop&w=600&q=60" alt="avatar" />
+      </div>
       <textarea className="addTweetContent" type="text" placeholder={placeholder}></textarea>
       <button className="submitButton">
         {buttonContext}

@@ -22,7 +22,7 @@
     }
   }
 
-  .avatarBox {
+  .modalAvatarBox {
     padding: 20px;
     width: 50px;
     height: 50px;
@@ -78,31 +78,58 @@
   border-radius: 14px;
   z-index: 10;
 
-  .avatarBox {
-    padding: 15px 29px;
+  .topBar {
+    display: flex;
+    justify-content: flex-start;
+    border-bottom: 1px solid #E6ECF0;
+
+    .iconBox {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin: 15px;
+      cursor: pointer;
+    }
+  }
+
+  .modalAvatarBox {
+    position: relative;
     width: 50px;
     height: 50px;
+    margin: 40px 15px;
     cursor: pointer;
+
+    img {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
   }
 
   .tweetItem {
     position: relative;
     display: flex;
+    justify-content: flex-end;
     height: 136px;
     border: none;
 
     .avatarBox {
-      padding: 20px;
-      width: 50px;
-      height: 50px;
-      border-radius: 50%;
-      cursor: pointer;
+      img {
+        position: absolute;
+        top: 10px;
+        left: 15px;
+        width: 50px;
+        height: 50px;
+      }
 
       &::before {
         position: absolute;
         content: '';
         top: 80px;
-        left: 44px;
+        left: 40px;
         width: 2px;
         height: 70px;
         background-color: #CCD6DD;
@@ -110,25 +137,23 @@
     }
 
     .tweetInfo {
-      width: 100%;
+      width: 88%;
 
       .topInfo {
         display: flex;
         justify-content: flex-start;
         align-items: flex-end;
         height: 15%;
-        padding: 5px 0;
 
         .name {
           font-weight: 700;
-          margin: 0 1px;
           font-size: 16px;
         }
 
         .account {
           font-size: 14px;
           color: #6C757D;
-          margin: 0 1px;
+          margin-left: 5px;
           font-size: 14px;
         }
 
@@ -145,20 +170,10 @@
         color: #171725;
         font-size: 16px;
       }
-    }
-  }
 
-  .topBar {
-    display: flex;
-    justify-content: flex-start;
-    border-bottom: 1px solid #E6ECF0;
-
-    .iconBox {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      margin: 15px;
-      cursor: pointer;
+      .replyInfo {
+        margin: 5px 0;
+      }
     }
   }
 
@@ -166,6 +181,7 @@
     position: absolute;
     width: 85%;
     height: 40%;
+    margin: 0 15px;
     bottom: 60px;
     right: 0px;
     font-size: 18px;
@@ -203,16 +219,16 @@
 
 // avatar style
 
-.avatar {
-  width: 50px;
-  height: 50px;
-  border-radius: 50%;
-  object-fit: cover;
-}
+// .avatar {
+//   width: 50px;
+//   height: 50px;
+//   border-radius: 50%;
+//   object-fit: cover;
+// }
 
 // icon style
 
-.closeIcon {
-  width: 24px;
-  height: 24px;
-}
+// .closeIcon {
+//   width: 24px;
+//   height: 24px;
+// }

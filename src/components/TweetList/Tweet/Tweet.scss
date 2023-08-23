@@ -1,32 +1,34 @@
 .tweetItem {
   display: flex;
-  height: 136px;
-  margin: 10px;
+  height: 150px;
   border-bottom: 1px solid #E6ECF0;
   z-index: 0;
 
   .avatarBox {
-    padding: 20px;
     width: 50px;
     height: 50px;
+    margin: 10px 10px 0 10px;
     border-radius: 50%;
     cursor: pointer;
     z-index: 5;
+
+    img {
+      width: 100%;
+      height: 100%;
+    }
   }
 
   .tweetInfo {
-    width: 100%;
+    width: 85%;
 
     .topInfo {
       display: flex;
       justify-content: flex-start;
       align-items: flex-end;
-      height: 15%;
-      padding: 5px 0;
+      margin-top: 10px;
 
       .name {
         font-weight: 700;
-        margin: 0 1px;
         font-size: 16px;
         cursor: pointer;
       }
@@ -34,7 +36,7 @@
       .account {
         font-size: 14px;
         color: #6C757D;
-        margin: 0 1px;
+        margin-left: 5px;
         font-size: 14px;
       }
 

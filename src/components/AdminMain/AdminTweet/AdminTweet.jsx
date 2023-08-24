@@ -1,7 +1,7 @@
 import './AdminTweet.scss'
 import { ReactComponent as CloseIcon } from 'assets/icons/close.svg'
 
-const TweetTitle = ({ title }) => {
+export const TweetTitle = ({ title }) => {
   return <h2 className='TweetTitle'>{title}</h2>
 }
 

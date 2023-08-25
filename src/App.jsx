@@ -6,7 +6,8 @@ import { UserPage } from 'pages/UserPage/UserPage';
 import { FollowPage } from 'pages/FollowPage/FollowPage';
 import { OtherUserPage } from 'pages/OtherUserPage/OtherUserPage';
 import { AdminLoginPage } from 'pages/AdminLoginPage/AdminLoginPage';
-import { AdminPage } from 'pages/AdminPage/AdminPage';
+import { AdminMainPage } from 'pages/AdminMainPage/AdminMainPage';
+import { AdminUserPage } from 'pages/AdminUserPage/AdminUserPage'
 import { LoginPage } from 'pages/LoginPage/LoginPage';
 import { SettingPage } from 'pages/SettingPage/SettingPage';
 import { SignUpPage } from 'pages/SignUpPage/SignUpPage';
@@ -25,7 +26,8 @@ function App() {
           <Route path="user/self/follower" element={<FollowPage />}></Route>
           <Route path="user/self/following" element={<FollowPage />}></Route>
           <Route path="user/other" element={<OtherUserPage />}></Route>
-          <Route path="admin" element={<AdminPage />}></Route>
+          <Route path="admin_main" element={<AdminMainPage />}></Route>
+          <Route path="admin_users" element={<AdminUserPage />}></Route>
           <Route path="reply_list" element={<ReplyListPage />}></Route>
           <Route path="reply_list/reply_modal" element={<ReplyListPage />}></Route>
           <Route path="home" element={<HomePage />}></Route>

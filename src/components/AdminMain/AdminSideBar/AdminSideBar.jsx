@@ -21,25 +21,25 @@ import { ReactComponent as LogoutIcon } from 'assets/icons/logout.svg'
 export const AdminSideBar = () => {
   const navigate = useNavigate()
   const path = useLocation().pathname
-  const { page, setPage } = useContext(PageContext)
+  const { adminPage, setAdminPage } = useContext(PageContext)
 
   useEffect(() => {
     if (path === '/admin_main') {
-      setPage('tweet')
+      setAdminPage('tweet')
     } else if (path ==='/admin_users') {
-      setPage('users')
+      setAdminPage('users')
     }
   })
 
   //回到推文清單 
   const handleTweet = () => {
     navigate('/admin_main')
-    setPage('tweet')
+    setAdminPage('tweet')
   }
 
   const handleUser = () => {
     navigate('/admin_users')
-    setPage('users')
+    setAdminPage('users')
   }
 
   return (
@@ -53,25 +53,25 @@ export const AdminSideBar = () => {
             <LogoIcon />
           </div>
           <div className="lists">
-            <div className="list" 
+            <div 
+              className="list" 
               onClick={handleTweet}
             >
               <div className="iconsBox">
-                <HomeIcon className='activeIcon' />
-                {/* {page === 'tweet' ? <HomeIcon className='activeIcon' /> : <HomeHollowIcon />} */}
+                {/* <HomeIcon className='activeIcon' /> */}
+                {adminPage === 'tweet' ? <HomeIcon className='activeIcon' /> : <HomeHollowIcon />}
               </div>
               <div className='pageTitle'>
                 推文清單
               </div>
             </div>
-            <div className="list"
+            <div 
+              className="list"
               onClick={handleUser}
             >
               <div className="iconsBox">
-                <UserIcon       
-                  className='activeIcon' 
-                />
-                {/* {page === 'tweet' ? <HomeIcon className='activeIcon' /> : <HomeHollowIcon />} */}
+                {/* <UserIcon className='activeIcon' /> */}
+                {adminPage === 'users' ? <UserIcon className='activeIcon' /> : <UserHollowIcon />}
               </div>
               <div className='pageTitle'>
                 使用者列表

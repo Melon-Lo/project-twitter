@@ -50,23 +50,20 @@
 
         .inputBox {
           position: absolute;
-          bottom: 5px;
-          left: 10px;
           border: none;
           outline-style: none;
           background-color: transparent;
           font-size: 16px;
           z-index: 6;
-        }
-
-        &::after {
-          position: absolute;
-          content: '';
-          bottom: 0;
+          padding-top: 25px;
+          padding-left: 13px;
           width: 100%;
-          height: 2px;
-          background-color: #657786;
-          z-index: 5;
+          height: 100%;
+          border-bottom: 2px solid #657786;
+
+          &:focus {
+            border-bottom: 2px solid #50B5FF;
+          }
         }
       }
     }
@@ -75,19 +72,6 @@
       display: flex;
       justify-content: flex-end;
       width: 40vw;
-
-      .save {
-        margin-right: 25px;
-        top: 100%;
-        width: 88px;
-        height: 46px;
-        color: white;
-        font-size: 20px;
-        border: none;
-        border-radius: 50px;
-        background-color: #FF6600;
-        cursor: pointer;
-      }
     }
   }
 
@@ -103,4 +87,45 @@
     border-radius: 4px;
     border: 2px solid #FAFAFA;
   }
+}
+
+// validationAlert style
+
+.validationAlert {
+  position: absolute;
+  bottom: -50%;
+  width: 100%;
+  height: 30px;
+  padding-left: 10px;
+  border-top: 3px solid #FC5A5A;
+  font-size: 12px;
+  color: #FC5A5A;
+  z-index: 10;
+}
+
+// button style
+
+.valid {
+  margin-right: 25px;
+  top: 100%;
+  width: 88px;
+  height: 46px;
+  color: white;
+  font-size: 20px;
+  border: none;
+  border-radius: 50px;
+  background-color: #FF6600;
+  cursor: pointer;
+}
+
+.invalid {
+  margin-right: 25px;
+  top: 100%;
+  width: 88px;
+  height: 46px;
+  color: white;
+  font-size: 20px;
+  border: none;
+  border-radius: 50px;
+  background-color: #828282;
 }

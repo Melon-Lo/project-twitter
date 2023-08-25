@@ -38,29 +38,6 @@
             background-color: #F5F8FA;
             border-bottom: 2px solid #657786;
     
-            label {
-              text-align: start;
-              padding: 5px 0;
-              padding-left: 11px;
-              font-size: 14px;
-              border: 0px;
-            }
-    
-            input[type=text] {
-              padding: 5px 0;
-              padding-left: 10px;
-              font-size: 16px;
-              color: #B5B5BE;
-              border: 0px solid #F5F8FA;
-              background-color: #F5F8FA;
-              &:focus {
-                  color: #696974;
-                }
-
-              &::placeholder {
-                color: #B5B5BE;
-              }
-            }
           }
 
 

@@ -1,0 +1,116 @@
+.cardListWrapper {
+  outline: 1px solid #E6ECF0;
+  width: 937px;
+
+  .TweetTitle {
+    width: 100%;
+    padding-left: 18px;
+    border-bottom: 1px solid E6ECF0;
+  }
+
+  .cardListContent {
+    width: 100%;
+    .cardListContainer {
+      padding: 10px 0px;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-evenly;
+      border-top: 1px solid #E6ECF0;
+
+      .card {
+          // outline: 1px solid purple;
+          width: 210px;
+          position: relative;
+          margin-bottom: 15px;
+          border-radius: 10px;
+          background-color: #F6F7F8;
+      
+          .backGroundImg {
+            padding: 70px 0px;
+            margin-bottom: 86px;
+            background-image: url("../../../assets/images/flowers.jpg");
+            background-size: cover;
+            background-position: center;
+            border-radius: 10px 10px 0px 0px;
+      
+          }
+      
+          .avatarSection {
+            // outline: 1px solid tomato;
+            width: 100px;
+            position: absolute;
+            top: 60px;
+            left: 50px;
+            margin: 0 auto;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+      
+            .avatarBox {
+              width: 100px;
+              height: 100px;
+              margin-bottom: 7px;
+              border: 4px solid #fff;
+              border-radius: 50%;
+      
+              img {
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+              }
+            }
+      
+            .avatarName {
+      
+              .name {
+                // outline: 1px solid purple;
+                font-weight: 700;
+      
+              }
+      
+              .hashName {
+                // outline: 1px solid purple;
+                color: #6C757D;
+              }
+            }
+          }
+      
+      
+          .iconSection {
+            width: 139px;
+            padding: 2px 0px;
+            margin: 0 auto;
+            margin-bottom: 8px;
+            display: flex;
+            justify-content: space-between;
+      
+            .iconGroup {
+              width: 61px;
+              // outline: 1px solid purple;
+              display: flex;
+              justify-content: space-between;
+              ;
+      
+              .iconBox {
+                // outline: 1px solid blue;
+                width: 24px;
+                height: 24px;
+      
+      
+              }
+            }
+          }
+      
+          .followSection {
+            // outline: 1px solid black;
+            width: 158px;
+            padding: 2px 0px;
+            margin: 0 auto;
+            margin-bottom: 24px;
+            display: flex;
+            justify-content: space-between;
+          }
+        }
+      }
+    }
+  }

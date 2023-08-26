@@ -37,9 +37,15 @@ export const AdminSideBar = () => {
     setAdminPage('tweet')
   }
 
+  // 回到使用者列表
   const handleUser = () => {
     navigate('/admin_users')
     setAdminPage('users')
+  }
+
+  // 回到後台登入畫面
+  const handleAdminLogin = () => {
+    navigate('/admin-login')
   }
 
   return (
@@ -83,7 +89,10 @@ export const AdminSideBar = () => {
         </div>
 
         {/* bottom */}
-        <div className="bottomSection">
+        <div 
+          className="bottomSection"
+          onClick={handleAdminLogin}
+        >
           <div className="iconBox">
             <LogoutIcon className='icon'/>
           </div>

@@ -15,6 +15,7 @@ import { ReactComponent as HomeHollowIcon } from 'assets/icons/home_hollow.svg'
 import { ReactComponent as UserIcon } from 'assets/icons/user.svg'
 import { ReactComponent as UserHollowIcon } from 'assets/icons/user_hollow.svg'
 import { ReactComponent as LogoutIcon } from 'assets/icons/logout.svg'
+import clsx from 'clsx'
 
 
 
@@ -67,7 +68,7 @@ export const AdminSideBar = () => {
                 {/* <HomeIcon className='activeIcon' /> */}
                 {adminPage === 'tweet' ? <HomeIcon className='activeIcon' /> : <HomeHollowIcon />}
               </div>
-              <div className='pageTitle'>
+              <div className={adminPage === 'tweet' ? 'activePage' : 'pageTitle'}>
                 推文清單
               </div>
             </div>
@@ -79,7 +80,7 @@ export const AdminSideBar = () => {
                 {/* <UserIcon className='activeIcon' /> */}
                 {adminPage === 'users' ? <UserIcon className='activeIcon' /> : <UserHollowIcon />}
               </div>
-              <div className='pageTitle'>
+              <div className={adminPage === 'users'? 'activePage': 'pageTitle'}>
                 使用者列表
               </div>
             </div>

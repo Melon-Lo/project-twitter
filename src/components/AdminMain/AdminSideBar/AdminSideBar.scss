@@ -32,13 +32,14 @@
                 height: 24px;
                 margin-left: 5px;
                 margin-right: 12px;
-            
+
                 .icon {
                   width: 100%;
                   height: 100%;
                 }
               }
-              .pageTitle {
+              .pageTitle, 
+              .activePage {
                 font-weight: 700;
                 font-size: 18px;
               }
@@ -66,7 +67,7 @@
             vertical-align: middle;
           }
         }
-        .title {
+        .titlec{
           font-weight: 700;
           font-size: 18px;
         }
@@ -78,4 +79,8 @@
 
 .activeIcon {
   fill: #FF6600;
+}
+
+.activePage {
+  color: #FF6600;
 }

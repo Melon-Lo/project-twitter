@@ -6,15 +6,47 @@ import { AuthInput } from 'components/SignUp/SignUp'
 import { TopIcon } from 'components/SignUp/SignUp'
 import { OrangeBtn } from 'components/SignUp/SignUp'
 
+// import { useAuth } from 'context/AuthContext'
+import { login } from 'api/auth'
 
 export const Login = () => {
   const [account, setAccount] = useState('')
   const [password, setPassword] = useState('')
 
-  const handleSubmit = (event) => {
-    event.preventDefault()
+  // const { login } = useAuth()
+
+  // const handleSubmit = (event) => {
+  //   event.preventDefault()
+
+  // }
+
+  const handleClick = async () => {
+    console.log(account, password)
+
+    // 如果登入成功的話，回傳值會是success，並且裡面裡面有data，data裡面也會有authToken
+    // 用解構的方式，把結果解構出來
+    const { success, authToken } = await login({
+      account, password
+    })
 
   }
+
+  // const handleSubmit = async () => {
+  //   if(account.length === 0 || password.length === 0) {
+  //     return
+  //   }
+
+  //   const success = await login({
+  //     account,
+  //     password,
+  //   })
+
+  //   if (success) {
+  //     console.log('登入成功')
+  //   } else {
+  //     console.log('登入失敗')
+  //   }
+  // }
 
   // 可加入context中，重複使用
   // 登入、取消、後台登入畫面事件處理，放在同一個函式中
@@ -76,7 +108,7 @@ export const Login = () => {
       <TopIcon title="登入 Alphitter" />
 
       {/* 記得有資料後，使用.map重複渲染 */}
-      <form onSubmit={handleSubmit}>
+      {/* <form onSubmit={handleSubmit}> */}
         <AuthInput
           id="account"
           label="帳號"
@@ -92,11 +124,11 @@ export const Login = () => {
           placeholder="請輸入密碼"
           onChange={(passwordInputValue) => setPassword(passwordInputValue)}
         />
-      </form>
+      {/* </form> */}
       <div className='btnGroup'>
         <OrangeBtn
           way="登入"
-          onClick={handleLogin}
+          onClick={handleClick}
         />
         <div className='aLink'>
           <a href="#" className='cancel-link' onClick={handleLogin}>取消</a>

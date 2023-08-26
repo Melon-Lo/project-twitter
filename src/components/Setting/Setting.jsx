@@ -13,6 +13,12 @@ export const Setting = () => {
   const [password, setPassword] = useState('')
   const [passwordCheck, setPasswordCheck] = useState('')
 
+  // 字數統計與字數限制
+  const accountLength = account.length
+  const nameLength = name.length
+  const accountLimit = 20
+  const nameLimit = 50
+
   // 設置驗證狀態
   const [accountIsValid, setAccountIsValid] = useState(false)
   const [nameIsValid, setNameIsValid] = useState(false)
@@ -27,10 +33,8 @@ export const Setting = () => {
 
   // 驗證函式，每次input改變時執行
   function checkAccount(inputValue) {
-    // 如果帳號的第一個字符不是@，不通過
-    if(inputValue.indexOf('@') !== 0) {
-      return setAccountAlert(true)
-    } else if(inputValue.trim().length > 20) {
+    // 如果帳號大於20個字符，不通過
+    if(inputValue.trim().length > accountLimit) {
       return setAccountAlert(true)
     } else {
       setAccountAlert(false)
@@ -39,7 +43,7 @@ export const Setting = () => {
   }
   function checkName(inputValue) {
     // 如果名字大於50個字符，不通過
-    if(inputValue.trim().length > 50) {
+    if(inputValue.trim().length > nameLimit) {
       setNameAlert(true)
     } else {
       setNameAlert(false)
@@ -109,7 +113,10 @@ export const Setting = () => {
               }}
               value={account}
             />
-            {accountAlert && <div className='validationAlert'>帳號不包含前綴「@」或是字數超過上限！（最多20字）</div>}
+            {accountAlert && <div className='validationAlert'>帳號字數超過上限！（最多20字）</div>}
+            <div className="wordCount">
+              {accountLength}/{accountLimit}
+            </div>
           </div>
           <div className="input">
             <div className="inputLabel">名稱</div>
@@ -123,7 +130,10 @@ export const Setting = () => {
               }}
               value={name}
             />
-            {nameAlert && <div className='validationAlert'>字數超過上限！（最多50個字）</div>}
+            {nameAlert && <div className='validationAlert'>名稱字數超過上限！（最多50個字）</div>}
+            <div className="wordCount">
+              {nameLength}/{nameLimit}
+            </div>
           </div>
           <div className="input">
             <div className="inputLabel">Email</div>

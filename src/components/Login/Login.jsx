@@ -21,14 +21,23 @@ export const Login = () => {
   // }
 
   const handleClick = async () => {
-    console.log(account, password)
+    // 驗證當前輸入框是否有值
+    if(account.length === 0 || password.length === 0) {
+      return
+    }
 
-    // 如果登入成功的話，回傳值會是success，並且裡面裡面有data，data裡面也會有authToken
-    // 用解構的方式，把結果解構出來
-    const { success, authToken } = await login({
+    // 將data設為login的回傳值
+    const data = await login({
       account, password
     })
 
+    // 如果data存在並值等於success的話，把authToken存起來
+    if(data?.status === 'success') {
+      localStorage.setItem('authToken', data.token)
+    // 如果data不存在（直接跳到catch了）
+    } else {
+      console.log('Login Failed.')
+    }
   }
 
   // const handleSubmit = async () => {

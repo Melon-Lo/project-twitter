@@ -12,7 +12,6 @@ import { LoginPage } from 'pages/LoginPage/LoginPage';
 import { SettingPage } from 'pages/SettingPage/SettingPage';
 import { SignUpPage } from 'pages/SignUpPage/SignUpPage';
 
-
 import AuthContextProvider from 'context/AuthContext';
 
 function App() {

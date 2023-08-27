@@ -17,8 +17,10 @@
   }
 
 
-  .accountTitle {
+  .iconTitle{
     font-weight: 700;
+    padding-bottom: 20px;
+    padding-top: 10px;
   }
 
   form {
@@ -36,7 +38,6 @@
         justify-content: center;
         color: #696974;
         background-color: #F5F8FA;
-        border-bottom: 2px solid #657786;
 
         label {
           text-align: start;
@@ -46,20 +47,49 @@
           border: 0px;
         }
 
-        input[type=text] {
+        input[type=text],
+        input[type=password] {
           padding: 5px 0;
-          padding-left: 10px;
+          padding-left: 13px;
           font-size: 16px;
-          color: #B5B5BE;
+          color: #696974;
           border: 0px solid #F5F8FA;
           background-color: #F5F8FA;
 
           &:focus {
-              color: #696974;
+              // color: #696974;
+              outline: none;
+              border-bottom: 2px solid #50B5FF;
             }
 
           &::placeholder {
             color: #B5B5BE;
+          }
+        }
+
+        .alerGroup {
+          position: relative;
+          font-size: 12px;
+          display: flex;
+
+          .alertBox {
+            position: absolute;
+            width: 100%;
+            top: -2px;
+            left: 0px;
+            text-align: start;
+            border-top: 2px solid #fC5A5A;
+            z-index: 3;
+
+              .alert {
+                color: #fC5A5A;
+              }
+          } 
+
+          .numAlertBox {
+            // outline: 1px solid blue;
+            width: 100%;
+            text-align: end;
           }
         }
       }

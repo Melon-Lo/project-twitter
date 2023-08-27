@@ -1,5 +1,5 @@
 import './SignUp.scss'
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { ReactComponent as LogoIcon } from 'assets/icons/logo.svg'
 import Swal from 'sweetalert2'
 
@@ -11,23 +11,47 @@ export const TopIcon = ({ title }) => {
       <div className="iconBox">
         <LogoIcon className='icon' />
       </div>
-      <h2 className='accountTitle'>{title}</h2>
+      <h2 className='iconTitle'>{title}</h2>
     </>
   )
 }
 
-export const AuthInput = ({ id, text, value, label, placeholder, onChange }) => {
+export const AuthInput = (
+  { id, 
+    name, 
+    text, 
+    value, 
+    label, 
+    placeholder, 
+    onChange,
+    valuelength,
+    maxlenth }) => {
   return (
     <div className='formContainer'>
       <div className='group'>
         <label htmlFor={id}>{label}</label>
         <input 
           id={id}
+          name={name}
           type={text || "text"} 
           value={value || ""}
           placeholder={placeholder} 
           onChange={(event) => onChange?.(event.target.value)}
+          valuelength={valuelength}
+          maxlenth={maxlenth}
         />
+        <div className="alerGroup">
+          {value.length > maxlenth && <div className="alertBox">
+            <span className='alert'>字數超過上限!</span>
+          </div>
+          }
+          {value.length >= 1 && <div className="numAlertBox">
+            <span className='lengthNum'>{valuelength}</span>
+            /
+            <span className='fityNum'>{maxlenth}</span>
+          </div>
+          } 
+        </div>
 
       </div>
     </div>
@@ -80,7 +104,7 @@ export const OrangeBtn = ({ way, onClick }) => {
 
 
 export const SignUp = () => {
-  // 狀態變數
+  // 各input的儲存狀態變數
   const [account, setAccount] = useState('')
   const [userName, setUserName] = useState('')
   const [email, setEmail] = useState('')
@@ -88,34 +112,130 @@ export const SignUp = () => {
   const [passwordAgin, setPasswordAgin] = useState('')
 
 
+  // 設定5格input提示，沒通過會跳出，以及驗證全部是否通過
+  const [accountAlert, setAccountAlert] = useState(false)
+  const [userNameAlert, setUserNameAlert] = useState(false)
+  const [emailAlert, setEmailAlert] = useState(false)
+
+
+
+  // 設置驗證狀態
+  const [accountIsValid, setAccountIsValid] = useState(false)
+  const [nameIsValid, setNameIsValid] = useState(false)
+  const [emailIsValid, setEmailIsValid] = useState(false)
+  const [passwordIsValid, setPasswordIsValid] = useState(false)
+  const [passwordCheckIsValid, setPasswordCheckIsValid] = useState(false)
+
+  // 宣告變數
+  // 信箱規格
+  const emailRule = /^\w+((-\w+)|(\.\w+))*\@[A-Za-z0-9]+((\.|-)[A-Za-z0-9]+)*\.[A-Za-z]+$/;
+
+
+  // 驗證函式，input改變時執行
+  //帳號大於20個字，即不通過
+  function checkAccount(inputValue) {
+    if (inputValue.trim().length > 20) {
+      return setAccountAlert(true)
+    } else {
+      setAccountAlert(false)
+      setAccountIsValid(true)
+    }
+  }
+
+  //名稱大於50個字，即不通過
+  function checkUserName(inputValue) {
+    if (inputValue.trim().length > 50) {
+      return setUserNameAlert(true)
+    } else {
+      setUserNameAlert(false)
+      setNameIsValid(true)
+    }
+  }
+ 
+
+  //如果不符合email撰寫規格，就不通過
+  function checkEmail(inputValue) {
+    if (!emailRule.test(inputValue)) {
+      return setEmailAlert(true)
+    } else {
+      setEmailAlert(false)
+      setEmailIsValid(true)
+    }
+
+  }
+
+  useEffect(() => {
+    account ? setAccountIsValid(true) : setAccountIsValid(false)
+    userName ? setNameIsValid(true) : setNameIsValid(false)
+    email ? setEmailIsValid(true) : setEmailIsValid(false)
+    password ? setPasswordIsValid(true) : setPasswordCheckIsValid(false)
+    passwordAgin ? setPasswordCheckIsValid(true) : setPasswordCheckIsValid(false)
+  })
+
+
+
   const handleSubmit = (event) => {
     event.preventDefault()
-    
   }
 
   // 註冊按鈕、取消函式功能放一起
-  const handleSign = (event) => {
-      //按下註冊 
-    if (event.currentTarget.classList.contains('orange')) {
+  // const handleSign = (event) => {
+  //     //按下註冊 
+  //   if (event.currentTarget.classList.contains('orange')) {
+  //     Swal.fire({
+  //       icon: 'success',
+  //       title: '註冊成功',
+  //       text: '您已經註冊，即可登入頁面。',
+  //     })
+  //     // 按下取消
+  //   } else if (event.currentTarget.classList.contains('cancel-link')) {
+  //     Swal.fire({
+  //       title: '您確定要取消註冊嗎?',
+  //       showCancelButton: true,
+  //       confirmButtonText: '確定',
+  //     }).then((result) => {
+  //       /* Read more about isConfirmed, isDenied below */
+  //       if (result.isConfirmed) {
+  //         Swal.fire('已取消!', '', 'success')
+  //       }
+  //     })
+  //   }
+  // }
+
+    //按下註冊按鈕函式
+    const handleSign = () => {
+      // 檢驗所有使用者輸入的值，是否符合標準，符合及通過
+      if (!accountIsValid || !nameIsValid || !emailIsValid || !passwordIsValid || !passwordCheckIsValid) {
+         return
+      }
+
+      // 『密碼』與『密碼再確認』
+        if(password !== passwordAgin) {
+
+          Swal.fire({
+            icon: 'error',
+            title: '註冊失敗',
+            text: '輸入兩組密碼不相符，請再重新確認。',
+          })
+          return
+        }
+
+      // 認證通過：送出資料，彈出成功視窗
       Swal.fire({
         icon: 'success',
         title: '註冊成功',
-        text: '您已經註冊，即可登入頁面。',
+        text: '您已經註冊，即可進入登入頁面登入。',
       })
-      // 按下取消
-    } else if (event.currentTarget.classList.contains('cancel-link')) {
-      Swal.fire({
-        title: '您確定要取消註冊嗎?',
-        showCancelButton: true,
-        confirmButtonText: '確定',
-      }).then((result) => {
-        /* Read more about isConfirmed, isDenied below */
-        if (result.isConfirmed) {
-          Swal.fire('已取消!', '', 'success')
-        }
-      })
+         
+      // 送出後清空
+      setAccount('')
+      setUserName('')
+      setEmail('')
+      setPassword('')
+      setPasswordAgin('')
+
+
     }
-  }
 
   return (
       <div className="SignUpcontainer">
@@ -125,38 +245,63 @@ export const SignUp = () => {
         <form onSubmit={handleSubmit}>
           <AuthInput 
             id="account" 
+            name="account"
             label="帳號" 
             value={account}
             placeholder="請輸入帳號"
-            onChange={(accountInputValue) => setAccount(accountInputValue) } 
+            onChange={(accountInputValue) =>{  
+              checkAccount(accountInputValue)
+              setAccount(accountInputValue) 
+            }}
+            valuelength={account.length}
+            maxlenth="20" 
           />
           <AuthInput
             id="name"
+            name="name"
             label="名稱"
             value={userName}
             placeholder="請輸入使用者名稱"
-            onChange={(nameInputValue) => setUserName(nameInputValue)}
+            onChange={(userNameInputValue) => {
+              checkUserName(userNameInputValue)
+              setUserName(userNameInputValue)
+            }}
+            valuelength={userName.length}
+            maxlenth="50" 
           />
           <AuthInput
-            id="Email"
+            id="email"
+            name="email"
             label="Email"
             value={email}
             placeholder="請輸入Email"
-            onChange={(EmailInputValue) => setEmail(EmailInputValue)}
+          onChange={(emailInputValue) => {
+             checkEmail(emailInputValue)
+             setEmail(emailInputValue)
+            }}
+            valuelength={email.length}
+            maxlenth="50" 
           />
           <AuthInput
             id="password"
+            name="password"
             label="密碼"
             value={password}
             placeholder="請設定密碼"
             onChange={(passwordInputValue) => setPassword(passwordInputValue)}
+            valuelength={password.length}
+            maxlenth="50" 
+
           />
           <AuthInput
             id="password-2"
+            name="password-2"
             label="密碼確認"
             value={passwordAgin}
             placeholder="請再次輸入密碼"
             onChange={(passwordAgnInputValue) => setPasswordAgin(passwordAgnInputValue)}
+            valuelength={passwordAgin.length}
+            maxlenth="50" 
           />
         </form>
 
@@ -166,7 +311,7 @@ export const SignUp = () => {
             onClick={handleSign}
           />
           <div className='aLink'>
-            <a href="#" className='cancel-link' onClick={handleSign}>取消</a>
+            <a href="http://localhost:3000/login" className='cancel-link'>取消</a>
           </div>
         </div>
       </div>

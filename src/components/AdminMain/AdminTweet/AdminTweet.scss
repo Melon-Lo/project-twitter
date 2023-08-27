@@ -8,10 +8,15 @@
   justify-content: center;
 
   .TweetTitle {
+    outline: 1px solid #E6ECF0;
+    padding: 15px 0px;
     padding-left: 25px;
   }
 
   .TweetListContent {
+    height: 100vh;
+    overflow-y: scroll;
+
     // adminTweetItem
       .AdminTweetItem {
         outline: 1px solid #E6ECF0;

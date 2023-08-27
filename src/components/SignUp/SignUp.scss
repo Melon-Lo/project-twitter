@@ -4,12 +4,17 @@
 //   padding-top: 40px;
 //   padding-bottom: 19px;
 
+   h2 {
+    margin: 0;
+    padding: 0;
+   }
+
   .SignUpcontainer {
       width: 100vw;
       max-width: 1140px;
       margin: 0 auto;
       text-align: center;
-      padding-top: 40px;
+      padding-top: 30px;
 
       .iconBox {
           display: inline-block;
@@ -23,15 +28,16 @@
         }
 
 
-        .accountTitle {
+        .iconTitle {
           font-weight: 700;
+          padding-bottom: 12px;
+          padding-top: 2px;
         }
 
        form {
         .formContainer {
           width: 31%;
           margin: 0 auto;
-          margin-bottom: 5px;
           padding-bottom: 24px;
           .group {
               width: 100%;
@@ -41,7 +47,6 @@
               justify-content: center;
               color: #696974;
               background-color: #F5F8FA;
-              border-bottom: 2px solid #657786;
           
               label {
                 text-align: start;
@@ -54,17 +59,46 @@
               input[type=text],
               input[type=password] {
                 padding: 5px 0;
-                padding-left: 10px;
+                padding-left: 13px;
                 font-size: 16px;
-                color: #B5B5BE;
+                color: #696974;
+                // color: #B5B5BE;
                 border: 0px solid #F5F8FA;
                 background-color: #F5F8FA;
+                border-bottom: 2px solid #657786;
+
                 &:focus {
-                  color: #696974;
                   outline: none;
+                  border-bottom: 2px solid #50B5FF;
                 }
                 &::placeholder {
                   color: #B5B5BE;
+                }
+              }
+
+              .alerGroup {
+                position: relative;
+                font-size: 12px;
+                display: flex;
+
+                .alertBox {
+                  position: absolute;
+                  width: 100%;
+                  top: -2px;
+                  left: 0px;
+                  text-align: start;
+                  border-top: 2px solid #fC5A5A;
+                  z-index: 3;
+
+                  .alert {
+                    color: #fC5A5A;
+                  }
+                } 
+
+                .numAlertBox {
+                  // outline: 1px solid blue;
+                  width: 100%;
+                  text-align: end;
                 }
               }
             }
@@ -78,7 +112,7 @@
         .orange {
           width: 100%;
           padding: 8px 24px;
-          margin: 10px 0;
+          margin-bottom: 10px;
           font-size: 20px;
           color: #FFFFFF;
           cursor: pointer;

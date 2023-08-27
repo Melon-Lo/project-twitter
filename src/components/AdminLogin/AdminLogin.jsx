@@ -65,6 +65,8 @@ export const AdminLogin = () => {
           value={account}
           placeholder="請輸入帳號"
           onChange={(accountInputValue) => setAccount(accountInputValue)}
+          valuelength={account.length}
+          maxlenth="20" 
         />
         <AuthInput
           id="password"
@@ -72,6 +74,8 @@ export const AdminLogin = () => {
           value={password}
           placeholder="請輸入密碼"
           onChange={(passwordInputValue) => setPassword(passwordInputValue)}
+          valuelength={password.length}
+          maxlenth="50" 
         />
       </form>
       <div className='btnGroup'>

@@ -11,7 +11,7 @@ export const TopIcon = ({ title }) => {
       <div className="iconBox">
         <LogoIcon className='icon' />
       </div>
-      <h2 className='accountTitle'>{title}</h2>
+      <h2 className='iconTitle'>{title}</h2>
     </>
   )
 }

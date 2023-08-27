@@ -1,24 +1,27 @@
 .cardListWrapper {
   outline: 1px solid #E6ECF0;
-  width: 937px;
+  width: 1152px;
 
   .TweetTitle {
     width: 100%;
+    padding: 15px 0px;
     padding-left: 18px;
-    border-bottom: 1px solid E6ECF0;
+    border-bottom: 1px solid #E6ECF0;
   }
 
   .cardListContent {
-    width: 100%;
+    width: 87%;
+    height: 100vh;
+    overflow-y: scroll;
+
     .cardListContainer {
-      padding: 10px 0px;
+      padding-top: 15px;
+      padding-bottom: 30px;
       display: flex;
       flex-wrap: wrap;
       justify-content: space-evenly;
-      border-top: 1px solid #E6ECF0;
 
       .card {
-          // outline: 1px solid purple;
           width: 210px;
           position: relative;
           margin-bottom: 15px;
@@ -36,7 +39,6 @@
           }
       
           .avatarSection {
-            // outline: 1px solid tomato;
             width: 100px;
             position: absolute;
             top: 60px;
@@ -63,13 +65,11 @@
             .avatarName {
       
               .name {
-                // outline: 1px solid purple;
                 font-weight: 700;
       
               }
       
               .hashName {
-                // outline: 1px solid purple;
                 color: #6C757D;
               }
             }
@@ -86,13 +86,11 @@
       
             .iconGroup {
               width: 61px;
-              // outline: 1px solid purple;
               display: flex;
               justify-content: space-between;
               ;
       
               .iconBox {
-                // outline: 1px solid blue;
                 width: 24px;
                 height: 24px;
       
@@ -102,7 +100,6 @@
           }
       
           .followSection {
-            // outline: 1px solid black;
             width: 158px;
             padding: 2px 0px;
             margin: 0 auto;

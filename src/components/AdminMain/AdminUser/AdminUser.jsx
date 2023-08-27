@@ -65,6 +65,14 @@ export const CardList = () => {
           <CardItem />
           <CardItem />
           <CardItem />
+          <CardItem />
+          <CardItem />
+          <CardItem />
+          <CardItem />
+          <CardItem />
+          <CardItem />
+          <CardItem />
+          <CardItem />
         </div>
       </div>
     </div>

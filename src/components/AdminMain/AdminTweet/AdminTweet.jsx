@@ -44,6 +44,10 @@ export const AdminTweetList = () => {
         <AdminTweetItem />
         <AdminTweetItem />
         <AdminTweetItem />
+        <AdminTweetItem />
+        <AdminTweetItem />
+        <AdminTweetItem />
+        <AdminTweetItem />
       </div>
     </div>
   )

@@ -1,5 +1,5 @@
 import axios from "axios";
-const authURL = 'https://aqueous-dusk-12569-5142ecba44ff.herokuapp.com/api'
+const authURL = 'https://simple-twitter-0827-5fac12a34439.herokuapp.com/api'
 
 // const authURL = 'https://todo-list.alphacamp.io/api/auth';
 

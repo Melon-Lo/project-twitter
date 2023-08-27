@@ -7,10 +7,9 @@ import { useNavigate } from 'react-router-dom'
 import { ReactComponent as ChatHollowIcon } from 'assets/icons/chat_hollow.svg'
 import { ReactComponent as LikeHollowIcon } from 'assets/icons/like_hollow.svg'
 
-
 // tweet types
 
-export const IconInfo = ({ setShowReplyModal }) => {
+export const IconInfo = ({ setShowReplyModal, likeCount, replyCount }) => {
   const navigate = useNavigate()
 
   return (
@@ -23,7 +22,7 @@ export const IconInfo = ({ setShowReplyModal }) => {
           <ChatHollowIcon className="icon" />
         </div>
         <div className="number">
-          13
+          {replyCount}
         </div>
       </div>
       <div className="likes">
@@ -31,7 +30,7 @@ export const IconInfo = ({ setShowReplyModal }) => {
           <LikeHollowIcon className="icon" />
         </div>
         <div className="number">
-          99
+          {likeCount}
         </div>
       </div>
     </div>
@@ -46,21 +45,21 @@ export const ReplyInfo = () => {
   )
 }
 
-export const Tweet = ({ children }) => {
+export const Tweet = ({ children, id, name, account, description, avatar, createdAt }) => {
   const navigate = useNavigate()
 
   return (
-    <div className="tweetItem">
+    <div className="tweetItem" key={id}>
       <div className="avatarBox" onClick={() => navigate('/user/other')}>
-        <img className="avatar" src="https://avatoon.me/wp-content/uploads/2021/09/Cartoon-Pic-Ideas-for-DP-Profile-02-768x768.png" alt="avatar" />
+        <img className="avatar" src={avatar} alt="avatar" />
       </div>
       <div className="tweetInfo">
         <div className="topInfo">
-          <div className="name">Chris</div>
-          <div className="account">@Anna</div>
-          <div className="time">·3小時</div>
+          <div className="name">{name}</div>
+          <div className="account">@{account}</div>
+          <div className="time">．{createdAt}</div>
         </div>
-        <div className="tweetContent" onClick={() => navigate('/reply_list')}>Nulla Lorem mollit cupidatat irure. Laborum magna nulla duis ullamco cillum dolor. Voluptate exercitation incididunt aliquip deserunt reprehenderit elit laborum. </div>
+        <div className="tweetContent" onClick={() => navigate('/reply_list')}>{description}</div>
         {children}
       </div>
     </div>

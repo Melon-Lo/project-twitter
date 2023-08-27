@@ -9,7 +9,7 @@ import { Tweet, IconInfo } from 'components/TweetList/Tweet/Tweet'
 import { Modal } from 'components/Modal/Modal'
 import { useNavigate } from 'react-router-dom'
 
-export const Tweets = () => {
+export const Tweets = ({ tweets }) => {
   const { showModal, setShowModal, showReplyModal, setShowReplyModal } = useContext(ModalContext)
   const navigate = useNavigate()
 
@@ -49,10 +49,32 @@ export const Tweets = () => {
         </div>
       </div>
       <div className="bottomSection">
-        <Tweet children={<IconInfo setShowReplyModal={setShowReplyModal} />} />
-        <Tweet children={<IconInfo setShowReplyModal={setShowReplyModal} />} />
-        <Tweet children={<IconInfo setShowReplyModal={setShowReplyModal} />} />
-        <Tweet children={<IconInfo setShowReplyModal={setShowReplyModal} />} />
+        {tweets.lengh !== 0 ? 
+          (tweets.map((tweet) => {
+            let { name, account, avatar } = tweet.User
+            const { id, UserId, createdAt, description, likeCount, replyCount, updatedAt } = tweet
+            return (
+              <Tweet 
+                children={
+                <IconInfo 
+                  setShowReplyModal={setShowReplyModal}
+                  likeCount={likeCount}
+                  replyCount={replyCount}
+                />
+                }
+                key={id}
+                id={id}
+                UserId={UserId}
+                name={name}
+                account={account}
+                description={description}
+                createdAt={createdAt}
+                avatar={avatar}
+                updatedAt={updatedAt}
+              />
+            )
+          }))
+          : '尚未發佈任何貼文'}
       </div>
     </div>
   )

@@ -1,7 +1,7 @@
 import './HomePage.scss'
 import { SideBar } from "components/SideBar/SideBar";
 import { TweetList } from "components/TweetList/TweetList";
-import { Recommendation } from 'components/Recommendation/Recommendation';
+import { RecommendationList } from 'components/RecommendationList/RecommendationList';
 import { useContext, useEffect, useState } from 'react';
 import { ModalContext } from 'context/ModalContext';
 
@@ -33,7 +33,7 @@ export const HomePage = () => {
       }
       <SideBar />
       <TweetList tweets={tweets}/>
-      <Recommendation />
+      <RecommendationList />
     </div>
   );
 };

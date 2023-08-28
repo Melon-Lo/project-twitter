@@ -1,0 +1,21 @@
+.recommendationContainer {
+  position: fixed;
+  top: 16px;
+  right: 100px;
+  width: 273px;
+  background-color: #FAFAFB;
+  border-radius: 16px;
+
+  .title {
+    padding: 20px;
+    color: #171725;
+    font-size: 24px;
+    font-weight: 700;
+    border-bottom: 1px solid #E6ECF0
+  }
+
+  .people {
+    display: flex;
+    flex-direction: column;
+  }
+}

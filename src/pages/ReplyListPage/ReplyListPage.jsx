@@ -1,6 +1,6 @@
 import './ReplyListPage.scss'
 import { SideBar } from "components/SideBar/SideBar";
-import { Recommendation } from 'components/Recommendation/Recommendation';
+import { RecommendationList } from 'components/RecommendationList/RecommendationList';
 import { useContext } from 'react';
 import { ModalContext } from 'context/ModalContext';
 import { ReplyList } from 'components/ReplyList/ReplyList';
@@ -14,7 +14,7 @@ export const ReplyListPage = () => {
       }
       <SideBar />
       <ReplyList />
-      <Recommendation />
+      <RecommendationList />
     </div>
   )
 }

@@ -1,0 +1,51 @@
+.person {
+  width: 100%;
+  display: flex;
+  justify-content: space-evenly;
+  padding: 10px;
+
+  .avatarBox {
+    width: 50px;
+    height: 50px;
+    cursor: pointer;
+  }
+
+  .account {
+    display: flex;
+    flex-direction: column;
+
+    .accountTitle {
+      color: #171725;
+      font-size: 16px;
+      font-weight: 700;
+    }
+
+    .accountContent {
+      color: #92929D;
+      font-size: 14px;
+      font-weight: 500;
+    }
+  }
+
+  // button styles
+
+  .follow {
+    width: 64px;
+    height: 40px;
+    background-color: transparent;
+    border: 1px solid #FF6600;
+    border-radius: 50px;
+    color: #FF6600;
+    cursor: pointer;
+  }
+
+  .following {
+    width: 96px;
+    height: 40px;
+    background-color: #FF6600;
+    border: none;
+    border-radius: 50px;
+    color: #FFFFFF;
+    cursor: pointer;
+  }
+}

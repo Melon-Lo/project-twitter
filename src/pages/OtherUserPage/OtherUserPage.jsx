@@ -1,7 +1,7 @@
 import './OtherUserPage.scss'
 import { SideBar } from "components/SideBar/SideBar";
 import { OtherUser } from 'components/User/OtherUser';
-import { Recommendation } from 'components/Recommendation/Recommendation';
+import { RecommendationList } from 'components/RecommendationList/RecommendationList';
 import { useContext, useEffect } from 'react';
 import { ModalContext } from 'context/ModalContext';
 import { PageContext } from 'context/PageContext';
@@ -21,7 +21,7 @@ export const OtherUserPage = () => {
       }
       <SideBar />
       <OtherUser />
-      <Recommendation />
+      <RecommendationList />
     </div>
   )
 };

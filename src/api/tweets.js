@@ -21,7 +21,7 @@ axiosInstance.interceptors.request.use(
 );
 
 // 瀏覽所有tweets
-// /tweets
+// GET: /tweets
 export const getAllTweets = async () => {
   try {
     const res = await axiosInstance.get(`${baseURL}/tweets`)
@@ -33,7 +33,7 @@ export const getAllTweets = async () => {
 }
 
 // 瀏覽某一使用者的tweets
-// /users/:id/tweets
+// GET: /users/:id/tweets
 export const getUserTweets = async (id) => {
   try {
     const res = await axiosInstance.get(`${baseURL}/users/${id}/tweets`)
@@ -45,7 +45,7 @@ export const getUserTweets = async (id) => {
 }
 
 // 瀏覽某一使用者的回覆
-// /users/:id/replied_tweets
+// GET: /users/:id/replied_tweets
 export const getUserReplies = async (id) => {
   try {
     const res = await axiosInstance.get(`${baseURL}/users/${id}/replied_tweets`)
@@ -57,13 +57,25 @@ export const getUserReplies = async (id) => {
 }
 
 // 瀏覽某一使用者喜歡的tweets
-// /users/:id/likes
+// GET: /users/:id/likes
 export const getUserLikes = async (id) => {
   try {
     const res = axiosInstance.get(`${baseURL}/users/${id}/likes`);
-    // console.log("getUserLikes回傳值: ", res.data);
+    // console.log("getUserLikes回傳值：", res.data);
     return res.data;
   } catch (error) {
     console.error("[Get UserLikes Failed]: ", error.response.data.message);
   }
 };
+
+// 新增 tweet
+// POST: /tweets
+export const postTweet = async({ description }) => {
+  try {
+    const res = axiosInstance.post(`${baseURL}/tweets`, { description })
+    // console.log("postTweet回傳值：", res.data);
+    return res.data
+  } catch (error) {
+    console.error("[Post Tweet Failed]", error.response.data.message)
+  }
+} 

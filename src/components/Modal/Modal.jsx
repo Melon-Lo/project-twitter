@@ -4,6 +4,7 @@ import './Modal.scss'
 import { Link } from 'react-router-dom'
 import clsx from 'clsx'
 import { useLocation } from 'react-router-dom'
+import Swal from 'sweetalert2'
 
 // import components
 import { Tweet, ReplyInfo } from 'components/TweetList/Tweet/Tweet'
@@ -11,6 +12,9 @@ import { Tweet, ReplyInfo } from 'components/TweetList/Tweet/Tweet'
 // import icons
 import { ReactComponent as Close } from 'assets/icons/close.svg'
 import { useState, useEffect } from 'react'
+
+// import api
+import { postTweet, getAllTweets } from 'api/tweets'
 
 const CloseIcon = () => {
   const path = useLocation().pathname
@@ -57,12 +61,28 @@ export const Modal = ({ placeholder, buttonContext, showModal, setShowModal, sho
     }
   }
 
-  // 推文送出函式
-  function onSubmit(e) {
+  // 發佈貼文函式
+  const onSubmit = async (e) => {
     e.preventDefault()
 
     // 驗證不通過：不送出
     if(!contentIsValid) return
+
+    // 發佈貼文
+    await postTweet({ description: content })
+  
+    // 發佈成功提示
+    Swal.fire({
+      position: 'top',
+      title: '貼文已發佈！',
+      timer: 1000,
+      icon: 'success',
+      showConfirmButton: false,
+    });
+
+    // 關閉modal並清空content
+    setShowModal(false)
+    setContent('')
   }
 
   useEffect(() => {

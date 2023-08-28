@@ -3,6 +3,7 @@ const authURL = 'https://simple-twitter-0827-5fac12a34439.herokuapp.com/api'
 
 
 // 使用者登入
+// POST: /users/login
 export const login = async ({ account, password }) => {
   try {
     const response = await axios.post(`${authURL}/users/login`, {
@@ -17,7 +18,8 @@ export const login = async ({ account, password }) => {
 };
 
 // 使用者註冊
-export const signup = async ({account, name, email, password, checkPassword }) => {
+// POST: /users
+export const signup = async ({account, name, email, password }) => {
   try {
     const { data } = await axios.post(`${authURL}/users`, {account, name, password, email, checkPassword: password });
 

@@ -32,7 +32,7 @@ export const MainPage = () => {
     // if (isAuthenticated) {
     //   getTweetsAsync()
     // } 
-  }, [isAuthenticated])
+  }, [isAuthenticated, showModal])
 
   return (
     <div className="mainPageContainer">

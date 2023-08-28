@@ -47,7 +47,7 @@ export const Login = () => {
       showConfirmButton: false,
     });
     setIsAuthenticated(true)
-    navigate('/home')
+    navigate('/main')
   }
 
   const handleLogin = (event) => {

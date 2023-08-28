@@ -23,7 +23,7 @@ export const ReplyList = () => {
     <div className="replyContainer">
       <div className="topSection">
         <div className="title">
-          <div className="iconBox" onClick={() => navigate('/home')}>
+          <div className="iconBox" onClick={() => navigate('/main')}>
             <BackIcon />
           </div>
           <p>推文</p>

@@ -32,9 +32,7 @@ export const MainPage = () => {
 
     if (isAuthenticated) {
       getTweetsAsync()
-    } else {
-      navigate('/login')
-    }
+    } 
   }, [isAuthenticated])
 
   return (

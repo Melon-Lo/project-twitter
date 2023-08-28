@@ -27,7 +27,7 @@ export const User = () => {
     <div className="userContainer">
       <div className="topSection">
         <div className="title">
-          <div className="iconBox" onClick={() => navigate('/home')}>
+          <div className="iconBox" onClick={() => navigate('/main')}>
             <BackIcon />
           </div>
           <div className="titleContent">

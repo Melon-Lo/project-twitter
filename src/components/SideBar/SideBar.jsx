@@ -23,8 +23,8 @@ export const SideBar = () => {
   const { page, setPage } = useContext(PageContext)
 
   useEffect(() => {
-    if(path === '/home') {
-      setPage('home')
+    if(path === '/main') {
+      setPage('main')
     } else if(path === '/user/self') {
       setPage('user')
     } else if(path === '/setting') {
@@ -40,13 +40,13 @@ export const SideBar = () => {
         </div>
         <div className="pages">
           <div className="page" onClick={() => {
-            navigate('/home')
-            setPage('home')
+            navigate('/main')
+            setPage('main')
           }}>
             <div className="iconBox">
-              {page === 'home' ? <HomeIcon className="activeIcon" /> : <HomeHollowIcon />}
+              {page === 'main' ? <HomeIcon className="activeIcon" /> : <HomeHollowIcon />}
             </div>
-            <div className={page === 'home' ? 'activePageTitle' : 'pageTitle'}>
+            <div className={page === 'main' ? 'activePageTitle' : 'pageTitle'}>
               首頁
             </div>
           </div>
@@ -74,7 +74,7 @@ export const SideBar = () => {
           </div>
         </div>
         <button className="tweetsButton" onClick={() => {
-          navigate('/home/tweet')
+          navigate('/main/tweet')
           setShowModal(true)
         }}>
           推文

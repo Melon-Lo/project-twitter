@@ -11,6 +11,7 @@ import { AdminUserPage } from 'pages/AdminUserPage/AdminUserPage'
 import { LoginPage } from 'pages/LoginPage/LoginPage';
 import { SettingPage } from 'pages/SettingPage/SettingPage';
 import { SignUpPage } from 'pages/SignUpPage/SignUpPage';
+import { HomePage } from 'pages/HomePage/HomePage';
 
 // import contexts
 import ModalContextProvider from 'context/ModalContext';
@@ -40,9 +41,11 @@ function App() {
                 <Route path="admin_users" element={<AdminUserPage />}></Route>
                 <Route path="reply_list" element={<ReplyListPage />}></Route>
                 <Route path="reply_list/reply_modal" element={<ReplyListPage />}></Route>
-                <Route path="home" element={<MainPage />}></Route>
-                <Route path="home/tweet" element={<MainPage />}></Route>
-                <Route path="home/reply_modal" element={<MainPage />}></Route>
+                <Route path="main" element={<MainPage />}></Route>
+                <Route path="main/tweet" element={<MainPage />}></Route>
+                <Route path="main/reply_modal" element={<MainPage />}></Route>
+                <Route path="main/reply_modal" element={<MainPage />}></Route>
+                <Route path="home" element={<HomePage />}></Route>
                 <Route path="*" element={<Navigate to="home" />} />
               </Routes>
             </AuthContextProvider> 

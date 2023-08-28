@@ -1,4 +1,5 @@
 import axios from "axios";
+import { async } from "q";
 const baseURL = 'https://simple-twitter-0827-5fac12a34439.herokuapp.com/api'
 
 // 新增一個 instance
@@ -41,5 +42,17 @@ export const getUserTweets = async (id) => {
     return res.data
   } catch (error) {
     console.error("[Get UserTweets Failed]: ", error.response.data.message)
+  }
+}
+
+// 瀏覽某一使用者的回覆
+// /users/:id/replied_tweets
+export const getUserReplies = async (id) => {
+  try {
+    const res = await axiosInstance.get(`${baseURL}/users/${id}/replied_tweets`)
+    console.log("getUserReplies回傳值：", res.data)
+    return res.data
+  } catch (error) {
+    console.error("[Get UserReplies Failed]: ", error.response.data.message)
   }
 }

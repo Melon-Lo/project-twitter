@@ -10,26 +10,58 @@ import { useNavigate } from 'react-router-dom'
 import { Tweet, IconInfo } from 'components/TweetList/Tweet/Tweet'
 import { Reply } from 'components/ReplyList/Reply/Reply'
 import { Follow } from 'components/FollowList/Follow/Follow'
+import { getUserTweets, getUserReplies } from 'api/tweets'
 
-const UserTweet = () => {
+const UserTweet = ({ tweets }) => {
   const { setShowReplyModal } = useContext(ModalContext)
   return (
     <>
-      <Tweet children={<IconInfo setShowReplyModal={setShowReplyModal} />} />
-      <Tweet children={<IconInfo setShowReplyModal={setShowReplyModal} />} />
-      <Tweet children={<IconInfo setShowReplyModal={setShowReplyModal} />} />
-      <Tweet children={<IconInfo setShowReplyModal={setShowReplyModal} />} />
+      {tweets.length !== 0 ? 
+        (tweets.map((tweet) => {
+          const { id, createdAt, description, RepliesCount, LikeCount, updatedAt } = tweet
+          return (
+            <Tweet 
+              children={
+              <IconInfo 
+                setShowReplyModal={setShowReplyModal}
+                likeCount={RepliesCount}
+                replyCount={LikeCount}
+              />
+              }
+              key={id}
+              id={id}
+              // name={name}
+              // account={account}
+              description={description}
+              createdAt={createdAt}
+              // avatar={avatar}
+              updatedAt={updatedAt}
+            />
+          )
+        }))
+        : '尚未發佈任何貼文'}
     </>
   )
 }
 
-const UserReply = () => {
+const UserReply = ({ replies }) => {
   return (
     <>
-      <Reply />
-      <Reply />
-      <Reply />
-      <Reply />
+      {replies.length !== 0 ? 
+        (replies.map((reply) => {
+          const { id, comment, createdAt, respondentAccount } = reply
+          // const { name, avatar } = reply
+          return (
+            <Reply 
+              key={id}
+              tweetId={id}
+              comment={comment}
+              createdAt={createdAt}
+              respondentAccount={respondentAccount}
+            />
+          )
+        }))
+      : '尚未發佈任何回覆'}
     </>
   )
 }
@@ -49,8 +81,53 @@ const UserLike = () => {
 export const Tab = () => {
   // 存放tweets
   const [tweets, setTweets] = useState([])
+  // 存放replies
+  const [replies, setReplies] = useState([])
+  // 存放likedTweets
+  const [likedTweets, setLikedTweets] = useState([])
 
   const { tab, setTab } = useContext(TabContext)
+
+  // 使用API拿資料
+  useEffect(() => {
+    // 自己所有的貼文
+    const getUserTweetsAsync = async () => {
+      try {
+        const tweets = await getUserTweets(savedUserInfoId)
+        if (tweets) {
+          setTweets(tweets.map((tweet) => ({ ...tweet })))
+        } else {
+          setTweets(null)
+        }
+      } catch (error) {
+        console.error(error)
+      }
+    }
+
+    // 自己所有的回覆
+    const getUserRepliesAsync = async () => {
+      try {
+        const replies = await getUserReplies(savedUserInfoId)
+        if(replies) {
+          console.log(replies)
+          setReplies(replies.map((reply) => ({ ...reply })))
+        } else {
+          console.log('no')
+          setReplies(null)
+        }
+      } catch (error) {
+        console.error(error)
+      }
+    }
+
+    // 執行
+    getUserTweetsAsync()
+    getUserRepliesAsync()
+  }, [])
+
+  // 從localStorage拿當前使用者的資料
+  const savedUserInfo = JSON.parse(localStorage.getItem("userInfo"))
+  const savedUserInfoId = savedUserInfo.id
 
   return (
     <div className="tabContainer">
@@ -63,8 +140,8 @@ export const Tab = () => {
         <div className={tab === 'like' ? 'optionActive' : 'option'} onClick={() => setTab('like')}>喜歡的內容</div>
       </div>
       <div className="content">
-        {tab === 'tweet' && <UserTweet />}
-        {tab === 'reply' && <UserReply />}
+        {tab === 'tweet' && <UserTweet tweets={tweets} />}
+        {tab === 'reply' && <UserReply replies={replies}/>}
         {tab === 'like' && <UserLike />}
       </div>
     </div>

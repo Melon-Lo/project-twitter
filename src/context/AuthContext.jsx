@@ -167,10 +167,9 @@ export default function AuthContextProvider({ children }) {
             setPayload(null)
             setIsAuthenticated(false)
           }
-
+          
           return response
         }
-
       }}
     >
       {children}

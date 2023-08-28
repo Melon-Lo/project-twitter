@@ -1,18 +1,21 @@
 import './Login.scss'
 import Swal from 'sweetalert2'
-import { useState } from 'react'
+import { useState, useContext } from 'react'
 import { Link } from 'react-router-dom'
 import { AuthInput } from 'components/SignUp/SignUp'
 import { TopIcon } from 'components/SignUp/SignUp'
 import { OrangeBtn } from 'components/SignUp/SignUp'
 
 // import { useAuth } from 'context/AuthContext'
-import { login } from 'api/auth'
+// import { login } from 'api/auth'
 import { useNavigate } from 'react-router-dom'
+import { AuthContext } from 'context/AuthContext'
 
 export const Login = () => {
   const [account, setAccount] = useState('')
   const [password, setPassword] = useState('')
+
+  const { login, isAuthenticated } = useContext(AuthContext) 
 
   const navigate = useNavigate()
 
@@ -24,41 +27,52 @@ export const Login = () => {
   // }
 
   const handleClick = async () => {
-    // 驗證當前輸入框是否有值
-    if(account.length === 0 || password.length === 0) {
-      return
+    // 檢查格式是否符合需求
+    if (account.trim().length === 0 || password.trim().length === 0) return
+    const response = await login({ account, password })
+    //產生錯誤訊息
+    if (!response.data) {
+      if (response.response.data.status === "error") return 
     }
-
-    // 將data設為login的回傳值
-    const data = await login({
-      account, password
-    })
-
-    // 如果data存在並值等於success的話，把authToken存起來
-    // 如果data不存在（直接跳到catch了）
-    if(data?.status === 'success') {
-      localStorage.setItem('authToken', data.token)
-      // 登入成功訊息
-      Swal.fire({
-        position: 'top',
-        title: '登入成功！',
-        timer: 1000,
-        icon: 'success',
-        showConfirmButton: false,
-      });
-      navigate('/home')
-    } else {
-      // 登入失敗訊息
-      Swal.fire({
-        position: 'top',
-        title: '登入失敗！',
-        timer: 1000,
-        icon: 'error',
-        showConfirmButton: false,
-      });
-      console.log('Login Failed.')
-    }
+    //成功的話可以取得該使用者的資料
+    navigate('/home')
   }
+
+  //   // 驗證當前輸入框是否有值
+  //   if(account.trim().length === 0 || password.trim().length === 0) {
+  //     return
+  //   }
+
+  //   // 將data設為login的回傳值
+  //   const data = await login({
+  //     account, password
+  //   })
+
+  //   // 如果data存在並值等於success的話，把authToken存起來
+  //   // 如果data不存在（直接跳到catch了）
+  //   if(data?.status === 'success') {
+  //     localStorage.setItem('authToken', data.token)
+  //     // 登入成功訊息
+  //     Swal.fire({
+  //       position: 'top',
+  //       title: '登入成功！',
+  //       timer: 1000,
+  //       icon: 'success',
+  //       showConfirmButton: false,
+  //     });
+  //     navigate('/home')
+  //   } else {
+  //     // 登入失敗訊息
+  //     Swal.fire({
+  //       position: 'top',
+  //       title: '登入失敗！',
+  //       timer: 1000,
+  //       icon: 'error',
+  //       showConfirmButton: false,
+  //     });
+  //     console.log('Login Failed.')
+  //   }
+  // }
 
   // const handleSubmit = async () => {
   //   if(account.length === 0 || password.length === 0) {

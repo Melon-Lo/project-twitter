@@ -1,7 +1,7 @@
 import './Tab.scss'
 
 // import dependencies
-import { useContext } from 'react'
+import { useState, useEffect, useContext } from 'react'
 import { ModalContext } from 'context/ModalContext'
 import { TabContext } from 'context/TabContext'
 import { useNavigate } from 'react-router-dom'
@@ -47,6 +47,9 @@ const UserLike = () => {
 }
 
 export const Tab = () => {
+  // 存放tweets
+  const [tweets, setTweets] = useState([])
+
   const { tab, setTab } = useContext(TabContext)
 
   return (

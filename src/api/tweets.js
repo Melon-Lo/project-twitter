@@ -21,12 +21,25 @@ axiosInstance.interceptors.request.use(
 );
 
 // 瀏覽所有tweets
+// /tweets
 export const getAllTweets = async () => {
   try {
     const res = await axiosInstance.get(`${baseURL}/tweets`)
-    console.log("getAllTweets回傳值: ", res.data)
+    console.log("getAllTweets回傳值：", res.data)
     return res.data
   } catch (error) {
-    console.error("[Get AllTweets failed]: ", error.response.data.message)
+    console.error("[Get AllTweets Failed]: ", error.response.data.message)
+  }
+}
+
+// 瀏覽某一使用者的tweets
+// /users/:id/tweets
+export const getUserTweets = async (id) => {
+  try {
+    const res = await axiosInstance.get(`${baseURL}/users/${id}/tweets`)
+    console.log("getUserTweets回傳值：", res.data)
+    return res.data
+  } catch (error) {
+    console.error("[Get UserTweets Failed]: ", error.response.data.message)
   }
 }

@@ -103,7 +103,30 @@ export const Modal = ({ placeholder, buttonContext, showModal, setShowModal, sho
   return (
     <div className={clsx('', {postModalBox: showModal, replyModalBox: showReplyModal })}>
       <div className="topBar">
-        <div className="iconBox" onClick={() => checkModalType()}>
+        <div className="iconBox" onClick={() => {
+          // 如果已經有輸入內容，跳出「確定退出」提示
+          if(content) {
+            Swal.fire({
+              title: "你確定要退出嗎？",
+              text: "已輸入的內容不會被保存哦！",
+              icon: "warning",
+              showCancelButton: true,
+              confirmButtonText: "確定",
+              confirmButtonColor: "#FF6600",
+              cancelButtonText: "取消"
+            }).then((result) => {
+
+              // 按下「確認」後，執行動作
+              if(result.isConfirmed) {
+                checkModalType()
+              } 
+            })
+
+            // 若無內容，直接關閉視窗
+          } else {
+            checkModalType()
+          }
+        }}>
           <CloseIcon onClick={() => checkModalType()}/>
         </div>
       </div>

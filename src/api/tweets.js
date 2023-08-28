@@ -1,5 +1,4 @@
 import axios from "axios";
-import { async } from "q";
 const baseURL = 'https://simple-twitter-0827-5fac12a34439.herokuapp.com/api'
 
 // 新增一個 instance

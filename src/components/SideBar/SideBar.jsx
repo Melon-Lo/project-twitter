@@ -15,12 +15,19 @@ import { ReactComponent as CogIcon } from 'assets/icons/cog.svg'
 import { ReactComponent as LogoutIcon } from 'assets/icons/logout.svg'
 import { PageContext } from 'context/PageContext'
 import { ModalContext } from 'context/ModalContext'
+import { func } from 'prop-types'
 
 export const SideBar = () => {
   const navigate = useNavigate()
   const path = useLocation().pathname
   const { setShowModal } = useContext(ModalContext)
   const { page, setPage } = useContext(PageContext)
+
+  function handleLogout() {
+    localStorage.removeItem("userInfo")
+    localStorage.removeItem("authToken")
+    navigate('/login')
+  }
 
   useEffect(() => {
     if(path === '/main') {
@@ -80,7 +87,7 @@ export const SideBar = () => {
           推文
         </button>
       </div>
-      <div className="bottomSection" onClick={() => navigate('/login')}>
+      <div className="bottomSection" onClick={handleLogout}>
         <div className="iconBox">
           <LogoutIcon />
         </div>

@@ -121,6 +121,7 @@ export default function AuthContextProvider({ children }) {
     <AuthContext.Provider 
       value={{
         isAuthenticated,
+        setIsAuthenticated,
         currentUser,
         userInfo,
         tweetId,

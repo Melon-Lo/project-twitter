@@ -5,6 +5,7 @@ import { Link } from 'react-router-dom'
 import clsx from 'clsx'
 import { useLocation } from 'react-router-dom'
 import Swal from 'sweetalert2'
+import { useNavigate } from 'react-router-dom'
 
 // import components
 import { Tweet, ReplyInfo } from 'components/TweetList/Tweet/Tweet'
@@ -34,6 +35,8 @@ const CloseIcon = () => {
 }
 
 export const Modal = ({ placeholder, buttonContext, showModal, setShowModal, showReplyModal, setShowReplyModal, type }) => {
+  const navigate = useNavigate()
+
   // 取得使用者資料
   const { avatar } = JSON.parse(localStorage.getItem("userInfo"))
 
@@ -83,6 +86,7 @@ export const Modal = ({ placeholder, buttonContext, showModal, setShowModal, sho
     // 關閉modal並清空content
     setShowModal(false)
     setContent('')
+    navigate('/main')
   }
 
   useEffect(() => {

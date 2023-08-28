@@ -18,6 +18,11 @@ export const User = () => {
   const { setFollowTab } = useContext(TabContext)
   const navigate = useNavigate()
 
+  // 取得使用者資料
+  const userInfo = JSON.parse(localStorage.getItem("userInfo"))
+  const { avatar, account, name, introduction } = userInfo
+  // const { cover, followingCount, followerCount } = userInfo
+
   return (
     <div className="userContainer">
       <div className="topSection">
@@ -45,12 +50,12 @@ export const User = () => {
               編輯個人資料
             </button>
             <div className="avatarBox">
-              <img className="avatar" src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8M3x8cmFuZG9tJTIwcGVvcGxlfGVufDB8fDB8fHww&auto=format&fit=crop&w=600&q=60" alt="avatar" />
+              <img className="avatar" src={avatar} alt="avatar" />
             </div>
             <div className="info">
-              <div className="name">Liz</div>
-              <div className="account">@liz</div>
-              <div className="description">I am a beautiful girl.</div>
+              <div className="name">{name}</div>
+              <div className="account">@{account}</div>
+              <div className="description">{introduction}</div>
               <div className="countData">
               <div className="following">
                 <b onClick={() => {
@@ -58,6 +63,7 @@ export const User = () => {
                   navigate('following')
                 }}>
                   10個
+                  {/* {followingCount}個 */}
                 </b>
                   追蹤中
               </div>
@@ -66,7 +72,8 @@ export const User = () => {
                   setFollowTab('follower')
                   navigate('follower')
                 }}>
-                  9位
+                  9個
+                  {/* {followerCount}個 */}
                 </b>
                   追蹤者
               </div>

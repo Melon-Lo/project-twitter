@@ -112,7 +112,7 @@ export default function AuthContextProvider({ children }) {
 
     // 執行驗證函式
     checkTokenIsValid()
-    console.log('AuthProvider re-rendered.')
+    // console.log('AuthProvider re-rendered.')
 
   // 當路徑改變或執行轉跳時時進行驗證
   }, [pathname, navigate])

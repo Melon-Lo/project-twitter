@@ -10,7 +10,7 @@ import { useNavigate } from 'react-router-dom'
 import { Tweet, IconInfo } from 'components/TweetList/Tweet/Tweet'
 import { Reply } from 'components/ReplyList/Reply/Reply'
 import { Follow } from 'components/FollowList/Follow/Follow'
-import { getUserTweets, getUserReplies } from 'api/tweets'
+import { getUserTweets, getUserReplies, getUserLikes } from 'api/tweets'
 
 const UserTweet = ({ tweets }) => {
   const { setShowReplyModal } = useContext(ModalContext)
@@ -66,16 +66,36 @@ const UserReply = ({ replies }) => {
   )
 }
 
-const UserLike = () => {
+const UserLike = ({ tweets }) => {
   const { setShowReplyModal } = useContext(ModalContext)
   return (
     <>
-      <Tweet children={<IconInfo setShowReplyModal={setShowReplyModal} />} />
-      <Tweet children={<IconInfo setShowReplyModal={setShowReplyModal} />} />
-      <Tweet children={<IconInfo setShowReplyModal={setShowReplyModal} />} />
-      <Tweet children={<IconInfo setShowReplyModal={setShowReplyModal} />} />
+      {tweets.length !== 0 ? 
+        (tweets.map((tweet) => {
+          const { id, createdAt, description, RepliesCount, LikeCount, updatedAt } = tweet
+          return (
+            <Tweet 
+              children={
+              <IconInfo 
+                setShowReplyModal={setShowReplyModal}
+                likeCount={RepliesCount}
+                replyCount={LikeCount}
+              />
+              }
+              key={id}
+              id={id}
+              // name={name}
+              // account={account}
+              description={description}
+              createdAt={createdAt}
+              // avatar={avatar}
+              updatedAt={updatedAt}
+            />
+          )
+        }))
+        : '尚未喜歡任何貼文'}
     </>
-  ) 
+  )
 }
 
 export const Tab = () => {
@@ -97,7 +117,7 @@ export const Tab = () => {
         if (tweets) {
           setTweets(tweets.map((tweet) => ({ ...tweet })))
         } else {
-          setTweets(null)
+          setTweets([])
         }
       } catch (error) {
         console.error(error)
@@ -109,11 +129,24 @@ export const Tab = () => {
       try {
         const replies = await getUserReplies(savedUserInfoId)
         if(replies) {
-          console.log(replies)
           setReplies(replies.map((reply) => ({ ...reply })))
         } else {
-          console.log('no')
-          setReplies(null)
+          setReplies([])
+        }
+      } catch (error) {
+        console.error(error)
+      }
+    }
+
+    // 自己所有喜歡的貼文
+    const getUserLikesAsync = async () => {
+      try {
+        const likedTweets = await getUserLikes(savedUserInfoId)
+        if(likedTweets) {
+          console.log(likedTweets)
+          setLikedTweets(likedTweets.map((likedTweet) => ({ ...likedTweet })))
+        } else {
+          setLikedTweets([])
         }
       } catch (error) {
         console.error(error)
@@ -123,6 +156,7 @@ export const Tab = () => {
     // 執行
     getUserTweetsAsync()
     getUserRepliesAsync()
+    getUserLikesAsync()
   }, [])
 
   // 從localStorage拿當前使用者的資料
@@ -134,7 +168,6 @@ export const Tab = () => {
       <div className="selectionBar">
         <div className={tab === 'tweet' ? 'optionActive' : 'option'} onClick={() => {
           setTab('tweet')
-          console.log('hey')
         }}>推文</div>
         <div className={tab === 'reply' ? 'optionActive' : 'option'} onClick={() => setTab('reply')}>回覆</div>
         <div className={tab === 'like' ? 'optionActive' : 'option'} onClick={() => setTab('like')}>喜歡的內容</div>
@@ -142,7 +175,7 @@ export const Tab = () => {
       <div className="content">
         {tab === 'tweet' && <UserTweet tweets={tweets} />}
         {tab === 'reply' && <UserReply replies={replies}/>}
-        {tab === 'like' && <UserLike />}
+        {tab === 'like' && <UserLike tweets={likedTweets}/>}
       </div>
     </div>
   )

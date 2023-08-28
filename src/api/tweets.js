@@ -26,7 +26,7 @@ axiosInstance.interceptors.request.use(
 export const getAllTweets = async () => {
   try {
     const res = await axiosInstance.get(`${baseURL}/tweets`)
-    console.log("getAllTweets回傳值：", res.data)
+    // console.log("getAllTweets回傳值：", res.data)
     return res.data
   } catch (error) {
     console.error("[Get AllTweets Failed]: ", error.response.data.message)
@@ -38,7 +38,7 @@ export const getAllTweets = async () => {
 export const getUserTweets = async (id) => {
   try {
     const res = await axiosInstance.get(`${baseURL}/users/${id}/tweets`)
-    console.log("getUserTweets回傳值：", res.data)
+    // console.log("getUserTweets回傳值：", res.data)
     return res.data
   } catch (error) {
     console.error("[Get UserTweets Failed]: ", error.response.data.message)
@@ -50,9 +50,21 @@ export const getUserTweets = async (id) => {
 export const getUserReplies = async (id) => {
   try {
     const res = await axiosInstance.get(`${baseURL}/users/${id}/replied_tweets`)
-    console.log("getUserReplies回傳值：", res.data)
+    // console.log("getUserReplies回傳值：", res.data)
     return res.data
   } catch (error) {
     console.error("[Get UserReplies Failed]: ", error.response.data.message)
   }
 }
+
+// 瀏覽某一使用者喜歡的tweets
+// /users/:id/likes
+export const getUserLikes = async (id) => {
+  try {
+    const res = axiosInstance.get(`${baseURL}/users/${id}/likes`);
+    // console.log("getUserLikes回傳值: ", res.data);
+    return res.data;
+  } catch (error) {
+    console.error("[Get UserLikes Failed]: ", error.response.data.message);
+  }
+};

@@ -1,6 +1,6 @@
 import './HomePage.scss'
 import { SideBar } from "components/SideBar/SideBar";
-import { Tweets } from "components/TweetList/TweetList";
+import { TweetList } from "components/TweetList/TweetList";
 import { Recommendation } from 'components/Recommendation/Recommendation';
 import { useContext, useEffect, useState } from 'react';
 import { ModalContext } from 'context/ModalContext';
@@ -32,7 +32,7 @@ export const HomePage = () => {
         <div className="grayBackground"></div>
       }
       <SideBar />
-      <Tweets tweets={tweets}/>
+      <TweetList tweets={tweets}/>
       <Recommendation />
     </div>
   );

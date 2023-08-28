@@ -1,7 +1,7 @@
 import './TweetList.scss'
 
 // import dependencies
-import { useContext } from 'react'
+import { useContext, useState, useEffect } from 'react'
 import { ModalContext } from 'context/ModalContext'
 
 // import components
@@ -9,9 +9,12 @@ import { Tweet, IconInfo } from 'components/TweetList/Tweet/Tweet'
 import { Modal } from 'components/Modal/Modal'
 import { useNavigate } from 'react-router-dom'
 
-export const Tweets = ({ tweets }) => {
+export const TweetList = ({ tweets }) => {
   const { showModal, setShowModal, showReplyModal, setShowReplyModal } = useContext(ModalContext)
   const navigate = useNavigate()
+
+  // 取得大頭貼
+  const avatar = JSON.parse(localStorage.getItem("userInfo")).avatar
 
   return (
     <div className="tweetListContainer">
@@ -36,7 +39,7 @@ export const Tweets = ({ tweets }) => {
           />
         }
         <div className="AddTweetBox">
-          <div className="avatarBox"><img className="avatar" src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8M3x8cmFuZG9tJTIwcGVvcGxlfGVufDB8fDB8fHww&auto=format&fit=crop&w=600&q=60" alt="avatar" /></div>
+          <div className="avatarBox"><img className="avatar" src={avatar} alt="avatar" /></div>
           <div className="addTweetContent" onClick={() => {
             setShowModal(true)
             navigate('tweet')

@@ -30,9 +30,10 @@ export const MainPage = () => {
       }
     }
 
-    if (isAuthenticated) {
-      getTweetsAsync()
-    } 
+    getTweetsAsync()
+    // if (isAuthenticated) {
+    //   getTweetsAsync()
+    // } 
   }, [isAuthenticated])
 
   return (

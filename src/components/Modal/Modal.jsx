@@ -10,6 +10,7 @@ import { Tweet, ReplyInfo } from 'components/TweetList/Tweet/Tweet'
 
 // import icons
 import { ReactComponent as Close } from 'assets/icons/close.svg'
+import { useState, useEffect } from 'react'
 
 const CloseIcon = () => {
   const path = useLocation().pathname
@@ -29,6 +30,45 @@ const CloseIcon = () => {
 }
 
 export const Modal = ({ placeholder, buttonContext, showModal, setShowModal, showReplyModal, setShowReplyModal, type }) => {
+  // 取得使用者資料
+  const { avatar } = JSON.parse(localStorage.getItem("userInfo"))
+
+  // 設置textarea的狀態
+  const [content, setContent] = useState('')
+
+  // 數字統計與字數限制
+  const contentLength = content.length
+  const contentLimit = 160
+
+  // 設置驗證狀態
+  const [contentIsValid, setContentIsValid] = useState(false)
+
+  // 設置驗證提示，若沒通過則跳出
+  const [alert, setAlert] = useState(false)
+
+  // 驗證函式，每次textarea改變時執行
+  function checkContent(inputValue) {
+    // 如果推文超過160個字符，不通過
+    if(inputValue.trim().length > contentLimit) {
+      return setAlert(true)
+    } else {
+      setAlert(false)
+      setContentIsValid(true)
+    }
+  }
+
+  // 推文送出函式
+  function onSubmit(e) {
+    e.preventDefault()
+
+    // 驗證不通過：不送出
+    if(!contentIsValid) return
+  }
+
+  useEffect(() => {
+    content ? setContentIsValid(true) : setContentIsValid(false)
+  })
+
   const checkModalType = ()  => {
     if(type === 'post') {
       setShowModal(false)
@@ -47,10 +87,27 @@ export const Modal = ({ placeholder, buttonContext, showModal, setShowModal, sho
         <Tweet children={<ReplyInfo />} />
       }
       <div className="modalAvatarBox">
-        <img className="avatar" src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8M3x8cmFuZG9tJTIwcGVvcGxlfGVufDB8fDB8fHww&auto=format&fit=crop&w=600&q=60" alt="avatar" />
+        <img className="avatar" src={avatar} alt="avatar" />
       </div>
-      <textarea className="addTweetContent" type="text" placeholder={placeholder}></textarea>
-      <button className="submitButton">
+      <textarea 
+        name="tweet" 
+        className="addTweetContent" 
+        type="text" 
+        placeholder={placeholder} 
+        onChange={(e) => {
+          checkContent(e.target.value)
+          setContent(e.target.value)
+        }}
+      >
+      </textarea>
+      {alert && <div className='alert'>推文字數超過上限！（最多160字）</div>}
+      <div className="wordCount">
+        {contentLength}/{contentLimit}
+      </div>
+      <button 
+        className={contentIsValid ? 'submitValid' : 'submitInvalid'}
+        onClick={(e) => onSubmit(e)}
+      >
         {buttonContext}
       </button>
     </div>

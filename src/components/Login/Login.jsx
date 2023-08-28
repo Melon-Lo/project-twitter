@@ -131,7 +131,7 @@ export const Login = () => {
           onClick={handleClick}
         />
         <div className='aLink'>
-          <a href="#" className='cancel-link' onClick={handleLogin}>取消</a>
+          <a href="#" className='cancel-link' onClick={() => navigate('/signup')}>註冊</a>
           <span className='point'>&bull;</span>
           <Link to="http://localhost:3000/admin-login" className='back-signup-link'>
             後台登入

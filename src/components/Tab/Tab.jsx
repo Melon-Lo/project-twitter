@@ -16,13 +16,6 @@ import { Follow } from 'components/FollowList/Follow/Follow'
 import { getUserFollowers, getUserFollowings } from 'api/users'
 import { getUserTweets, getUserReplies, getUserLikes } from 'api/tweets'
 
-// 從localStorage拿當前使用者的資料
-const savedUserInfo = JSON.parse(localStorage.getItem("userInfo"))
-const selfId = savedUserInfo.id
-
-// 先把別人的id拿出來
-const otherUserId = localStorage.getItem("otherUserId")
-
 const UserTweet = ({ tweets }) => {
   const { setShowReplyModal } = useContext(ModalContext)
   return (
@@ -103,7 +96,14 @@ const UserLike = ({ tweets }) => {
 }
 
 export const Tab = () => {
-  const { user, setUser } = useContext(PageContext)
+  // 從localStorage拿當前使用者的資料
+  const savedUserInfo = JSON.parse(localStorage.getItem("userInfo"))
+  const selfId = savedUserInfo.id
+
+  // 先把別人的id拿出來
+  const otherUserId = localStorage.getItem("otherUserId")
+
+  const { user } = useContext(PageContext)
 
   // 存放tweets
   const [tweets, setTweets] = useState([])
@@ -149,6 +149,7 @@ export const Tab = () => {
       try {
         const likedTweets = await getUserLikes(selfId)
         if(likedTweets) {
+          // console.log(likedTweets)
           setLikedTweets(likedTweets.map((likedTweet) => ({ ...likedTweet })))
         } else {
           setLikedTweets([])
@@ -234,6 +235,13 @@ export const Tab = () => {
 }
 
 export const FollowTab = () => {
+  // 從localStorage拿當前使用者的資料
+  const savedUserInfo = JSON.parse(localStorage.getItem("userInfo"))
+  const selfId = savedUserInfo.id
+
+  // 先把別人的id拿出來
+  const otherUserId = localStorage.getItem("otherUserId")
+
   const { followTab, setFollowTab } = useContext(TabContext)
   const navigate = useNavigate()
   const { user } = useContext(PageContext)
@@ -372,4 +380,3 @@ export const FollowTab = () => {
     </div>
   )
 }
-

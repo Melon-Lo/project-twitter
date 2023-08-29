@@ -108,21 +108,22 @@ export const ReplyModal = ({ setShowReplyModal }) => {
           <CloseIcon className='closeIcon'/>
         </div>
       </div>
+      {/* 等抓到該tweet資料 */}
       <Tweet 
-        avatar={avatar} 
-        name={name} 
-        account={account}
-        updatedAt={createdAt}
+        // avatar={avatar} 
+        // name={name} 
+        // account={account}
+        // updatedAt={createdAt}
         children={<ReplyInfo />} 
       />
       <div className="modalAvatarBox">
-        <img className="avatar" src="avatar" alt="avatar" />
+        <img className="avatar" src={avatar} alt="avatar" />
       </div>
       <textarea 
         name="tweet" 
         className="addTweetContent" 
         type="text" 
-        placeholder="有什麼新鮮事" 
+        placeholder="推你的回覆" 
         onChange={(e) => {
           checkContent(e.target.value)
           setContent(e.target.value)

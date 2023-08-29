@@ -85,6 +85,7 @@ export const SideBar = () => {
         <button className="tweetsButton" onClick={() => {
           navigate('/main/tweet')
           setShowModal(true)
+          setPage('main')
         }}>
           推文
         </button>

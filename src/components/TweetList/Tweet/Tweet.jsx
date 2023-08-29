@@ -59,7 +59,7 @@ export const Tweet = ({ children, id, name, account, description, avatar, create
           <div className="account">@{account}</div>
           <div className="time">．{createdAt}</div>
         </div>
-        <div className="tweetContent" onClick={() => navigate('/reply_list')}>{description}</div>
+        <div className="tweetContent" onClick={() => navigate('/reply_list', {state: { id }})}>{description}</div>
         {children}
       </div>
     </div>

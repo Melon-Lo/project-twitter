@@ -49,7 +49,7 @@ const UserReply = ({ replies }) => {
     <>
       {replies.length !== 0 ? 
         (replies.map((reply) => {
-          const { id, comment, createdAt, respondentAccount } = reply
+          const { id, comment, createdAt, respondentName } = reply
           // const { name, avatar } = reply
           return (
             <Reply 
@@ -57,7 +57,7 @@ const UserReply = ({ replies }) => {
               tweetId={id}
               comment={comment}
               createdAt={createdAt}
-              respondentAccount={respondentAccount}
+              respondentName={respondentName}
             />
           )
         }))

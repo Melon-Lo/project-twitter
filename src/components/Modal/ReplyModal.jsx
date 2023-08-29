@@ -1,4 +1,7 @@
-import './Modal.scss'
+import './ReplyModal.scss'
+
+// import components
+import { Tweet, ReplyInfo } from 'components/TweetList/Tweet/Tweet'
 
 // import dependencies
 import Swal from 'sweetalert2'
@@ -9,9 +12,9 @@ import { ReactComponent as CloseIcon } from 'assets/icons/close.svg'
 import { useState, useEffect } from 'react'
 
 // import api
-import { postTweet } from 'api/tweets'
+// import { postTweet } from 'api/tweets'
 
-export const Modal = ({ setShowModal }) => {
+export const ReplyModal = ({ setShowReplyModal }) => {
   const navigate = useNavigate()
 
   // 取得使用者資料
@@ -49,7 +52,7 @@ export const Modal = ({ setShowModal }) => {
     if(!contentIsValid) return
 
     // 發佈貼文
-    await postTweet({ description: content })
+    // await postTweet({ description: content })
   
     // 發佈成功提示
     Swal.fire({
@@ -61,7 +64,7 @@ export const Modal = ({ setShowModal }) => {
     });
 
     // 關閉modal並清空content
-    setShowModal(false)
+    setShowReplyModal(false)
     setContent('')
     navigate('/main')
   }
@@ -71,7 +74,7 @@ export const Modal = ({ setShowModal }) => {
   })
 
   return (
-    <div className="postModalBox">
+    <div className="replyModalBox">
       <div className="topBar">
         <div className="iconBox" onClick={() => {
           // 如果已經有輸入內容，跳出「確定退出」提示
@@ -88,20 +91,21 @@ export const Modal = ({ setShowModal }) => {
 
               // 按下「確認」後，執行動作
               if(result.isConfirmed) {
-                setShowModal(false)
+                setShowReplyModal(false)
                 navigate('/main')
               } 
             })
 
             // 若無內容，直接關閉視窗
           } else {
-            setShowModal(false)
+            setShowReplyModal(false)
             navigate('/main')
           }
         }}>
           <CloseIcon className='closeIcon'/>
         </div>
       </div>
+      <Tweet children={<ReplyInfo />} />
       <div className="modalAvatarBox">
         <img className="avatar" src={avatar} alt="avatar" />
       </div>
@@ -120,7 +124,7 @@ export const Modal = ({ setShowModal }) => {
       <div className="wordCount">
         {contentLength}/{contentLimit}
       </div>
-      <button 
+      <button
         className={contentIsValid ? 'submitValid' : 'submitInvalid'}
         onClick={(e) => onSubmit(e)}
       >

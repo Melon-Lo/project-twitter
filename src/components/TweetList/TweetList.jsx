@@ -1,12 +1,13 @@
 import './TweetList.scss'
 
 // import dependencies
-import { useContext, useState, useEffect } from 'react'
+import { useContext } from 'react'
 import { ModalContext } from 'context/ModalContext'
 
 // import components
 import { Tweet, IconInfo } from 'components/TweetList/Tweet/Tweet'
 import { Modal } from 'components/Modal/Modal'
+import { ReplyModal } from 'components/Modal/ReplyModal'
 import { useNavigate } from 'react-router-dom'
 
 export const TweetList = ({ tweets }) => {
@@ -16,37 +17,32 @@ export const TweetList = ({ tweets }) => {
   // 取得大頭貼
   const avatar = JSON.parse(localStorage.getItem("userInfo")).avatar
 
+  // 貼文模式
+  const addTweet = () => {
+    setShowModal(true)
+    navigate('tweet')
+  }
+
   return (
     <div className="tweetListContainer">
       <div className="topSection">
         <p className="title">首頁</p>
-        {showReplyModal &&
-          <Modal 
-            type={'reply'}
-            placeholder={'推你的回覆'} 
-            buttonContext={'回覆'}
-            showReplyModal={showReplyModal} 
-            setShowReplyModal={setShowReplyModal} 
-          />
-        }
         {showModal &&
           <Modal 
-            type={'post'}
-            placeholder={'有什麼新鮮事？'} 
-            buttonContext={'推文'} 
-            showModal={showModal}
             setShowModal={setShowModal}
+          />
+        }
+        {showReplyModal &&
+          <ReplyModal
+            setShowReplyModal={setShowReplyModal} 
           />
         }
         <div className="AddTweetBox">
           <div className="avatarBox"><img className="avatar" src={avatar} alt="avatar" /></div>
-          <div className="addTweetContent" onClick={() => {
-            setShowModal(true)
-            navigate('tweet')
-          }}>
+          <div className="addTweetContent" onClick={addTweet}>
             有什麼新鮮事？
           </div>
-          <button className="submitButton">
+          <button className="submitButton" onClick={addTweet}>
             推文
           </button>
         </div>

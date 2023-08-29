@@ -1,39 +1,25 @@
-import './HomePage.scss'
-import { SideBar } from "components/SideBar/SideBar";
-import { TweetList } from "components/TweetList/TweetList";
-import { RecommendationList } from 'components/RecommendationList/RecommendationList';
-import { useContext, useEffect, useState } from 'react';
-import { ModalContext } from 'context/ModalContext';
-
-// API
-import { getAllTweets } from 'api/tweets';
+import { useEffect, useContext } from "react";
+import { useNavigate } from "react-router";
+import { AuthContext } from "context/AuthContext";
 
 export const HomePage = () => {
-  // 存放tweets
-  const [tweets, setTweets] = useState([])
+  const { isAuthenticated } = useContext(AuthContext)
+  const navigate = useNavigate()
 
-  const { showModal, showReplyModal } = useContext(ModalContext)
+  // 撈取 localStorage 中的 userInfo
+  let savedUserInfo = {}
 
-  useEffect(() => async () => {
-    try {
-      const tweets = await getAllTweets()
-      setTweets(tweets.map((tweet) => ({ ...tweet })))
-    } catch (error) {
-      console.error(error)
+  if(localStorage.getItem("userInfo")) {
+    savedUserInfo = JSON.parse(localStorage.getItem("userInfo"))
+  }
+
+  useEffect(() => {
+    if(isAuthenticated) {
+      navigate('/main')
+    } else {
+      navigate('/login')
     }
-  }, [])
+  }, [navigate, isAuthenticated])
 
-  return (
-    <div className="homePageContainer">
-      {showModal &&
-        <div className="grayBackground"></div>
-      }
-      {showReplyModal &&
-        <div className="grayBackground"></div>
-      }
-      <SideBar />
-      <TweetList tweets={tweets}/>
-      <RecommendationList />
-    </div>
-  );
-};
+  return <div>HomePage</div>
+}

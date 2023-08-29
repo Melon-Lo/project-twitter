@@ -35,7 +35,7 @@ export const getUserData = async (id) => {
 // GET: /users/:id/followings
 export const getUserFollowings = async(id) => {
   try {
-    const res = await axiosInstance.get(`${baseURL}/users/:id/followings`)
+    const res = await axiosInstance.get(`${baseURL}/users/${id}/followings`)
     return res.data
   } catch (error) {
     console.error("[Get UserFollowings Failed]: ", error.response.data.message)
@@ -43,3 +43,12 @@ export const getUserFollowings = async(id) => {
 }
 
 // 取得指定使用者的所有追隨者
+// GET: /users/:id/followers
+export const getUserFollowers = async(id) => {
+  try {
+    const res = await axiosInstance.get(`${baseURL}/users/${id}/followers`)
+    return res.data
+  } catch (error) {
+    console.error("[Get UserFollowers Failed]: ", error.response.data.message)
+  }
+}

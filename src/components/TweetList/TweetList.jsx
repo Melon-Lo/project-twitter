@@ -48,7 +48,7 @@ export const TweetList = ({ tweets }) => {
         </div>
       </div>
       <div className="bottomSection">
-        {tweets.lengh !== 0 ? 
+        {tweets.length !== 0 ? 
           (tweets.map((tweet) => {
             const { name, account, avatar } = tweet.User
             const { id, UserId, createdAt, description, likeCount, replyCount, updatedAt, Likes } = tweet

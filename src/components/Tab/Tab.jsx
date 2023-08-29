@@ -11,7 +11,17 @@ import { PageContext } from 'context/PageContext'
 import { Tweet, IconInfo } from 'components/TweetList/Tweet/Tweet'
 import { Reply } from 'components/ReplyList/Reply/Reply'
 import { Follow } from 'components/FollowList/Follow/Follow'
+
+// API
+import { getUserFollowers, getUserFollowings } from 'api/users'
 import { getUserTweets, getUserReplies, getUserLikes } from 'api/tweets'
+
+// 從localStorage拿當前使用者的資料
+const savedUserInfo = JSON.parse(localStorage.getItem("userInfo"))
+const selfId = savedUserInfo.id
+
+// 先把別人的id拿出來
+const otherUserId = localStorage.getItem("otherUserId")
 
 const UserTweet = ({ tweets }) => {
   const { setShowReplyModal } = useContext(ModalContext)
@@ -93,14 +103,7 @@ const UserLike = ({ tweets }) => {
 }
 
 export const Tab = () => {
-  const { user, setUser } = useContext(PageContext)
-
-  // 從localStorage拿當前使用者的資料
-  const savedUserInfo = JSON.parse(localStorage.getItem("userInfo"))
-  const savedUserInfoId = savedUserInfo.id
-
-  // 先把別人的id拿出來
-  const otherUserId = localStorage.getItem("otherUserId")
+  const { user } = useContext(PageContext)
 
   // 存放tweets
   const [tweets, setTweets] = useState([])
@@ -116,7 +119,7 @@ export const Tab = () => {
     // 自己所有的貼文
     const getUserTweetsAsync = async () => {
       try {
-        const tweets = await getUserTweets(savedUserInfoId)
+        const tweets = await getUserTweets(selfId)
         if (tweets) {
           setTweets(tweets.map((tweet) => ({ ...tweet })))
         } else {
@@ -130,7 +133,7 @@ export const Tab = () => {
     // 自己所有的回覆
     const getUserRepliesAsync = async () => {
       try {
-        const replies = await getUserReplies(savedUserInfoId)
+        const replies = await getUserReplies(selfId)
         if(replies) {
           setReplies(replies.map((reply) => ({ ...reply })))
         } else {
@@ -144,9 +147,9 @@ export const Tab = () => {
     // 自己所有喜歡的貼文
     const getUserLikesAsync = async () => {
       try {
-        const likedTweets = await getUserLikes(savedUserInfoId)
+        const likedTweets = await getUserLikes(selfId)
         if(likedTweets) {
-          console.log(likedTweets)
+          // console.log(likedTweets)
           setLikedTweets(likedTweets.map((likedTweet) => ({ ...likedTweet })))
         } else {
           setLikedTweets([])
@@ -189,7 +192,7 @@ export const Tab = () => {
       try {
         const likedTweets = await getUserLikes(otherUserId)
         if(likedTweets) {
-          console.log(likedTweets)
+          // console.log(likedTweets)
           setLikedTweets(likedTweets.map((likedTweet) => ({ ...likedTweet })))
         } else {
           setLikedTweets([])
@@ -204,12 +207,10 @@ export const Tab = () => {
       getUserTweetsAsync()
       getUserRepliesAsync()
       getUserLikesAsync()    
-      console.log('self')  
     } else if(user === 'other') {
       getOtherUserTweetsAsync()
       getOtherUserRepliesAsync()
       getOtherUserLikesAsync()
-      console.log('other')
     }
   }, [])
 
@@ -237,6 +238,100 @@ export const FollowTab = () => {
   const { followTab, setFollowTab } = useContext(TabContext)
   const navigate = useNavigate()
   const { user } = useContext(PageContext)
+
+  // 存放追蹤者和追隨者
+  const [followings, setFollowings] = useState([])
+  const [followers, setFollowers] = useState([])
+
+  useEffect(() => async () => {
+    // 拿到自己的追蹤者
+    const getUserFollowingsAsync = async () => {
+      try {
+        const followings = await getUserFollowings(selfId)
+        setFollowings(followings.map((following) => ({ ...following })))
+      } catch (error) {
+        console.error(error)
+      }
+    }
+
+    // 拿到自己的追隨者
+    const getUserFollowersAsync = async () => {
+      try {
+        const followers = await getUserFollowers(selfId)
+        setFollowers(followers.map((follower) => ({ ...follower })))
+      } catch (error) {
+        console.error(error)
+      }
+    }
+
+    // 拿到別人的追蹤者
+    const getOtherUserFollowingsAsync = async () => {
+      try {
+        const followings = await getUserFollowings(otherUserId)
+        setFollowings(followings.map((following) => ({ ...following })))
+      } catch (error) {
+        console.error(error)
+      }
+    }
+
+    // 拿到別人的追隨者
+    const getOtherUserFollowersAsync = async () => {
+      try {
+        const followers = await getUserFollowers(otherUserId)
+        setFollowers(followers.map((follower) => ({ ...follower })))
+      } catch (error) {
+        console.error(error)
+      }
+    }
+
+    if(user === 'self') {
+      getUserFollowingsAsync()
+      getUserFollowersAsync()
+    } else if(user === 'other') {
+      getOtherUserFollowersAsync()
+      getOtherUserFollowingsAsync()
+    }
+  }, [])
+
+  const Followings = () => {
+    return (
+      <>
+        {followings.length !== 0 ? 
+          (followings.map((following) => {
+            const { avatar, description, name } = following
+
+            return (
+              <Follow 
+                avatar={avatar}
+                description={description}
+                name={name}
+              />
+            )
+          }))
+        : '尚未有任何的追蹤者'}
+      </>
+    )
+  }
+
+  const Followers = () => {
+    return (
+      <>
+        {followers.length !== 0 ? 
+          (followers.map((follower) => {
+            const { avatar, description, name } = follower
+
+            return (
+              <Follow 
+                avatar={avatar}
+                description={description}
+                name={name}
+              />
+            )
+          }))
+        : '尚未有任何的追隨者'}
+      </>
+    )
+  }
 
   return (
     <div className="tabContainer">
@@ -269,8 +364,11 @@ export const FollowTab = () => {
         </div>
       </div>
       <div className="content">
-        {followTab === 'follower' && <Follow />}
-        {followTab === 'following' && <Follow />}
+        {followTab === 'follower' && 
+          <Followers />
+        }
+        {followTab === 'following' && 
+          <Followings />}
       </div>
     </div>
   )

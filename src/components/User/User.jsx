@@ -47,7 +47,7 @@ export const User = () => {
         setFollowersCount(data.followersCount)
         setFollowingsCount(data.followingsCount)
         setTweetsCount(data.tweetsCount)
-        console.log(data)
+        // console.log(data)
       } catch (error) {
         console.error(error)
       }

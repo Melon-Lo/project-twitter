@@ -50,13 +50,22 @@ export const TweetList = ({ tweets }) => {
       <div className="bottomSection">
         {tweets.lengh !== 0 ? 
           (tweets.map((tweet) => {
-            let { name, account, avatar } = tweet.User
-            const { id, UserId, createdAt, description, likeCount, replyCount, updatedAt } = tweet
+            const { name, account, avatar } = tweet.User
+            const { id, UserId, createdAt, description, likeCount, replyCount, updatedAt, Likes } = tweet
+           
+            const user = JSON.parse(localStorage.getItem("userInfo")).id
+            let isLiked = false
+            Likes.map(like=>{
+              return like.userId === user && like.tweetId === id  ? isLiked = true : isLiked
+            })
+            
             return (
               <Tweet 
                 children={
-                <IconInfo 
+                <IconInfo
                   setShowReplyModal={setShowReplyModal}
+                  id={id}
+                  isLiked={isLiked}
                   likeCount={likeCount}
                   replyCount={replyCount}
                 />

@@ -9,8 +9,28 @@ import { ReactComponent as LikeHollowIcon } from 'assets/icons/like_hollow.svg'
 
 // tweet types
 
-export const IconInfo = ({ setShowReplyModal, likeCount, replyCount }) => {
+import { addLike, removeLike } from 'api/like'
+import { useState } from 'react'
+
+export const IconInfo = ({ setShowReplyModal, id, isLiked, likeCount, replyCount }) => {
   const navigate = useNavigate()
+
+  const [ like, setLike ] = useState(isLiked)
+
+  const handleLike = async () => {
+    try{
+      const Token = localStorage.getItem("authToken");
+      let data = []
+      if( like === true ){
+        data = await removeLike(Token,id)
+      }else{
+        data = await addLike(Token,id)
+      }
+      setLike(data.isLiked)
+    }catch(err){
+      console.log(err)
+    }
+  }
 
   return (
     <div className="iconInfo">
@@ -25,9 +45,10 @@ export const IconInfo = ({ setShowReplyModal, likeCount, replyCount }) => {
           {replyCount}
         </div>
       </div>
-      <div className="likes">
-        <div className="iconBox">
-          <LikeHollowIcon className="icon" />
+      <div className="likes" onClick={handleLike}>
+        <div className="iconBox" >
+          {/* 幫我換個ICON(讚跟收回) */}
+          {like ? <p>喜歡</p> : <LikeHollowIcon className="icon" />}
         </div>
         <div className="number">
           {likeCount}

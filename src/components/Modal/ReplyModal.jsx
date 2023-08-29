@@ -10,15 +10,14 @@ import { useNavigate } from 'react-router-dom'
 // import icons
 import { ReactComponent as CloseIcon } from 'assets/icons/close.svg'
 import { useState, useEffect } from 'react'
-
-// import api
-// import { postTweet } from 'api/tweets'
+import { useLocation } from 'react-router-dom'
 
 export const ReplyModal = ({ setShowReplyModal }) => {
   const navigate = useNavigate()
+  const pathname = useLocation().pathname
 
   // 取得使用者資料
-  const { avatar } = JSON.parse(localStorage.getItem("userInfo"))
+  const { avatar, account, name, createdAt } = JSON.parse(localStorage.getItem("userInfo"))
 
   // 設置textarea的狀態
   const [content, setContent] = useState('')
@@ -99,15 +98,25 @@ export const ReplyModal = ({ setShowReplyModal }) => {
             // 若無內容，直接關閉視窗
           } else {
             setShowReplyModal(false)
-            navigate('/main')
+            if(pathname === '/reply_list/reply_modal') {
+              navigate('/reply_list')
+            } else if(pathname === '/main/reply_modal') {
+              navigate('/main')
+            }
           }
         }}>
           <CloseIcon className='closeIcon'/>
         </div>
       </div>
-      <Tweet children={<ReplyInfo />} />
+      <Tweet 
+        avatar={avatar} 
+        name={name} 
+        account={account}
+        updatedAt={createdAt}
+        children={<ReplyInfo />} 
+      />
       <div className="modalAvatarBox">
-        <img className="avatar" src={avatar} alt="avatar" />
+        <img className="avatar" src="avatar" alt="avatar" />
       </div>
       <textarea 
         name="tweet" 

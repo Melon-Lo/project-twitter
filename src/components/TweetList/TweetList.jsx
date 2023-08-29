@@ -1,9 +1,8 @@
 import './TweetList.scss'
 
 // import dependencies
-import { useContext, useEffect } from 'react'
+import { useContext } from 'react'
 import { ModalContext } from 'context/ModalContext'
-import { PageContext } from 'context/PageContext'
 
 // import components
 import { Tweet, IconInfo } from 'components/TweetList/Tweet/Tweet'
@@ -63,13 +62,13 @@ export const TweetList = ({ tweets }) => {
             return (
               <Tweet 
                 children={
-                <IconInfo
-                  setShowReplyModal={setShowReplyModal}
-                  id={id}
-                  isLiked={isLiked}
-                  likeCount={likeCount}
-                  replyCount={replyCount}
-                />
+                  <IconInfo
+                    setShowReplyModal={setShowReplyModal}
+                    id={id}
+                    isLiked={isLiked}
+                    likeCount={likeCount}
+                    replyCount={replyCount}
+                  />
                 }
                 key={id}
                 id={id}

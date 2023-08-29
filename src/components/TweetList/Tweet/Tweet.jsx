@@ -8,6 +8,7 @@ import { PageContext } from 'context/PageContext'
 // import icons
 import { ReactComponent as ChatHollowIcon } from 'assets/icons/chat_hollow.svg'
 import { ReactComponent as LikeHollowIcon } from 'assets/icons/like_hollow.svg'
+import { ReactComponent as LikeIcon } from 'assets/icons/like.svg'
 
 // tweet types
 
@@ -49,8 +50,9 @@ export const IconInfo = ({ setShowReplyModal, id, isLiked, likeCount, replyCount
       </div>
       <div className="likes" onClick={handleLike}>
         <div className="iconBox" >
-          {/* 幫我換個ICON(讚跟收回) */}
-          {like ? <p>喜歡</p> : <LikeHollowIcon className="icon" />}
+          {like ? 
+            <LikeIcon className="likeIcon" /> : 
+            <LikeHollowIcon className="icon" />}
         </div>
         <div className="number">
           {likeCount}
@@ -60,10 +62,10 @@ export const IconInfo = ({ setShowReplyModal, id, isLiked, likeCount, replyCount
   )
 }
 
-export const ReplyInfo = () => {
+export const ReplyInfo = ({ name }) => {
   return (
     <div className="replyInfo">
-      <div className="replyTo">回覆給<b>@Mitsubishi</b></div>
+      <div className="replyTo">回覆給<b>@{name}</b></div>
     </div>
   )
 }

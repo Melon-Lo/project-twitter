@@ -31,7 +31,7 @@ export const User = () => {
             <BackIcon />
           </div>
           <div className="titleContent">
-            <div className="name">Liz</div>
+            <div className="name">{name}</div>
             <div className="tweets">45 推文</div>
           </div>
         </div>

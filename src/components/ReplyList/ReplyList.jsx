@@ -6,7 +6,7 @@ import { ModalContext } from 'context/ModalContext'
 import { useNavigate } from 'react-router'
 
 // import components
-import { Modal } from 'components/Modal/Modal'
+import { ReplyModal } from 'components/Modal/ReplyModal'
 import { Reply } from 'components/ReplyList/Reply/Reply'
 
 // import icons
@@ -29,11 +29,7 @@ export const ReplyList = () => {
           <p>推文</p>
         </div>
         {showReplyModal &&
-          <Modal 
-            type={'reply'}
-            placeholder={'推你的回覆'} 
-            buttonContext={'回覆'}
-            showReplyModal={showReplyModal} 
+          <ReplyModal
             setShowReplyModal={setShowReplyModal} 
           />
         }

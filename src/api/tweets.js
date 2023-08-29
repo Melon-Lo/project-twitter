@@ -20,7 +20,7 @@ axiosInstance.interceptors.request.use(
   }
 );
 
-// 瀏覽所有tweets
+// 取得所有tweets
 // GET: /tweets
 export const getAllTweets = async () => {
   try {
@@ -32,7 +32,7 @@ export const getAllTweets = async () => {
   }
 }
 
-// 瀏覽某一使用者的tweets
+// 取得某一使用者的tweets
 // GET: /users/:id/tweets
 export const getUserTweets = async (id) => {
   try {
@@ -44,7 +44,7 @@ export const getUserTweets = async (id) => {
   }
 }
 
-// 瀏覽某一使用者的回覆
+// 取得某一使用者的回覆
 // GET: /users/:id/replied_tweets
 export const getUserReplies = async (id) => {
   try {
@@ -56,7 +56,7 @@ export const getUserReplies = async (id) => {
   }
 }
 
-// 瀏覽某一使用者喜歡的tweets
+// 取得某一使用者喜歡的tweets
 // GET: /users/:id/likes
 export const getUserLikes = async (id) => {
   try {

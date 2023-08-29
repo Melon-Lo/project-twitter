@@ -5,6 +5,7 @@ import { useContext, useEffect, useState } from 'react'
 import { ModalContext } from 'context/ModalContext'
 import { useNavigate } from 'react-router-dom'
 import { TabContext } from 'context/TabContext'
+import { PageContext } from 'context/PageContext'
 
 // import components
 import { EditModal } from 'components/Modal/EditModal'
@@ -19,6 +20,7 @@ import { getUserData } from 'api/users'
 export const User = () => {
   const { showModal, setShowModal } = useContext(ModalContext)
   const { setFollowTab } = useContext(TabContext)
+  const { setUser } = useContext(PageContext)
   const navigate = useNavigate()
 
   // 儲存資料空間
@@ -33,6 +35,7 @@ export const User = () => {
 
   // 取得使用者資料
   useEffect(() => async () => {
+    setUser("self")
     const getUserDataAsync = async () => {
       try {
         const data = await getUserData(id)

@@ -3,6 +3,8 @@ import './SideBar.scss'
 // import dependencies
 import { useNavigate, useLocation } from 'react-router-dom'
 import { useContext, useEffect } from 'react'
+import { PageContext } from 'context/PageContext'
+import { ModalContext } from 'context/ModalContext'
 
 // import icons
 import { ReactComponent as LogoIcon } from 'assets/icons/logo.svg'
@@ -13,15 +15,12 @@ import { ReactComponent as UserIcon } from 'assets/icons/user.svg'
 import { ReactComponent as CogHollowIcon } from 'assets/icons/cog_hollow.svg'
 import { ReactComponent as CogIcon } from 'assets/icons/cog.svg'
 import { ReactComponent as LogoutIcon } from 'assets/icons/logout.svg'
-import { PageContext } from 'context/PageContext'
-import { ModalContext } from 'context/ModalContext'
-import { func } from 'prop-types'
 
 export const SideBar = () => {
   const navigate = useNavigate()
   const path = useLocation().pathname
   const { setShowModal } = useContext(ModalContext)
-  const { page, setPage } = useContext(PageContext)
+  const { page, setPage, setUser } = useContext(PageContext)
 
   function handleLogout() {
     localStorage.removeItem("userInfo")
@@ -60,6 +59,7 @@ export const SideBar = () => {
           <div className="page" onClick={() => {
             navigate('/user/self')
             setPage('user')
+            setUser('self')
           }}>
             <div className="iconBox">
               {page === 'user' ? <UserIcon className="activeIcon" /> : <UserHollowIcon />}

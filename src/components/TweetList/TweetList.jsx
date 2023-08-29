@@ -14,7 +14,7 @@ export const TweetList = ({ tweets }) => {
   const navigate = useNavigate()
 
   // 取得大頭貼
-  const avatar = JSON.parse(localStorage.getItem("userInfo")).avatar
+  const avatar = JSON.parse(localStorage.getItem("userInfo"))?.avatar
 
   return (
     <div className="tweetListContainer">

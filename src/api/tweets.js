@@ -33,6 +33,28 @@ export const getAllTweets = async () => {
   }
 }
 
+// 瀏覽某一推文
+// /tweets/:tweet_id
+export const getTweet = async (id) => {
+  try {
+    const res = await axiosInstance.get(`${baseURL}/tweets/${id}`)
+    return res.data
+  } catch (error) {
+    console.error("[Get Tweet Failed]: ", error.response.data.message)
+  }
+}
+
+// 瀏覽某一推文所有留言
+// /tweets/:tweet_id/replies
+export const getReplies = async (id) => {
+  try {
+    const res = await axiosInstance.get(`${baseURL}/tweets/${id}/replies`)
+    return res.data
+  } catch (error) {
+    console.error("[Get Replies Failed]: ", error.response.data.message)
+  }
+}
+
 // 瀏覽某一使用者的tweets
 // /users/:id/tweets
 export const getUserTweets = async (id) => {

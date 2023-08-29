@@ -13,7 +13,6 @@ import { ReactComponent as LikeHollowIcon } from 'assets/icons/like_hollow.svg'
 
 export const IconInfo = ({ setShowReplyModal, likeCount, replyCount }) => {
   const navigate = useNavigate()
-  const { user, setUser } = useContext(PageContext)
 
   return (
     <div className="iconInfo">
@@ -50,7 +49,7 @@ export const ReplyInfo = () => {
 
 export const Tweet = ({ children, id, name, account, description, avatar, createdAt, UserId }) => {
   const navigate = useNavigate()
-  const { user, setUser } = useContext(PageContext)
+  const { setUser } = useContext(PageContext)
 
   const selfId = JSON.parse(localStorage.getItem("userInfo")).id
   const clikcedUserId = UserId

@@ -236,6 +236,7 @@ export const Tab = () => {
 export const FollowTab = () => {
   const { followTab, setFollowTab } = useContext(TabContext)
   const navigate = useNavigate()
+  const { user } = useContext(PageContext)
 
   return (
     <div className="tabContainer">
@@ -244,7 +245,11 @@ export const FollowTab = () => {
           className={followTab === 'follower' ? 'optionActive' : 'option'} 
           onClick={() => {
             setFollowTab('follower')
-            navigate('/user/self/follower')
+            if(user === 'self') {
+              navigate('/user/self/follower')
+            } else {
+              navigate('/user/other/follower')
+            }
           }}
         >
           追隨者
@@ -253,7 +258,11 @@ export const FollowTab = () => {
           className={followTab === 'following' ? 'optionActive' : 'option'} 
           onClick={() => {
             setFollowTab('following')
-            navigate('/user/self/following')
+            if(user === 'self') {
+              navigate('/user/self/following')
+            } else {
+              navigate('/user/other/following')
+            }
           }}
         >
           正在追隨

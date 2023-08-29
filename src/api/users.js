@@ -27,6 +27,19 @@ export const getUserData = async (id) => {
     const res = await axiosInstance.get(`${baseURL}/users/${id}`)
     return res.data
   } catch (error) {
-    console.error("[Get UserData Failed]:", error.response.data.message)
+    console.error("[Get UserData Failed]: ", error.response.data.message)
   }
 }
+
+// 取得指定使用者的所有追蹤者
+// GET: /users/:id/followings
+export const getUserFollowings = async(id) => {
+  try {
+    const res = await axiosInstance.get(`${baseURL}/users/:id/followings`)
+    return res.data
+  } catch (error) {
+    console.error("[Get UserFollowings Failed]: ", error.response.data.message)
+  }
+}
+
+// 取得指定使用者的所有追隨者

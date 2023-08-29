@@ -5,8 +5,6 @@ import { RecommendationList } from 'components/RecommendationList/Recommendation
 import { useContext, useEffect, useState } from 'react';
 import { ModalContext } from 'context/ModalContext';
 
-import { useLocation } from 'react-router';
-
 // API
 import { getAllTweets } from 'api/tweets';
 

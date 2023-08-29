@@ -22,3 +22,11 @@ axiosInstance.interceptors.request.use(
 
 // 取得某一使用者的資料
 // GET: /users/:id
+export const getUserData = async (id) => {
+  try {
+    const res = await axiosInstance.get(`${baseURL}/users/${id}`)
+    return res.data
+  } catch (error) {
+    console.error("[Get UserData Failed]:", error.response.data.message)
+  }
+}

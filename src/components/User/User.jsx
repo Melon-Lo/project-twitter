@@ -1,7 +1,7 @@
 import './User.scss'
 
 // import dependencies
-import { useContext } from 'react'
+import { useContext, useEffect, useState } from 'react'
 import { ModalContext } from 'context/ModalContext'
 import { useNavigate } from 'react-router-dom'
 import { TabContext } from 'context/TabContext'
@@ -13,15 +13,45 @@ import { Tab } from 'components/Tab/Tab'
 // import icons
 import { ReactComponent as BackIcon } from 'assets/icons/back.svg'
 
+// import api
+import { getUserData } from 'api/users'
+
 export const User = () => {
   const { showModal, setShowModal } = useContext(ModalContext)
   const { setFollowTab } = useContext(TabContext)
   const navigate = useNavigate()
 
+  // 儲存資料空間
+  const { id, introduction } = JSON.parse(localStorage.getItem("userInfo"))
+  const [name, setName] = useState('')
+  const [account, setAccount] = useState('')
+  const [avatar, setAvatar] = useState('')
+  const [banner, setBanner] = useState('')
+  const [followingsCount, setFollowingsCount] = useState('')
+  const [followersCount, setFollowersCount] = useState('')
+  const [tweetsCount, setTweetsCount] = useState('')
+
   // 取得使用者資料
-  const userInfo = JSON.parse(localStorage.getItem("userInfo"))
-  const { avatar, account, name, introduction } = userInfo
-  // const { cover, followingCount, followerCount } = userInfo
+  useEffect(() => async () => {
+    const getUserDataAsync = async () => {
+      try {
+        const data = await getUserData(id)
+        // 儲存使用者資料
+        setName(data.name)
+        setAccount(data.account)
+        setAvatar(data.avatar)
+        setBanner(data.banner)
+        setFollowersCount(data.followersCount)
+        setFollowingsCount(data.followingsCount)
+        setTweetsCount(data.tweetsCount)
+        console.log(data)
+      } catch (error) {
+        console.error(error)
+      }
+    }
+
+    getUserDataAsync()
+  }, [])
 
   return (
     <div className="userContainer">
@@ -32,7 +62,7 @@ export const User = () => {
           </div>
           <div className="titleContent">
             <div className="name">{name}</div>
-            <div className="tweets">45 推文</div>
+            <div className="tweets">{tweetsCount} 推文</div>
           </div>
         </div>
         {showModal &&
@@ -40,7 +70,7 @@ export const User = () => {
         }
         <div className="userBox">
           <div className="coverBox">
-            <img src="https://i.natgeofe.com/n/c9107b46-78b1-4394-988d-53927646c72b/1095_3x2.jpg" alt="coverImage" />
+            <img src={banner} alt="coverImage" />
           </div>
           <div className="infoBox">
             <button onClick={() => {
@@ -62,8 +92,7 @@ export const User = () => {
                   setFollowTab('following')
                   navigate('following')
                 }}>
-                  10個
-                  {/* {followingCount}個 */}
+                  {followingsCount}個
                 </b>
                   追蹤中
               </div>
@@ -72,8 +101,7 @@ export const User = () => {
                   setFollowTab('follower')
                   navigate('follower')
                 }}>
-                  9個
-                  {/* {followerCount}個 */}
+                  {followersCount}個
                 </b>
                   追蹤者
               </div>

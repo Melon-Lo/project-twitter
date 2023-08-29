@@ -1,8 +1,9 @@
 import './TweetList.scss'
 
 // import dependencies
-import { useContext } from 'react'
+import { useContext, useEffect } from 'react'
 import { ModalContext } from 'context/ModalContext'
+import { PageContext } from 'context/PageContext'
 
 // import components
 import { Tweet, IconInfo } from 'components/TweetList/Tweet/Tweet'
@@ -51,7 +52,7 @@ export const TweetList = ({ tweets }) => {
         {tweets.lengh !== 0 ? 
           (tweets.map((tweet) => {
             let { name, account, avatar } = tweet.User
-            const { id, UserId, createdAt, description, likeCount, replyCount, updatedAt } = tweet
+            const { id, createdAt, description, likeCount, replyCount, updatedAt, UserId } = tweet
             return (
               <Tweet 
                 children={

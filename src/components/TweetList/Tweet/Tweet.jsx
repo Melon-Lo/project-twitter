@@ -1,7 +1,9 @@
 import './Tweet.scss'
 
 // import dependencies
+import { useContext } from 'react'
 import { useNavigate } from 'react-router-dom'
+import { PageContext } from 'context/PageContext'
 
 // import icons
 import { ReactComponent as ChatHollowIcon } from 'assets/icons/chat_hollow.svg'
@@ -11,13 +13,14 @@ import { ReactComponent as LikeHollowIcon } from 'assets/icons/like_hollow.svg'
 
 export const IconInfo = ({ setShowReplyModal, likeCount, replyCount }) => {
   const navigate = useNavigate()
+  const { user, setUser } = useContext(PageContext)
 
   return (
     <div className="iconInfo">
       <div className="comments">
         <div className="iconBox" onClick={() => {
           setShowReplyModal(true)
-          navigate('reply_modal')
+          navigate('reply_modal') 
         }}>
           <ChatHollowIcon className="icon" />
         </div>
@@ -45,12 +48,28 @@ export const ReplyInfo = () => {
   )
 }
 
-export const Tweet = ({ children, id, name, account, description, avatar, createdAt }) => {
+export const Tweet = ({ children, id, name, account, description, avatar, createdAt, UserId }) => {
   const navigate = useNavigate()
+  const { user, setUser } = useContext(PageContext)
+
+  const selfId = JSON.parse(localStorage.getItem("userInfo")).id
+  const clikcedUserId = UserId
+
+  function checkUser() {
+    if(selfId === clikcedUserId) {
+      localStorage.setItem("otherUserId", clikcedUserId)
+      setUser("self")
+      navigate("/user/self")
+    } else {
+      localStorage.setItem("otherUserId", clikcedUserId)
+      setUser("other")
+      navigate("/user/other")
+    }
+  }
 
   return (
     <div className="tweetItem" key={id}>
-      <div className="avatarBox" onClick={() => navigate('/user/other')}>
+      <div className="avatarBox" onClick={checkUser}>
         <img className="avatar" src={avatar} alt="avatar" />
       </div>
       <div className="tweetInfo">

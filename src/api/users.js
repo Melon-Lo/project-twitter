@@ -52,3 +52,14 @@ export const getUserFollowers = async(id) => {
     console.error("[Get UserFollowers Failed]: ", error.response.data.message)
   }
 }
+
+// 修改指定使用者的資料
+// PUT: /users/:id
+export const putUserData = async({ id, name, email, password, account }) => {
+  try {
+    const { data } = await axios.put(`${baseURL}/users/${id}`)
+    return data
+  } catch (error) {
+    console.error('[Put UserData Failed]: ', error)
+  }
+}

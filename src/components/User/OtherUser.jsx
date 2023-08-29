@@ -42,7 +42,6 @@ export const OtherUser = () => {
   useEffect(() => async () => {
     // 他人頁面初始值
     setUser("other")
-    console.log("other")
 
     const getUserDataAsync = async () => {
       try {

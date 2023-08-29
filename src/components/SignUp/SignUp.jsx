@@ -3,6 +3,8 @@ import { useState, useEffect } from 'react'
 import { ReactComponent as LogoIcon } from 'assets/icons/logo.svg'
 import Swal from 'sweetalert2'
 import { useNavigate } from 'react-router'
+
+// API
 import { signup } from 'api/auth'
 
 // 信箱格式規範
@@ -192,14 +194,16 @@ export const SignUp = () => {
   //   }
   // }
 
-  //按下註冊按鈕函式
-  const onFormSubmit = async () => {
-    // 檢驗所有使用者輸入的值，是否符合標準，符合及通過
+  // 表單送出函式，當驗證全通過時才會送出
+  const onFormSubmit = async (e) => {
+    e.preventDefault()
+
+    // 認證不通過：不送出
     if (!accountIsValid || !nameIsValid || !emailIsValid || !passwordIsValid || !passwordCheckIsValid) {
       return
     }
 
-    // 『密碼』與『密碼再確認』
+    // 「密碼」與「密碼再確認」不相同：不送出，彈出警告視窗
     if(password !== passwordCheck) {
       Swal.fire({
         icon: 'error',
@@ -209,6 +213,7 @@ export const SignUp = () => {
       return
     }
 
+    // 執行非同步
     const response = await signup({account, name, email, password, passwordCheck})
 
     // 認證通過：送出資料，彈出成功視窗

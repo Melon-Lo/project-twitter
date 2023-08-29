@@ -2,10 +2,16 @@ import './Setting.scss'
 import Swal from 'sweetalert2';
 import { useState, useEffect } from 'react'
 
+// API
+import { putUserData } from 'api/users';
+
 // 信箱格式規範
 const emailRule = /^\w+((-\w+)|(\.\w+))*\@[A-Za-z0-9]+((\.|-)[A-Za-z0-9]+)*\.[A-Za-z]+$/;
 
 export const Setting = () => {
+  // 取得當前使用者的id
+  const { id } = JSON.parse(localStorage.getItem("userInfo"))
+
   // 設置每個 input 的狀態
   const [account, setAccount] = useState('')
   const [name, setName] = useState('')
@@ -69,8 +75,9 @@ export const Setting = () => {
   })
 
   // 表單送出函式，當驗證全通過時才會送出
-  function onFormSubmit(e) {
+  const onFormSubmit = async (e) => {
     e.preventDefault()
+
     // 認證不通過：不送出
     if(!accountIsValid || !nameIsValid || !emailIsValid || !passwordIsValid || !passwordCheckIsValid) {
       return
@@ -81,6 +88,10 @@ export const Setting = () => {
       Swal.fire("兩次輸入的密碼不相符！")
       return
     }
+
+    const response = await putUserData({id, account, name, email, password})
+
+    console.log(response)
 
     // 認證通過：送出資料，彈出成功視窗
     Swal.fire("修改成功！")

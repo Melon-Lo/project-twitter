@@ -22,7 +22,6 @@ export const login = async ({ account, password }) => {
 export const signup = async ({account, name, email, password }) => {
   try {
     const { data } = await axios.post(`${authURL}/users`, {account, name, password, email, checkPassword: password });
-
     return data;
   } catch (error) {
     console.error('[Register Failed]: ', error);

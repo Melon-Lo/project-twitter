@@ -49,16 +49,8 @@ const UserReply = ({ replies }) => {
     <>
       {replies.length !== 0 ? 
         (replies.map((reply) => {
-          const { id, comment, createdAt, respondentName } = reply
-          // const { name, avatar } = reply
           return (
-            <Reply 
-              key={id}
-              tweetId={id}
-              comment={comment}
-              createdAt={createdAt}
-              respondentName={respondentName}
-            />
+            <Reply key={reply.id} reply={reply} />
           )
         }))
       : '尚未發佈任何回覆'}

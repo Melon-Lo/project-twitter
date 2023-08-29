@@ -1,7 +1,7 @@
 import './ReplyList.scss'
 
 // import dependencies
-import { useContext } from 'react'
+import { useContext, useState } from 'react'
 import { ModalContext } from 'context/ModalContext'
 import { useNavigate } from 'react-router'
 
@@ -14,14 +14,20 @@ import { ReactComponent as BackIcon } from 'assets/icons/back.svg'
 import { ReactComponent as ReplyIcon } from 'assets/icons/reply.svg'
 import { ReactComponent as LikeHollowIcon } from 'assets/icons/like_hollow.svg'
 
-
-export const ReplyList = () => {
+export const ReplyList = (props) => {
   const navigate = useNavigate()
   const { showReplyModal, setShowReplyModal } = useContext(ModalContext)
 
+  const { id, description, absoluteTime, likeCount, replyCount, User } = props.tweet
+  const { account, avatar, name } = User
+
+  const replies = props.replies.map(reply => {
+    return <Reply key={reply.id} reply={reply} />
+  })
+
   return (
     <div className="replyContainer">
-      <div className="topSection">
+      <div className="topSection" key={id}>
         <div className="title">
           <div className="iconBox" onClick={() => navigate('/main')}>
             <BackIcon />
@@ -36,21 +42,21 @@ export const ReplyList = () => {
         <div className="tweet">
           <div className="tweetTop">
             <div className="avatarBox">
-              <img className="avatar" src="https://avatoon.me/wp-content/uploads/2021/09/Cartoon-Pic-Ideas-for-DP-Profile-02-768x768.png" alt="avatar" />
+              <img className="avatar" src={avatar} alt="avatar" />
             </div>
             <div className="info">
-              <div className="name">Chris</div>
-              <div className="account">@chris</div>
+              <div className="name">{name}</div>
+              <div className="account">@{account}</div>
             </div>
           </div>
           <div className="tweetMiddle">
-            <div className="content">今天天氣真好</div>
-            <div className="time">上午11:00．2023年8月19日</div>
+            <div className="content">{description}</div>
+            <div className="time">{absoluteTime}</div>
           </div>
           <div className="tweetBottom">
             <div className="dataCount">
-              <div className="count"><b>13</b>回覆</div>
-              <div className="count"><b>99</b>喜歡次數</div>
+              <div className="count"><b>{replyCount}</b>回覆</div>
+              <div className="count"><b>{likeCount}</b>喜歡次數</div>
             </div>
             <div className="iconSection">
               <div className="iconBox" onClick={() => {
@@ -67,10 +73,7 @@ export const ReplyList = () => {
         </div>
       </div>
       <div className="bottomSection">
-        <Reply />
-        <Reply />
-        <Reply />
-        <Reply />
+        {replies}
       </div>
     </div>
   )

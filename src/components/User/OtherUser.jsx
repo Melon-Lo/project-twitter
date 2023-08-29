@@ -1,14 +1,14 @@
 import './OtherUser.scss'
 
 // import dependencies
-import { useState, useContext } from 'react'
+import { useState, useEffect, useContext } from 'react'
 import { ModalContext } from 'context/ModalContext'
+import { PageContext } from 'context/PageContext'
 import { useNavigate } from 'react-router-dom'
 import { TabContext } from 'context/TabContext'
 import clsx from 'clsx'
 
 // import components
-import { EditModal } from 'components/Modal/EditModal'
 import { Tab } from 'components/Tab/Tab'
 
 // import icons
@@ -17,31 +17,68 @@ import { ReactComponent as MailHollowIcon } from 'assets/icons/mail_hollow.svg'
 import { ReactComponent as NotiHollowIcon } from 'assets/icons/noti_hollow.svg'
 import { ReactComponent as NotiActiveIcon } from 'assets/icons/noti_active.svg'
 
+// import api
+import { getUserData } from 'api/users'
+
 export const OtherUser = () => {
   const [following, setFollowing] = useState(false)
   const [noti, setNoti] = useState(false)
-  const { showModal } = useContext(ModalContext)
   const { setFollowTab } = useContext(TabContext)
   const navigate = useNavigate()
+  const { setUser } = useContext(PageContext)
+
+  // 取得使用者ID
+  const id = localStorage.getItem("otherUserId")
+  const [name, setName] = useState('')
+  const [account, setAccount] = useState('')
+  const [avatar, setAvatar] = useState('')
+  const [banner, setBanner] = useState('')
+  const [followingsCount, setFollowingsCount] = useState('')
+  const [followersCount, setFollowersCount] = useState('')
+  const [tweetsCount, setTweetsCount] = useState('')
+  const [introduction, setIntroduction] = useState('')
+
+  // 取得使用者資料
+  useEffect(() => async () => {
+    // 他人頁面初始值
+    setUser("other")
+
+    const getUserDataAsync = async () => {
+      try {
+        const data = await getUserData(id)
+        // 儲存使用者資料
+        setName(data.name)
+        setAccount(data.account)
+        setAvatar(data.avatar)
+        setBanner(data.banner)
+        setFollowersCount(data.followersCount)
+        setFollowingsCount(data.followingsCount)
+        setTweetsCount(data.tweetsCount)
+        setIntroduction(data.introduction)
+        // console.log(data)
+      } catch (error) {
+        console.error(error)
+      }
+    }
+
+    getUserDataAsync()
+  }, [])  
 
   return (
     <div className="userContainer">
       <div className="topSection">
         <div className="title">
-          <div className="iconBox" onClick={() => navigate('/user/self')}>
+          <div className="iconBox" onClick={() => navigate('/main')}>
             <BackIcon />
           </div>
           <div className="titleContent">
-            <div className="name">Liz</div>
-            <div className="tweets">45 推文</div>
+            <div className="name">{name}</div>
+            <div className="tweets">{tweetsCount} 推文</div>
           </div>
         </div>
-        {showModal &&
-          <EditModal />
-        }
         <div className="userBox">
           <div className="coverBox">
-            <img src="https://i.natgeofe.com/n/c9107b46-78b1-4394-988d-53927646c72b/1095_3x2.jpg" alt="coverImage" />
+            <img src={banner} alt="coverImage" />
           </div>
           <div className="infoBox">
             <div className="buttons">
@@ -64,19 +101,19 @@ export const OtherUser = () => {
               </button>
             </div>
             <div className="avatarBox">
-              <img className="avatar" src="https://avatoon.me/wp-content/uploads/2021/09/Cartoon-Pic-Ideas-for-DP-Profile-02-768x768.png" alt="avatar" />
+              <img className="avatar" src={avatar} alt="avatar" />
             </div>
             <div className="info">
-              <div className="name">Liz</div>
-              <div className="account">@liz</div>
-              <div className="description">I am a beautiful girl.</div>
+              <div className="name">{name}</div>
+              <div className="account">@{account}</div>
+              <div className="description">{introduction}</div>
               <div className="countData">
               <div className="following">
                 <b onClick={() => {
                   setFollowTab('following')
                   navigate('following')
                 }}>
-                  10個
+                  {followingsCount}個
                 </b>
                   追蹤中
               </div>
@@ -85,7 +122,7 @@ export const OtherUser = () => {
                   setFollowTab('follower')
                   navigate('follower')
                 }}>
-                  9位
+                  {followersCount}位
                 </b>
                   追蹤者
               </div>

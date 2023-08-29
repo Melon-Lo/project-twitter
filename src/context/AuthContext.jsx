@@ -160,7 +160,7 @@ export default function AuthContextProvider({ children }) {
               localStorage.setItem("authToken", authToken)
 
               // 儲存使用者資料
-              setUserInfo(response.data.User)
+              // setUserInfo(JSON.stringify(response.data.user))
               localStorage.setItem("userInfo", JSON.stringify(response.data.user))
             }
             // 若抓到的response不合條件，回傳response讓LoginPage去做錯誤顯示

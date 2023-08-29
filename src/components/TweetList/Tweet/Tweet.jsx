@@ -1,23 +1,46 @@
 import './Tweet.scss'
 
 // import dependencies
+import { useContext } from 'react'
 import { useNavigate } from 'react-router-dom'
+import { PageContext } from 'context/PageContext'
 
 // import icons
 import { ReactComponent as ChatHollowIcon } from 'assets/icons/chat_hollow.svg'
 import { ReactComponent as LikeHollowIcon } from 'assets/icons/like_hollow.svg'
+import { ReactComponent as LikeIcon } from 'assets/icons/like.svg'
 
 // tweet types
 
-export const IconInfo = ({ setShowReplyModal, likeCount, replyCount }) => {
+import { addLike, removeLike } from 'api/like'
+import { useState } from 'react'
+
+export const IconInfo = ({ setShowReplyModal, id, isLiked, likeCount, replyCount }) => {
   const navigate = useNavigate()
+
+  const [ like, setLike ] = useState(isLiked)
+
+  const handleLike = async () => {
+    try{
+      const Token = localStorage.getItem("authToken");
+      let data = []
+      if( like === true ){
+        data = await removeLike(Token,id)
+      }else{
+        data = await addLike(Token,id)
+      }
+      setLike(data.isLiked)
+    }catch(err){
+      console.log(err)
+    }
+  }
 
   return (
     <div className="iconInfo">
       <div className="comments">
         <div className="iconBox" onClick={() => {
           setShowReplyModal(true)
-          navigate('reply_modal')
+          navigate('reply_modal') 
         }}>
           <ChatHollowIcon className="icon" />
         </div>
@@ -25,9 +48,11 @@ export const IconInfo = ({ setShowReplyModal, likeCount, replyCount }) => {
           {replyCount}
         </div>
       </div>
-      <div className="likes">
-        <div className="iconBox">
-          <LikeHollowIcon className="icon" />
+      <div className="likes" onClick={handleLike}>
+        <div className="iconBox" >
+          {like ? 
+            <LikeIcon className="likeIcon" /> : 
+            <LikeHollowIcon className="icon" />}
         </div>
         <div className="number">
           {likeCount}
@@ -37,20 +62,36 @@ export const IconInfo = ({ setShowReplyModal, likeCount, replyCount }) => {
   )
 }
 
-export const ReplyInfo = () => {
+export const ReplyInfo = ({ name }) => {
   return (
     <div className="replyInfo">
-      <div className="replyTo">回覆給<b>@Mitsubishi</b></div>
+      <div className="replyTo">回覆給<b>@{name}</b></div>
     </div>
   )
 }
 
-export const Tweet = ({ children, id, name, account, description, avatar, createdAt }) => {
+export const Tweet = ({ children, id, name, account, description, avatar, createdAt, UserId }) => {
   const navigate = useNavigate()
+  const { setUser } = useContext(PageContext)
+
+  const selfId = JSON.parse(localStorage.getItem("userInfo")).id
+  const clikcedUserId = UserId
+
+  function checkUser() {
+    if(selfId === clikcedUserId) {
+      localStorage.setItem("otherUserId", clikcedUserId)
+      setUser("self")
+      navigate("/user/self")
+    } else {
+      localStorage.setItem("otherUserId", clikcedUserId)
+      setUser("other")
+      navigate("/user/other")
+    }
+  }
 
   return (
     <div className="tweetItem" key={id}>
-      <div className="avatarBox" onClick={() => navigate('/user/other')}>
+      <div className="avatarBox" onClick={checkUser}>
         <img className="avatar" src={avatar} alt="avatar" />
       </div>
       <div className="tweetInfo">
@@ -59,7 +100,7 @@ export const Tweet = ({ children, id, name, account, description, avatar, create
           <div className="account">@{account}</div>
           <div className="time">．{createdAt}</div>
         </div>
-        <div className="tweetContent" onClick={() => navigate('/reply_list')}>{description}</div>
+        <div className="tweetContent" onClick={() => navigate('/reply_list', {state: { id }})}>{description}</div>
         {children}
       </div>
     </div>

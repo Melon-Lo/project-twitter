@@ -1,4 +1,7 @@
-import './Modal.scss'
+import './ReplyModal.scss'
+
+// import components
+import { Tweet, ReplyInfo } from 'components/TweetList/Tweet/Tweet'
 
 // import dependencies
 import Swal from 'sweetalert2'
@@ -7,15 +10,14 @@ import { useNavigate } from 'react-router-dom'
 // import icons
 import { ReactComponent as CloseIcon } from 'assets/icons/close.svg'
 import { useState, useEffect } from 'react'
+import { useLocation } from 'react-router-dom'
 
-// import api
-import { postTweet } from 'api/tweets'
-
-export const Modal = ({ setShowModal }) => {
+export const ReplyModal = ({ setShowReplyModal }) => {
   const navigate = useNavigate()
+  const pathname = useLocation().pathname
 
   // 取得使用者資料
-  const { avatar } = JSON.parse(localStorage.getItem("userInfo"))
+  const { avatar, account, name, createdAt } = JSON.parse(localStorage.getItem("userInfo"))
 
   // 設置textarea的狀態
   const [content, setContent] = useState('')
@@ -49,7 +51,7 @@ export const Modal = ({ setShowModal }) => {
     if(!contentIsValid) return
 
     // 發佈貼文
-    await postTweet({ description: content })
+    // await postTweet({ description: content })
   
     // 發佈成功提示
     Swal.fire({
@@ -61,7 +63,7 @@ export const Modal = ({ setShowModal }) => {
     });
 
     // 關閉modal並清空content
-    setShowModal(false)
+    setShowReplyModal(false)
     setContent('')
     navigate('/main')
   }
@@ -71,7 +73,7 @@ export const Modal = ({ setShowModal }) => {
   })
 
   return (
-    <div className="postModalBox">
+    <div className="replyModalBox">
       <div className="topBar">
         <div className="iconBox" onClick={() => {
           // 如果已經有輸入內容，跳出「確定退出」提示
@@ -88,20 +90,32 @@ export const Modal = ({ setShowModal }) => {
 
               // 按下「確認」後，執行動作
               if(result.isConfirmed) {
-                setShowModal(false)
+                setShowReplyModal(false)
                 navigate('/main')
               } 
             })
 
             // 若無內容，直接關閉視窗
           } else {
-            setShowModal(false)
-            navigate('/main')
+            setShowReplyModal(false)
+            if(pathname === '/reply_list/reply_modal') {
+              navigate('/reply_list')
+            } else if(pathname === '/main/reply_modal') {
+              navigate('/main')
+            }
           }
         }}>
           <CloseIcon className='closeIcon'/>
         </div>
       </div>
+      {/* 等抓到該tweet資料 */}
+      <Tweet 
+        // avatar={avatar} 
+        // name={name} 
+        // account={account}
+        // updatedAt={createdAt}
+        children={<ReplyInfo />} 
+      />
       <div className="modalAvatarBox">
         <img className="avatar" src={avatar} alt="avatar" />
       </div>
@@ -109,7 +123,7 @@ export const Modal = ({ setShowModal }) => {
         name="tweet" 
         className="addTweetContent" 
         type="text" 
-        placeholder="有什麼新鮮事" 
+        placeholder="推你的回覆" 
         onChange={(e) => {
           checkContent(e.target.value)
           setContent(e.target.value)
@@ -120,7 +134,7 @@ export const Modal = ({ setShowModal }) => {
       <div className="wordCount">
         {contentLength}/{contentLimit}
       </div>
-      <button 
+      <button
         className={contentIsValid ? 'submitValid' : 'submitInvalid'}
         onClick={(e) => onSubmit(e)}
       >

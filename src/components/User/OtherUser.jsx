@@ -116,14 +116,14 @@ export const OtherUser = () => {
                 }}>
                   {followingsCount}個
                 </b>
-                  {followersCount}追蹤中
+                  追蹤中
               </div>
               <div className="follower">
                 <b onClick={() => {
                   setFollowTab('follower')
                   navigate('follower')
                 }}>
-                  9位
+                  {followersCount}位
                 </b>
                   追蹤者
               </div>

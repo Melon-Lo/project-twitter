@@ -6,13 +6,6 @@ export const HomePage = () => {
   const { isAuthenticated } = useContext(AuthContext)
   const navigate = useNavigate()
 
-  // 撈取 localStorage 中的 userInfo
-  let savedUserInfo = {}
-
-  if(localStorage.getItem("userInfo")) {
-    savedUserInfo = JSON.parse(localStorage.getItem("userInfo"))
-  }
-
   useEffect(() => {
     if(isAuthenticated) {
       navigate('/main')

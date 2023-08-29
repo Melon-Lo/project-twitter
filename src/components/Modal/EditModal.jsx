@@ -9,7 +9,7 @@ import { useNavigate } from 'react-router-dom'
 import { ReactComponent as CloseIcon } from 'assets/icons/close.svg'
 import { ReactComponent as AddPhotoIcon } from 'assets/icons/add_photo_hollow.svg'
 
-export const EditModal = () => {
+export const EditModal = ({ avatar, banner }) => {
   const { setShowModal } = useContext(ModalContext)
   const navigate = useNavigate()
 
@@ -28,13 +28,13 @@ export const EditModal = () => {
         <button className="save">儲存</button>
       </div>
       <div className="coverBox">
-        <img src="https://i.natgeofe.com/n/c9107b46-78b1-4394-988d-53927646c72b/1095_3x2.jpg" alt="cover"/>
+        <img src={banner} alt="cover"/>
         <CloseIcon style={{fill: 'white'}}className="closeIcon" />
         <AddPhotoIcon className="photoIcon" />
       </div>
       <div className="editSection">
         <div className="avatarBox">
-          <img src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8M3x8cmFuZG9tJTIwcGVvcGxlfGVufDB8fDB8fHww&auto=format&fit=crop&w=600&q=60" alt="avatar"/>
+          <img src={avatar} alt="avatar"/>
         </div>
         <div className="edit">
           <div className="nameInput">

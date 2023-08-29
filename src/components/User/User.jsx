@@ -69,7 +69,7 @@ export const User = () => {
           </div>
         </div>
         {showModal &&
-          <EditModal />
+          <EditModal avatar={avatar} banner={banner}/>
         }
         <div className="userBox">
           <div className="coverBox">

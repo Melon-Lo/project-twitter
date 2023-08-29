@@ -118,7 +118,7 @@ export const Login = () => {
         />
         <AuthInput
           id="password"
-          text="password"
+          type="password"
           label="密碼"
           value={password}
           placeholder="請輸入密碼"

@@ -5,6 +5,7 @@ import { useNavigate, useLocation } from 'react-router-dom'
 import { useContext, useEffect } from 'react'
 import { PageContext } from 'context/PageContext'
 import { ModalContext } from 'context/ModalContext'
+import Swal from 'sweetalert2'
 
 // import icons
 import { ReactComponent as LogoIcon } from 'assets/icons/logo.svg'
@@ -25,6 +26,7 @@ export const SideBar = () => {
   function handleLogout() {
     localStorage.removeItem("userInfo")
     localStorage.removeItem("authToken")
+    localStorage.removeItem("otherUserId")
     navigate('/login')
   }
 
@@ -87,7 +89,22 @@ export const SideBar = () => {
           推文
         </button>
       </div>
-      <div className="bottomSection" onClick={handleLogout}>
+      <div className="bottomSection" onClick={() => {
+        // 按下登出鍵後跳出確認提示
+        Swal.fire({
+          title: "你確定要登出嗎？",
+          icon: "warning",
+          showCancelButton: true,
+          confirmButtonText: "確定",
+          confirmButtonColor: "#FF6600",
+          cancelButtonText: "取消"
+        }).then((result) => {
+          // 按下「確認」後，執行動作
+          if(result.isConfirmed) {
+            handleLogout()
+          } 
+        })
+      }}>
         <div className="iconBox">
           <LogoutIcon />
         </div>

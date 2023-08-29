@@ -44,8 +44,10 @@ export const AdminSideBar = () => {
     setAdminPage('users')
   }
 
-  // 回到後台登入畫面
-  const handleAdminLogin = () => {
+  // 後台登出
+  const handleAdminLogout = () => {
+    localStorage.removeItem('authToken');
+    localStorage.removeItem('userInfo')
     navigate('/admin-login')
   }
 
@@ -92,7 +94,7 @@ export const AdminSideBar = () => {
         {/* bottom */}
         <div 
           className="bottomSection"
-          onClick={handleAdminLogin}
+          onClick={handleAdminLogout}
         >
           <div className="iconBox">
             <LogoutIcon className='icon'/>

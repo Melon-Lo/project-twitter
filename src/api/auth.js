@@ -32,6 +32,7 @@ const authURL = 'https://simple-twitter-0827-5fac12a34439.herokuapp.com/api'
 //   }
 // };
 
+// 前台登入
 export const login = async ({ account, password }) => {
   try {
     const response = await axios.post(`${authURL}/users/login`, {
@@ -45,6 +46,7 @@ export const login = async ({ account, password }) => {
   }
 };
 
+// 前台註冊
 export const register = async ({ username, email, password }) => {
   try {
     const { data } = await axios.post(`${authURL}/register`, {
@@ -65,6 +67,26 @@ export const register = async ({ username, email, password }) => {
   }
 };
 
+// 後台登入
+export const adminLogin = async ({ account, password }) => {
+  try {
+    const response = await axios.post(`${authURL}/admin/login`, {
+      account,
+      password,
+    });
+   
+    const authToken = response.data.token
+    if (authToken) {
+      return { status: "success", ...response.data }
+    }
+    
+    return response;
+  } catch (error) {
+    console.error("[Admin Login Failed]", error);
+    return error;
+  }
+};
+
 export const checkPermission = async (authToken) => {
   try {
     const response = await axios.get(`${authURL}/test-token`, {
@@ -77,3 +99,4 @@ export const checkPermission = async (authToken) => {
     console.error('[Check Permission Failed]:', error);
   }
 };
+

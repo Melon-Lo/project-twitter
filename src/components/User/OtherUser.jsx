@@ -3,12 +3,12 @@ import './OtherUser.scss'
 // import dependencies
 import { useState, useEffect, useContext } from 'react'
 import { ModalContext } from 'context/ModalContext'
+import { PageContext } from 'context/PageContext'
 import { useNavigate } from 'react-router-dom'
 import { TabContext } from 'context/TabContext'
 import clsx from 'clsx'
 
 // import components
-import { EditModal } from 'components/Modal/EditModal'
 import { Tab } from 'components/Tab/Tab'
 
 // import icons
@@ -23,9 +23,9 @@ import { getUserData } from 'api/users'
 export const OtherUser = () => {
   const [following, setFollowing] = useState(false)
   const [noti, setNoti] = useState(false)
-  const { showModal } = useContext(ModalContext)
   const { setFollowTab } = useContext(TabContext)
   const navigate = useNavigate()
+  const { setUser } = useContext(PageContext)
 
   // 取得使用者ID
   const id = localStorage.getItem("otherUserId")
@@ -40,6 +40,10 @@ export const OtherUser = () => {
 
   // 取得使用者資料
   useEffect(() => async () => {
+    // 他人頁面初始值
+    setUser("other")
+    console.log("other")
+
     const getUserDataAsync = async () => {
       try {
         const data = await getUserData(id)
@@ -73,9 +77,6 @@ export const OtherUser = () => {
             <div className="tweets">{tweetsCount} 推文</div>
           </div>
         </div>
-        {showModal &&
-          <EditModal />
-        }
         <div className="userBox">
           <div className="coverBox">
             <img src={banner} alt="coverImage" />

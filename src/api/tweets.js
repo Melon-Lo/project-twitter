@@ -82,7 +82,7 @@ export const getUserReplies = async (id) => {
 // GET: /users/:id/likes
 export const getUserLikes = async (id) => {
   try {
-    const res = axiosInstance.get(`${baseURL}/users/${id}/likes`);
+    const res = await axiosInstance.get(`${baseURL}/users/${id}/likes`);
     // console.log("getUserLikes回傳值：", res.data);
     return res.data;
   } catch (error) {

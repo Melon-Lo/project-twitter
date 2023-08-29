@@ -103,7 +103,7 @@ const UserLike = ({ tweets }) => {
 }
 
 export const Tab = () => {
-  const { user } = useContext(PageContext)
+  const { user, setUser } = useContext(PageContext)
 
   // 存放tweets
   const [tweets, setTweets] = useState([])
@@ -149,7 +149,6 @@ export const Tab = () => {
       try {
         const likedTweets = await getUserLikes(selfId)
         if(likedTweets) {
-          // console.log(likedTweets)
           setLikedTweets(likedTweets.map((likedTweet) => ({ ...likedTweet })))
         } else {
           setLikedTweets([])

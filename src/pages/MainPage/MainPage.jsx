@@ -5,14 +5,10 @@ import { RecommendationList } from 'components/RecommendationList/Recommendation
 import { useContext, useEffect, useState } from 'react';
 import { ModalContext } from 'context/ModalContext';
 
-import { AuthContext } from 'context/AuthContext';
-
 // API
 import { getAllTweets } from 'api/tweets';
 
 export const MainPage = () => {
-  const { isAuthenticated } = useContext(AuthContext)
-
   // 存放tweets
   const [tweets, setTweets] = useState([])
 
@@ -29,9 +25,6 @@ export const MainPage = () => {
     }
 
     getTweetsAsync()
-    // if (isAuthenticated) {
-    //   getTweetsAsync()
-    // } 
   })
 
   return (

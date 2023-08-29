@@ -5,6 +5,7 @@ import { useState, useEffect, useContext } from 'react'
 import { ModalContext } from 'context/ModalContext'
 import { TabContext } from 'context/TabContext'
 import { useNavigate } from 'react-router-dom'
+import { PageContext } from 'context/PageContext'
 
 // import components
 import { Tweet, IconInfo } from 'components/TweetList/Tweet/Tweet'
@@ -19,6 +20,7 @@ const UserTweet = ({ tweets }) => {
       {tweets.length !== 0 ? 
         (tweets.map((tweet) => {
           const { id, createdAt, description, RepliesCount, LikeCount, updatedAt } = tweet
+          const { name, account, avatar } = tweet.User
           return (
             <Tweet 
               children={
@@ -30,11 +32,11 @@ const UserTweet = ({ tweets }) => {
               }
               key={id}
               id={id}
-              // name={name}
-              // account={account}
+              name={name}
+              account={account}
               description={description}
               createdAt={createdAt}
-              // avatar={avatar}
+              avatar={avatar}
               updatedAt={updatedAt}
             />
           )
@@ -91,6 +93,15 @@ const UserLike = ({ tweets }) => {
 }
 
 export const Tab = () => {
+  const { user, setUser } = useContext(PageContext)
+
+  // 從localStorage拿當前使用者的資料
+  const savedUserInfo = JSON.parse(localStorage.getItem("userInfo"))
+  const savedUserInfoId = savedUserInfo.id
+
+  // 先把別人的id拿出來
+  const otherUserId = localStorage.getItem("otherUserId")
+
   // 存放tweets
   const [tweets, setTweets] = useState([])
   // 存放replies
@@ -145,15 +156,64 @@ export const Tab = () => {
       }
     }
 
-    // 執行
-    getUserTweetsAsync()
-    getUserRepliesAsync()
-    getUserLikesAsync()
+    // 別人所有的貼文
+    const getOtherUserTweetsAsync = async () => {
+      try {
+        const tweets = await getUserTweets(otherUserId)
+        if (tweets) {
+          setTweets(tweets.map((tweet) => ({ ...tweet })))
+        } else {
+          setTweets([])
+        }
+      } catch (error) {
+        console.error(error)
+      }
+    }
+
+    // 別人所有的回覆
+    const getOtherUserRepliesAsync = async () => {
+      try {
+        const replies = await getUserReplies(otherUserId)
+        if(replies) {
+          setReplies(replies.map((reply) => ({ ...reply })))
+        } else {
+          setReplies([])
+        }
+      } catch (error) {
+        console.error(error)
+      }
+    }
+
+    // 別人所有喜歡的貼文
+    const getOtherUserLikesAsync = async () => {
+      try {
+        const likedTweets = await getUserLikes(otherUserId)
+        if(likedTweets) {
+          console.log(likedTweets)
+          setLikedTweets(likedTweets.map((likedTweet) => ({ ...likedTweet })))
+        } else {
+          setLikedTweets([])
+        }
+      } catch (error) {
+        console.error(error)
+      }
+    }
+
+    // 根據user執行
+    if(user === 'self') {
+      getUserTweetsAsync()
+      getUserRepliesAsync()
+      getUserLikesAsync()    
+      console.log('self')  
+    } else if(user === 'other') {
+      getOtherUserTweetsAsync()
+      getOtherUserRepliesAsync()
+      getOtherUserLikesAsync()
+      console.log('other')
+    }
   }, [])
 
-  // 從localStorage拿當前使用者的資料
-  const savedUserInfo = JSON.parse(localStorage.getItem("userInfo"))
-  const savedUserInfoId = savedUserInfo.id
+
 
   return (
     <div className="tabContainer">
@@ -176,6 +236,7 @@ export const Tab = () => {
 export const FollowTab = () => {
   const { followTab, setFollowTab } = useContext(TabContext)
   const navigate = useNavigate()
+  const { user } = useContext(PageContext)
 
   return (
     <div className="tabContainer">
@@ -184,7 +245,11 @@ export const FollowTab = () => {
           className={followTab === 'follower' ? 'optionActive' : 'option'} 
           onClick={() => {
             setFollowTab('follower')
-            navigate('/user/self/follower')
+            if(user === 'self') {
+              navigate('/user/self/follower')
+            } else {
+              navigate('/user/other/follower')
+            }
           }}
         >
           追隨者
@@ -193,7 +258,11 @@ export const FollowTab = () => {
           className={followTab === 'following' ? 'optionActive' : 'option'} 
           onClick={() => {
             setFollowTab('following')
-            navigate('/user/self/following')
+            if(user === 'self') {
+              navigate('/user/self/following')
+            } else {
+              navigate('/user/other/following')
+            }
           }}
         >
           正在追隨

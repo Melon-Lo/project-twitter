@@ -29,6 +29,7 @@ export const ReplyListPage = () => {
   useEffect(() => async () => {
     try {
       const { id } = tweetId.state
+      // console.log(id)
       const tweet = await getTweet(id)
       setTweet(tweet)
       const replies = await getReplies(id)

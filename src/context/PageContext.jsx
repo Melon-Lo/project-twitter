@@ -6,6 +6,8 @@ export default function PageContextProvider({ children }) {
   const [page, setPage] = useState('main')
   const [adminPage, setAdminPage] = useState('tweet')
 
+  const [user, setUser] = useState('self')
+
   return (
     <PageContext.Provider
       value={{
@@ -13,6 +15,8 @@ export default function PageContextProvider({ children }) {
         adminPage,
         setPage,
         setAdminPage,
+        user,
+        setUser,
       }}
     >
       {children}

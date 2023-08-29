@@ -3,6 +3,9 @@ import './Follow.scss'
 import { useState } from 'react'
 import clsx from 'clsx'
 
+// import api
+import { getUserFollowings } from 'api/users'
+
 export const Follow = () => {
   const [following, setFollowing] = useState(false)
 

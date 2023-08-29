@@ -37,6 +37,8 @@ function App() {
                 <Route path="user/self/follower" element={<FollowPage />}></Route>
                 <Route path="user/self/following" element={<FollowPage />}></Route>
                 <Route path="user/other" element={<OtherUserPage />}></Route>
+                <Route path="user/other/follower" element={<FollowPage />}></Route>
+                <Route path="user/other/following" element={<FollowPage />}></Route>
                 <Route path="admin_main" element={<AdminMainPage />}></Route>
                 <Route path="admin_users" element={<AdminUserPage />}></Route>
                 <Route path="reply_list" element={<ReplyListPage />}></Route>

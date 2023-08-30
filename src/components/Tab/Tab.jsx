@@ -69,23 +69,23 @@ const UserLike = ({ tweets }) => {
     <>
       {tweets.length !== 0 ? 
         (tweets.map((tweet) => {
-          const { id, createdAt, description, RepliesCount, LikeCount, updatedAt } = tweet
+          const { id, createdAt, description, repliesCount, likeCount, updatedAt, name, account, avatar } = tweet
           return (
             <Tweet 
               children={
               <IconInfo 
                 setShowReplyModal={setShowReplyModal}
-                likeCount={RepliesCount}
-                replyCount={LikeCount}
+                likeCount={repliesCount}
+                replyCount={likeCount}
               />
               }
               key={id}
               id={id}
-              // name={name}
-              // account={account}
+              name={name}
+              account={account}
               description={description}
               createdAt={createdAt}
-              // avatar={avatar}
+              avatar={avatar}
               updatedAt={updatedAt}
             />
           )
@@ -305,13 +305,15 @@ export const FollowTab = () => {
       <>
         {followings.length !== 0 ? 
           (followings.map((following) => {
-            const { avatar, description, name } = following
+            const { followingAvatar, followingIntroduction, followingName, followingId, id } = following
 
             return (
               <Follow 
-                avatar={avatar}
-                description={description}
-                name={name}
+                id={id}
+                avatar={followingAvatar}
+                description={followingIntroduction}
+                name={followingName}
+                followId={followingId}
               />
             )
           }))
@@ -325,13 +327,15 @@ export const FollowTab = () => {
       <>
         {followers.length !== 0 ? 
           (followers.map((follower) => {
-            const { avatar, description, name } = follower
+            const { followerAvatar, followerIntroduction, followerName, followerId, id } = follower
 
             return (
               <Follow 
-                avatar={avatar}
-                description={description}
-                name={name}
+                id={id}
+                avatar={followerAvatar}
+                description={followerIntroduction}
+                name={followerName}
+                followId={followerId}
               />
             )
           }))

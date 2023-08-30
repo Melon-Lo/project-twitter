@@ -6,12 +6,15 @@ import clsx from 'clsx'
 export const Follow = ({
   avatar,
   description,
-  name
+  name,
+  id,
+  // 先拿追蹤者／追隨者的id，之後做使用
+  followId,
 }) => {
   const [following, setFollowing] = useState(false)
 
   return (
-    <div className="followItem">
+    <div className="followItem" key={id}>
       <div className="name">{name}</div>
       <div className="content">{description}</div>
       <div className="avatarBox">

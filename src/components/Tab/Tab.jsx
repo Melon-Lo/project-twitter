@@ -22,15 +22,15 @@ const UserTweet = ({ tweets }) => {
     <>
       {tweets.length !== 0 ? 
         (tweets.map((tweet) => {
-          const { id, createdAt, description, RepliesCount, LikeCount, updatedAt } = tweet
+          const { id, createdAt, description, replyCount, likeCount, updatedAt } = tweet
           const { name, account, avatar } = tweet.User
           return (
             <Tweet 
               children={
               <IconInfo 
                 setShowReplyModal={setShowReplyModal}
-                likeCount={RepliesCount}
-                replyCount={LikeCount}
+                likeCount={likeCount}
+                replyCount={replyCount}
               />
               }
               key={id}
@@ -100,11 +100,6 @@ export const Tab = () => {
   const savedUserInfo = JSON.parse(localStorage.getItem("userInfo"))
   const selfId = savedUserInfo.id
 
-  // 先把別人的id拿出來
-  const otherUserId = localStorage.getItem("otherUserId")
-
-  const { user } = useContext(PageContext)
-
   // 存放tweets
   const [tweets, setTweets] = useState([])
   // 存放replies
@@ -159,59 +154,9 @@ export const Tab = () => {
       }
     }
 
-    // 別人所有的貼文
-    const getOtherUserTweetsAsync = async () => {
-      try {
-        const tweets = await getUserTweets(otherUserId)
-        if (tweets) {
-          setTweets(tweets.map((tweet) => ({ ...tweet })))
-        } else {
-          setTweets([])
-        }
-      } catch (error) {
-        console.error(error)
-      }
-    }
-
-    // 別人所有的回覆
-    const getOtherUserRepliesAsync = async () => {
-      try {
-        const replies = await getUserReplies(otherUserId)
-        if(replies) {
-          setReplies(replies.map((reply) => ({ ...reply })))
-        } else {
-          setReplies([])
-        }
-      } catch (error) {
-        console.error(error)
-      }
-    }
-
-    // 別人所有喜歡的貼文
-    const getOtherUserLikesAsync = async () => {
-      try {
-        const likedTweets = await getUserLikes(otherUserId)
-        if(likedTweets) {
-          // console.log(likedTweets)
-          setLikedTweets(likedTweets.map((likedTweet) => ({ ...likedTweet })))
-        } else {
-          setLikedTweets([])
-        }
-      } catch (error) {
-        console.error(error)
-      }
-    }
-
-    // 根據user執行
-    if(user === 'self') {
-      getUserTweetsAsync()
-      getUserRepliesAsync()
-      getUserLikesAsync()    
-    } else if(user === 'other') {
-      getOtherUserTweetsAsync()
-      getOtherUserRepliesAsync()
-      getOtherUserLikesAsync()
-    }
+    getUserTweetsAsync()
+    getUserRepliesAsync()
+    getUserLikesAsync()    
   }, [])
 
 

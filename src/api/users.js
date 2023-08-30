@@ -60,7 +60,6 @@ export const putUserData = async({ id, name, introduction, banner}) => {
     const res = await axiosInstance.put(`${baseURL}/users/${id}`, {name, introduction, banner})
     return res.data
   } catch (error) {
-    console.log('fail')
     console.error('[Put UserData Failed]: ', error)
   }
 }

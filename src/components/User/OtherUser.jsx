@@ -9,7 +9,7 @@ import { TabContext } from 'context/TabContext'
 import clsx from 'clsx'
 
 // import components
-import { Tab } from 'components/Tab/Tab'
+import { OtherTab } from 'components/Tab/OtherTab'
 
 // import icons
 import { ReactComponent as BackIcon } from 'assets/icons/back.svg'
@@ -55,7 +55,7 @@ export const OtherUser = () => {
         setFollowingsCount(data.followingsCount)
         setTweetsCount(data.tweetsCount)
         setIntroduction(data.introduction)
-        console.log(data)
+        // console.log(data)
       } catch (error) {
         console.error(error)
       }
@@ -131,7 +131,7 @@ export const OtherUser = () => {
           </div>
         </div>
       </div>
-      <Tab />
+      <OtherTab />
     </div>
   )
 }

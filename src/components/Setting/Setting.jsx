@@ -94,9 +94,8 @@ export const Setting = () => {
 
     const res = await putUserData({id, name, introduction, banner})
 
+    // 等api修改完成
     // const res = await putUserData({id, account, name, email})
-
-    console.log(res)
 
 
     // 認證通過：送出資料，彈出成功視窗

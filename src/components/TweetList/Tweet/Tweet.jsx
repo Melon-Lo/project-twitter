@@ -2,7 +2,7 @@ import './Tweet.scss'
 
 // import dependencies
 import { useContext,useState } from 'react'
-import { useNavigate } from 'react-router-dom'
+import { useNavigate, useLocation } from 'react-router-dom'
 import { PageContext } from 'context/PageContext'
 import { ModalContext } from 'context/ModalContext'
 
@@ -11,27 +11,26 @@ import { ReactComponent as ChatHollowIcon } from 'assets/icons/chat_hollow.svg'
 import { ReactComponent as LikeHollowIcon } from 'assets/icons/like_hollow.svg'
 import { ReactComponent as LikeIcon } from 'assets/icons/like.svg'
 
-// tweet types
-
 // api
 import { addLike, removeLike } from 'api/like'
 
-export const IconInfo = ({ setShowReplyModal, id, name, account, avatar, description,createdAt, isLiked, likeCount, replyCount }) => {
+export const IconInfo = ({ setShowReplyModal, id, name, account, avatar, description,　createdAt, isLiked, likeCount, replyCount }) => {
   const navigate = useNavigate()
+  const pathname = useLocation().pathname
 
-  const [ like, setLike ] = useState(isLiked)
+  const [like, setLike] = useState(isLiked)
 
   const handleLike = async () => {
-    try{
+    try {
       const Token = localStorage.getItem("authToken");
       let data = []
-      if( like === true ){
+      if(like === true) {
         data = await removeLike(Token, id)
-      }else{
+      } else {
         data = await addLike(Token, id)
       }
       setLike(data.isLiked)
-    }catch(err){
+    } catch(err){
       console.log(err)
     }
   }
@@ -41,6 +40,10 @@ export const IconInfo = ({ setShowReplyModal, id, name, account, avatar, descrip
       <div className="comments">
         <div className="iconBox" onClick={() => {
           setShowReplyModal(true)
+          if(pathname === '/user/self') {
+            navigate('reply_list/reply_modal')
+            return
+          }
           navigate('reply_modal',{state: { id, name, account, avatar, description, createdAt }}) 
         }}>
           <ChatHollowIcon className="icon" />
@@ -73,6 +76,7 @@ export const ReplyInfo = ({ account }) => {
 
 export const Tweet = ({ children, id, name, account, description, avatar, createdAt, UserId, isLiked }) => {
   const navigate = useNavigate()
+
   const { setUser } = useContext(PageContext)
   const { showReplyModal } = useContext
 

@@ -89,12 +89,11 @@ export const Setting = () => {
       return
     }
 
+    // 等api修改完成
     const introduction = '123'
     const banner = 'hey'
-
     const res = await putUserData({id, name, introduction, banner})
-
-    // 等api修改完成
+    
     // const res = await putUserData({id, account, name, email})
 
 

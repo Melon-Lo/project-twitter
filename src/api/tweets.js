@@ -101,3 +101,16 @@ export const postTweet = async ({ description }) => {
     console.error("[Post Tweet Failed]", error.response.data.message)
   }
 } 
+
+
+// admin取得所有使用者
+export const getAllUsersAdmin = async () => {
+  try {
+    const res = await axiosInstance.get(`${baseURL}/admin/users`)
+    // console.log('getAllUsersAdmin回傳值', res.data)
+
+    return res.data
+  } catch (error) {
+    console.log("[Post Tweet Failed]", error.response.data.message)
+  }
+}

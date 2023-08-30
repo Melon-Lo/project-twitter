@@ -103,6 +103,10 @@ export const EditModal = ({ avatar, banner }) => {
         <div className="avatarBox">
           <img src={avatar} alt="avatar"/>
         </div>
+        <div className="avatarBoxCover">
+          <AddPhotoIcon className="photoIcon" />
+          <input type="file" accept="image/jpeg, image/png"/>
+        </div>
         <div className="edit">
           <div className="nameInput">
             <div className="label">名稱</div>
@@ -114,7 +118,7 @@ export const EditModal = ({ avatar, banner }) => {
                 setName(e.target.value)
               }}
             />
-            {nameAlert && <div className='validationAlert'>名稱字數超過上限！（最多50個字）</div>}
+            {nameAlert && <div className='nameValidationAlert'>名稱字數超過上限！（最多50個字）</div>}
             <div className="words">{name.length}/{nameLimit}</div>
           </div>
           <div className="introInput">

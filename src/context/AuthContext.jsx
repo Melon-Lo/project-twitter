@@ -1,14 +1,15 @@
-import { login } from 'api/auth';
+import { login, adminLogin } from 'api/auth';
 import { createContext, useContext, useEffect, useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
-// import jwt from 'jsonwebtoken';
 import jwt_decode from 'jwt-decode'
+
 
 const defaultAuthContext = {
   isAuthenticated: false,
   currentMember: null,
   register: null,
   login: null,
+  adminLogin: null,
   logout: null,
 };
 
@@ -168,6 +169,37 @@ export default function AuthContextProvider({ children }) {
             setIsAuthenticated(false)
           }
           
+          return response
+        },
+        adminLogin: async (data) => {
+          const response = await adminLogin({
+            account: data.account,
+            password: data.password
+          })
+        
+
+          if (response) {
+            if (response.status === "success") {
+              const authToken = response.token
+              // 解析資料
+              const tempPayload = jwt_decode(authToken)
+              setPayload(tempPayload)
+              setIsAuthenticated(true)
+              setCurrentUser({
+                id: tempPayload.id
+              })
+              // 儲存token
+              localStorage.setItem("authToken", authToken)
+
+              // 儲存使用者資料
+              setUserInfo(response.user)
+              localStorage.setItem("userInfo", JSON.stringify(response.user))
+            }
+            // 若抓到的response不合條件，回傳response讓LoginPage去做錯誤顯示
+          } else {
+            setPayload(null)
+            setIsAuthenticated(false)
+          }
           return response
         }
       }}

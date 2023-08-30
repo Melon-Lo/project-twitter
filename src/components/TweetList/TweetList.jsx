@@ -15,7 +15,7 @@ export const TweetList = ({ tweets }) => {
   const navigate = useNavigate()
 
   // 取得大頭貼
-  const avatar = JSON.parse(localStorage.getItem("userInfo")).avatar
+  const avatar = JSON.parse(localStorage.getItem("userInfo"))?.avatar
 
   // 貼文模式
   const addTweet = () => {

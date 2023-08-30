@@ -12,12 +12,18 @@ import { ReactComponent as CloseIcon } from 'assets/icons/close.svg'
 import { useState, useEffect } from 'react'
 import { useLocation } from 'react-router-dom'
 
+// api
+import { postReply } from 'api/tweets'
+
 export const ReplyModal = ({ setShowReplyModal }) => {
   const navigate = useNavigate()
   const pathname = useLocation().pathname
 
+  const location = useLocation()
+  const { id, name, account, avatar, description, createdAt } = location.state
+
   // 取得使用者資料
-  const { avatar, account, name, createdAt } = JSON.parse(localStorage.getItem("userInfo"))
+  const userAvatar = JSON.parse(localStorage.getItem("userInfo")).avatar
 
   // 設置textarea的狀態
   const [content, setContent] = useState('')
@@ -51,7 +57,7 @@ export const ReplyModal = ({ setShowReplyModal }) => {
     if(!contentIsValid) return
 
     // 發佈貼文
-    // await postTweet({ description: content })
+    await postReply(id, { comment: content })
   
     // 發佈成功提示
     Swal.fire({
@@ -110,17 +116,20 @@ export const ReplyModal = ({ setShowReplyModal }) => {
       </div>
       {/* 等抓到該tweet資料 */}
       <Tweet 
-        // avatar={avatar} 
-        // name={name} 
-        // account={account}
-        // updatedAt={createdAt}
-        children={<ReplyInfo />} 
+      // 這個是登入者的資料，不是發文的人
+        avatar={avatar} 
+        name={name} 
+        account={account}
+        description={description}
+        createdAt={createdAt}
+        updatedAt={createdAt}
+        children={<ReplyInfo account={account} />} 
       />
       <div className="modalAvatarBox">
-        <img className="avatar" src={avatar} alt="avatar" />
+        <img className="avatar" src={userAvatar} alt="avatar" />
       </div>
       <textarea 
-        name="tweet" 
+        name="tweet"
         className="addTweetContent" 
         type="text" 
         placeholder="推你的回覆" 

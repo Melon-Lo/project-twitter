@@ -134,3 +134,11 @@
 .likeIcon {
   fill: rgb(255, 87, 87);
 }
+
+// 如果是顯示在ReplyModal內，點擊不會轉跳
+.replyTweetContent {
+  display: flex;
+  height: 55%;
+  color: #171725;
+  font-size: 16px;
+}

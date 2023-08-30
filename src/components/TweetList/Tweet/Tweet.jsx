@@ -4,6 +4,7 @@ import './Tweet.scss'
 import { useContext,useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { PageContext } from 'context/PageContext'
+import { ModalContext } from 'context/ModalContext'
 
 // import icons
 import { ReactComponent as ChatHollowIcon } from 'assets/icons/chat_hollow.svg'
@@ -73,6 +74,7 @@ export const ReplyInfo = ({ account }) => {
 export const Tweet = ({ children, id, name, account, description, avatar, createdAt, UserId, isLiked }) => {
   const navigate = useNavigate()
   const { setUser } = useContext(PageContext)
+  const { showReplyModal } = useContext
 
   const selfId = JSON.parse(localStorage.getItem("userInfo")).id
   const clikcedUserId = UserId
@@ -100,7 +102,18 @@ export const Tweet = ({ children, id, name, account, description, avatar, create
           <div className="account">@{account}</div>
           <div className="time">．{createdAt}</div>
         </div>
-        <div className="tweetContent" onClick={() => navigate('/reply_list', {state: { id, name, account, description, avatar, isLiked }})}>{description}</div>
+        {showReplyModal ?
+          <div 
+            className="tweetContent" 
+            onClick={() => navigate('/reply_list', {state: { id, name, account, description, avatar, isLiked }})}
+          >
+            {description}
+          </div>
+          :
+          <div className="replyTweetContent" >
+            {description}
+          </div>
+        }
         {children}
       </div>
     </div>

@@ -77,7 +77,6 @@ export const CardList = () => {
       try {
         const datas = await getAllUsersAdmin()
         setUsers(datas.map((data) => ({ ...data })))
-
         // console.log('setUser後的值', datas)
 
       } catch (error) {

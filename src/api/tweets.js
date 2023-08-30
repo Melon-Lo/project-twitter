@@ -54,6 +54,17 @@ export const getReplies = async (id) => {
   }
 }
 
+// 某一推文留言
+// /tweets/:tweet_id/replies
+export const postReply = async (id, { comment }) => {
+  try {
+    const res = await axiosInstance.post(`${baseURL}/tweets/${id}/replies`, { comment })
+    return res.data
+  } catch (error) {
+    console.error("[Post Reply Failed]: ", error.response.data.message)
+  }
+}
+
 // 瀏覽某一使用者的tweets
 // /users/:id/tweets
 export const getUserTweets = async (id) => {

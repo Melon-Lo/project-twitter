@@ -65,6 +65,11 @@ export const TweetList = ({ tweets }) => {
                   <IconInfo
                     setShowReplyModal={setShowReplyModal}
                     id={id}
+                    name={name}
+                    account={account}
+                    avatar={avatar}
+                    description={description}
+                    createdAt={createdAt}
                     isLiked={isLiked}
                     likeCount={likeCount}
                     replyCount={replyCount}

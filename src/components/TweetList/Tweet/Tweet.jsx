@@ -15,7 +15,7 @@ import { ReactComponent as LikeIcon } from 'assets/icons/like.svg'
 // api
 import { addLike, removeLike } from 'api/like'
 
-export const IconInfo = ({ setShowReplyModal, id, isLiked, likeCount, replyCount }) => {
+export const IconInfo = ({ setShowReplyModal, id, name, account, avatar, description,createdAt, isLiked, likeCount, replyCount }) => {
   const navigate = useNavigate()
 
   const [ like, setLike ] = useState(isLiked)
@@ -25,9 +25,9 @@ export const IconInfo = ({ setShowReplyModal, id, isLiked, likeCount, replyCount
       const Token = localStorage.getItem("authToken");
       let data = []
       if( like === true ){
-        data = await removeLike(Token,id)
+        data = await removeLike(Token, id)
       }else{
-        data = await addLike(Token,id)
+        data = await addLike(Token, id)
       }
       setLike(data.isLiked)
     }catch(err){
@@ -40,7 +40,7 @@ export const IconInfo = ({ setShowReplyModal, id, isLiked, likeCount, replyCount
       <div className="comments">
         <div className="iconBox" onClick={() => {
           setShowReplyModal(true)
-          navigate('reply_modal') 
+          navigate('reply_modal',{state: { id, name, account, avatar, description, createdAt }}) 
         }}>
           <ChatHollowIcon className="icon" />
         </div>
@@ -62,10 +62,10 @@ export const IconInfo = ({ setShowReplyModal, id, isLiked, likeCount, replyCount
   )
 }
 
-export const ReplyInfo = ({ name }) => {
+export const ReplyInfo = ({ account }) => {
   return (
     <div className="replyInfo">
-      <div className="replyTo">回覆給<b>@{name}</b></div>
+      <div className="replyTo">回覆給<b>@{account}</b></div>
     </div>
   )
 }

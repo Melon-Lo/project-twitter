@@ -1,12 +1,31 @@
 import './Reply.scss'
 
+import { useNavigate } from 'react-router-dom'
+
 export const Reply = ({ reply }) => {
-  const { id, comment, createdAt, poster } = reply
+  const navigate = useNavigate()
+  const { id, UserId, comment, createdAt, poster } = reply
   const { account, name, avatar } = reply.User
+
+  const clickedUserId = UserId
+  const selfId = localStorage.getItem("userInfo").id
+
   return (
     <div className="reply" key={id}>
       <div className="replyLeft">
-        <img className="avatar" src={avatar} alt="avatar" />
+        <img 
+          className="avatar" 
+          src={avatar} 
+          alt="avatar" 
+          onClick={() => {
+            localStorage.setItem("otherUserId", UserId)
+            if(selfId === clickedUserId) {
+              navigate('/user/self')
+            } else {
+              navigate('/user/other')   
+            }    
+          }}
+        />
       </div>
       <div className="replyRight">
         <div className="data">

@@ -6,8 +6,9 @@
   .replyLeft {
     margin-right: 15px;
 
-    // .avatar {
-    // }
+    .avatar {
+      cursor: pointer;
+    }
   }
 
   .replyRight {
@@ -45,7 +46,6 @@
 
       b {
         color: #FF6600;
-        cursor: pointer;
       }
     }
 

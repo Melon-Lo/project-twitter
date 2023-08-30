@@ -105,7 +105,7 @@ export const ReplyModal = ({ setShowReplyModal }) => {
           } else {
             setShowReplyModal(false)
             if(pathname === '/reply_list/reply_modal') {
-              navigate('/reply_list')
+              navigate('/reply_list', {state: { id, name, account, avatar, description, createdAt }})
             } else if(pathname === '/main/reply_modal') {
               navigate('/main')
             }

@@ -82,7 +82,7 @@ export const ReplyList = (props) => {
             <div className="iconSection">
               <div className="iconBox" onClick={() => {
                 setShowReplyModal(true)
-                navigate('reply_modal')
+                navigate('reply_modal',{state: { id, name, account, avatar, description }})
               }}>
                 <ReplyIcon />
               </div>

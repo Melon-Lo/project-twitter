@@ -77,15 +77,15 @@ export const Tweet = ({ children, id, name, account, description, avatar, create
   const { showReplyModal } = useContext
 
   const selfId = JSON.parse(localStorage.getItem("userInfo")).id
-  const clikcedUserId = UserId
+  const clickedUserId = UserId
 
   function checkUser() {
-    if(selfId === clikcedUserId) {
-      localStorage.setItem("otherUserId", clikcedUserId)
+    if(selfId === clickedUserId) {
+      localStorage.setItem("otherUserId", clickedUserId)
       setUser("self")
       navigate("/user/self")
     } else {
-      localStorage.setItem("otherUserId", clikcedUserId)
+      localStorage.setItem("otherUserId", clickedUserId)
       setUser("other")
       navigate("/user/other")
     }
@@ -103,14 +103,14 @@ export const Tweet = ({ children, id, name, account, description, avatar, create
           <div className="time">．{createdAt}</div>
         </div>
         {showReplyModal ?
+          // 如果是ReplyModal裡面的Tweet，不能被點擊
+          <div className="replyTweetContent" >
+            {description}
+          </div> :
           <div 
             className="tweetContent" 
             onClick={() => navigate('/reply_list', {state: { id, name, account, description, avatar, isLiked }})}
           >
-            {description}
-          </div>
-          :
-          <div className="replyTweetContent" >
             {description}
           </div>
         }

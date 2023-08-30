@@ -79,6 +79,7 @@ export const TweetList = ({ tweets }) => {
                 createdAt={createdAt}
                 avatar={avatar}
                 updatedAt={updatedAt}
+                isLiked={isLiked}
               />
             )
           }))

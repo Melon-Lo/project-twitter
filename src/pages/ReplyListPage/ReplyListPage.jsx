@@ -11,27 +11,22 @@ import { useLocation } from 'react-router-dom';
 export const ReplyListPage = () => {
   const { showReplyModal } = useContext(ModalContext)
   
-  const tweetId = useLocation()
+  const location = useLocation()
+  const { id, name, account, avatar, isLiked } = location.state
   const [ tweet, setTweet ] = useState({
-    id:'',
-    description:'',
-    absoluteTime:'',
-    likeCount: 0,
-    replyCount: 0,
+    isLiked: isLiked,
     User:{
-      account: '',
-      avatar: '',
-      name: ''
+      account: account,
+      avatar: avatar,
+      name: name
     }
   })
   const [ replies, setReplies ] = useState([])
 
   useEffect(() => async () => {
     try {
-      const { id } = tweetId.state
-      // console.log(id)
       const tweet = await getTweet(id)
-      setTweet(tweet)
+      setTweet({...tweet})
       const replies = await getReplies(id)
       setReplies(replies.map(reply => ({
         ...reply
@@ -39,7 +34,7 @@ export const ReplyListPage = () => {
     } catch (err) {
       console.error(err)
     }
-  },[])
+  })
 
   return (
     <div className="replyListPageContainer">

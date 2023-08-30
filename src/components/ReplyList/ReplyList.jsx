@@ -13,17 +13,38 @@ import { Reply } from 'components/ReplyList/Reply/Reply'
 import { ReactComponent as BackIcon } from 'assets/icons/back.svg'
 import { ReactComponent as ReplyIcon } from 'assets/icons/reply.svg'
 import { ReactComponent as LikeHollowIcon } from 'assets/icons/like_hollow.svg'
+import { ReactComponent as LikeIcon } from 'assets/icons/like.svg'
+
+// api
+import { addLike, removeLike } from 'api/like'
 
 export const ReplyList = (props) => {
   const navigate = useNavigate()
   const { showReplyModal, setShowReplyModal } = useContext(ModalContext)
 
-  const { id, description, absoluteTime, likeCount, replyCount, User } = props.tweet
+  const { id, description, absoluteTime, likeCount, replyCount, isLiked, User } = props.tweet
   const { account, avatar, name } = User
 
   const replies = props.replies.map(reply => {
     return <Reply key={reply.id} reply={reply} />
   })
+
+  const [ like, setLike ] = useState(isLiked)
+
+  const handleLike = async () => {
+    try{
+      const Token = localStorage.getItem("authToken");
+      let data = []
+      if( like === true ){
+        data = await removeLike(Token, id)
+      }else{
+        data = await addLike(Token, id)
+      }
+      setLike(data.isLiked)
+    }catch(err){
+      console.log(err)
+    }
+  }
 
   return (
     <div className="replyContainer">
@@ -65,8 +86,8 @@ export const ReplyList = (props) => {
               }}>
                 <ReplyIcon />
               </div>
-              <div className="iconBox">
-                <LikeHollowIcon />
+              <div className="iconBox" onClick={handleLike}>
+              {like ? <LikeIcon className="likeIcon" /> : <LikeHollowIcon className="icon" />}
               </div>
             </div>
           </div>

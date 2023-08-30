@@ -1,7 +1,7 @@
 import './Tweet.scss'
 
 // import dependencies
-import { useContext } from 'react'
+import { useContext,useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { PageContext } from 'context/PageContext'
 
@@ -12,8 +12,8 @@ import { ReactComponent as LikeIcon } from 'assets/icons/like.svg'
 
 // tweet types
 
+// api
 import { addLike, removeLike } from 'api/like'
-import { useState } from 'react'
 
 export const IconInfo = ({ setShowReplyModal, id, isLiked, likeCount, replyCount }) => {
   const navigate = useNavigate()
@@ -70,7 +70,7 @@ export const ReplyInfo = ({ name }) => {
   )
 }
 
-export const Tweet = ({ children, id, name, account, description, avatar, createdAt, UserId }) => {
+export const Tweet = ({ children, id, name, account, description, avatar, createdAt, UserId, isLiked }) => {
   const navigate = useNavigate()
   const { setUser } = useContext(PageContext)
 
@@ -100,7 +100,7 @@ export const Tweet = ({ children, id, name, account, description, avatar, create
           <div className="account">@{account}</div>
           <div className="time">．{createdAt}</div>
         </div>
-        <div className="tweetContent" onClick={() => navigate('/reply_list', {state: { id }})}>{description}</div>
+        <div className="tweetContent" onClick={() => navigate('/reply_list', {state: { id, name, account, description, avatar, isLiked }})}>{description}</div>
         {children}
       </div>
     </div>

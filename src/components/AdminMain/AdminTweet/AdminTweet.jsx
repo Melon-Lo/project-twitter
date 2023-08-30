@@ -1,4 +1,6 @@
 import './AdminTweet.scss'
+import { useState, useEffect } from 'react'
+import { getAllTweetsAdmin } from 'api/tweets'
 import { ReactComponent as CloseIcon } from 'assets/icons/close.svg'
 
 export const TweetTitle = ({ title }) => {
@@ -6,7 +8,12 @@ export const TweetTitle = ({ title }) => {
 }
 
 // TweetItem 子元件
-export const AdminTweetItem = () => {
+export const AdminTweetItem = ({ 
+  name,
+  account,
+  time,
+  content
+ }) => {
   return (
     <div className="AdminTweetItem">
       <div className="avatarBox">
@@ -15,16 +22,18 @@ export const AdminTweetItem = () => {
       <div className="tweetText">
         <div className="topText">
           <div className="infoText">
-            <div className="name">Chris</div>
-            <div className="account">@Anna</div>
-            <div className="time">·3小時</div>
+            <div className="name">{name}</div>
+            <div className="smallText">
+              <span className="account">@{account}</span>
+              <span className="time">·{time}</span>
+            </div>
           </div>
           <div className='closeBox'>
             <CloseIcon className='close' />
           </div>
         </div>
         <div className="tweetContent">
-          Nulla Lorem mollit cupidatat irure. Laborum magna nulla duis ullamco cillum dolor. Voluptate exercitation incididunt aliquip deserunt reprehenderit elit laborum. 
+          {content} 
         </div>
       </div>
     </div>
@@ -33,21 +42,37 @@ export const AdminTweetItem = () => {
 
 // TweetList 父元件
 export const AdminTweetList = () => {
+  const [tweets, setTweets] = useState([])
+
+  
+
+  useEffect(() => {
+    const getAllTweetsAdminAsync = async () => {
+      try {
+        const datas = await getAllTweetsAdmin()
+        setTweets(datas.map((data) => ({...data})))
+        console.log('setTweets後的值', datas)
+
+      } catch(error) {
+        console.error(error)
+      }
+    }
+    getAllTweetsAdminAsync()
+  },[])
+
   return (
     <div className='TweetListWrapper'>
       <TweetTitle title="推特清單" />
       <div className='TweetListContent'>
-        <AdminTweetItem />
-        <AdminTweetItem />
-        <AdminTweetItem />
-        <AdminTweetItem />
-        <AdminTweetItem />
-        <AdminTweetItem />
-        <AdminTweetItem />
-        <AdminTweetItem />
-        <AdminTweetItem />
-        <AdminTweetItem />
-        <AdminTweetItem />
+        {tweets.map((tweet) => (
+          <AdminTweetItem 
+            key={tweet.id}
+            name={tweet.userName}
+            account={tweet.userAccount}
+            time={tweet.createdAt}
+            content={tweet.description}
+          />
+        ))}
       </div>
     </div>
   )

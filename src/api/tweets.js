@@ -111,6 +111,18 @@ export const getAllUsersAdmin = async () => {
 
     return res.data
   } catch (error) {
-    console.log("[Post Tweet Failed]", error.response.data.message)
+    console.log("[Get Admin all users Failed]", error.response.data.message)
+  }
+}
+
+//admin瀏覽所有的tweets
+export const getAllTweetsAdmin = async () => {
+  try {
+    const res = await axiosInstance.get(`${baseURL}/admin/tweets`)
+    console.log('getAllTweetsAdmin', res.data)
+
+    return res.data
+  } catch (error) {
+    console.error("[Get Admin all tweets Failed]")
   }
 }

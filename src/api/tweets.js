@@ -119,10 +119,26 @@ export const getAllUsersAdmin = async () => {
 export const getAllTweetsAdmin = async () => {
   try {
     const res = await axiosInstance.get(`${baseURL}/admin/tweets`)
-    console.log('getAllTweetsAdmin', res.data)
+    // console.log('getAllTweetsAdmin', res.data)
 
     return res.data
   } catch (error) {
     console.error("[Get Admin all tweets Failed]")
+  }
+}
+
+//admin 刪除特定推文
+export const deleteTweetAdmin = async ( authToken, id) => {
+  try {
+    const res = await axios.delete(`${baseURL}/admin/tweets/${id}`, {
+      headers: { 
+        Authorization: 'Bearer ' + authToken  },
+    })
+    
+    // console.log("deleteTweetAdmin:", res)
+
+    return res.data
+  } catch (error) {
+    console.error("[DeleteTweetAdmin failed]", error)
   }
 }

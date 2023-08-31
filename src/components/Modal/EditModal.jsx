@@ -105,7 +105,14 @@ export const EditModal = ({ avatar, banner }) => {
         </div>
         <div className="avatarBoxCover">
           <AddPhotoIcon className="photoIcon" />
-          <input type="file" accept="image/jpeg, image/png"/>
+          <input 
+            type="file" 
+            accept="image/jpeg, image/png"
+            onChange={(e) => {
+              const selectedFile = e.target.files[0]
+              console.log(selectedFile)
+            }}
+          />
         </div>
         <div className="edit">
           <div className="nameInput">

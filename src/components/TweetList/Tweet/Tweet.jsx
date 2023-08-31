@@ -21,14 +21,21 @@ export const IconInfo = ({ setShowReplyModal, id, name, account, avatar, descrip
   const { showReplyModal } = useContext(ModalContext)
   const { tab } = useContext(TabContext)
   const selfId = JSON.parse(localStorage.getItem("userInfo")).id
+  const otherId = localStorage.getItem("otherUserId")
 
   const [liked, setLiked] = useState(false)
   
   useEffect(() => {
     if(tab === 'tweet') {
       const idArray = LikeUsers.map(LikeUser => LikeUser.id)
-      if(idArray.includes(selfId)) {
-        setLiked(true)
+      if(pathname === '/user/self') {
+          if(idArray.includes(selfId)) {
+          setLiked(true)
+        }
+      } else if(pathname === '/user/other') {
+          if(idArray.includes(otherId)) {
+          setLiked(true)
+        }
       }
     } else if(tab === 'like') {
       setLiked(true)

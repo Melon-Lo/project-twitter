@@ -22,7 +22,7 @@ const UserTweet = ({ tweets }) => {
     <>
       {tweets.length !== 0 ? 
         (tweets.map((tweet) => {
-          const { id, createdAt, description, replyCount, likeCount, updatedAt } = tweet
+          const { id, createdAt, description, replyCount, likeCount, updatedAt, LikeUsers } = tweet
           const { name, account, avatar } = tweet.User
           return (
             <Tweet 
@@ -31,6 +31,7 @@ const UserTweet = ({ tweets }) => {
                 setShowReplyModal={setShowReplyModal}
                 likeCount={likeCount}
                 replyCount={replyCount}
+                LikeUsers={LikeUsers}
               />
               }
               key={id}
@@ -69,7 +70,7 @@ const UserLike = ({ tweets }) => {
     <>
       {tweets.length !== 0 ? 
         (tweets.map((tweet) => {
-          const { id, createdAt, description, repliesCount, likeCount, updatedAt, name, account, avatar } = tweet
+          const { id, createdAt, description, repliesCount, likeCount, updatedAt, name, account, avatar, LikeUsers } = tweet
           return (
             <Tweet 
               children={
@@ -77,6 +78,7 @@ const UserLike = ({ tweets }) => {
                 setShowReplyModal={setShowReplyModal}
                 likeCount={repliesCount}
                 replyCount={likeCount}
+                LikeUsers={LikeUsers}
               />
               }
               key={id}

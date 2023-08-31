@@ -73,6 +73,7 @@ export const TweetList = ({ tweets }) => {
                     isLiked={isLiked}
                     likeCount={likeCount}
                     replyCount={replyCount}
+                    LikeUsers={Likes}
                   />
                 }
                 key={id}

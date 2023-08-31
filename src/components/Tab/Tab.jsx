@@ -22,7 +22,7 @@ const UserTweet = ({ tweets }) => {
     <>
       {tweets.length !== 0 ? 
         (tweets.map((tweet) => {
-          const { id, createdAt, description, replyCount, likeCount, updatedAt } = tweet
+          const { id, createdAt, description, replyCount, likeCount, updatedAt, LikeUsers } = tweet
           const { name, account, avatar } = tweet.User
           return (
             <Tweet 
@@ -31,6 +31,7 @@ const UserTweet = ({ tweets }) => {
                 setShowReplyModal={setShowReplyModal}
                 likeCount={likeCount}
                 replyCount={replyCount}
+                LikeUsers={LikeUsers}
               />
               }
               key={id}
@@ -69,7 +70,7 @@ const UserLike = ({ tweets }) => {
     <>
       {tweets.length !== 0 ? 
         (tweets.map((tweet) => {
-          const { id, createdAt, description, repliesCount, likeCount, updatedAt, name, account, avatar } = tweet
+          const { id, createdAt, description, repliesCount, likeCount, updatedAt, name, account, avatar, LikeUsers } = tweet
           return (
             <Tweet 
               children={
@@ -77,6 +78,7 @@ const UserLike = ({ tweets }) => {
                 setShowReplyModal={setShowReplyModal}
                 likeCount={likeCount}
                 replyCount={repliesCount}
+                LikeUsers={LikeUsers}
               />
               }
               key={id}
@@ -115,8 +117,6 @@ export const Tab = () => {
     const getUserTweetsAsync = async () => {
       try {
         const tweets = await getUserTweets(selfId)
-        
-        console.log(test)
         if (tweets) {
           setTweets(tweets.map((tweet) => ({ ...tweet })))
         } else {
@@ -161,13 +161,11 @@ export const Tab = () => {
     getUserLikesAsync()    
   }, [])
 
-
-
   return (
     <div className="tabContainer">
       <div className="selectionBar">
         <div className={tab === 'tweet' ? 'optionActive' : 'option'} onClick={() => {
-          setTab('tweet')
+            setTab('tweet')
         }}>推文</div>
         <div className={tab === 'reply' ? 'optionActive' : 'option'} onClick={() => setTab('reply')}>回覆</div>
         <div className={tab === 'like' ? 'optionActive' : 'option'} onClick={() => setTab('like')}>喜歡的內容</div>

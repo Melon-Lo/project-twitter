@@ -11,11 +11,13 @@ import clsx from 'clsx'
 // import components
 import { OtherTab } from 'components/Tab/OtherTab'
 
-// import icons
+// import icons & images
 import { ReactComponent as BackIcon } from 'assets/icons/back.svg'
 import { ReactComponent as MailHollowIcon } from 'assets/icons/mail_hollow.svg'
 import { ReactComponent as NotiHollowIcon } from 'assets/icons/noti_hollow.svg'
 import { ReactComponent as NotiActiveIcon } from 'assets/icons/noti_active.svg'
+import { ReactComponent as DefaultBanner } from 'assets/images/default_banner.svg'
+import { ReactComponent as DefaultAvatar } from 'assets/images/default_avatar.svg'
 
 // import api
 import { getUserData } from 'api/users'
@@ -78,7 +80,7 @@ export const OtherUser = () => {
         </div>
         <div className="userBox">
           <div className="coverBox">
-            <img src={banner} alt="coverImage" />
+            <img src={banner ? banner : <DefaultBanner />} alt="coverImage" />
           </div>
           <div className="infoBox">
             <div className="buttons">
@@ -101,7 +103,7 @@ export const OtherUser = () => {
               </button>
             </div>
             <div className="avatarBox">
-              <img className="avatar" src={avatar} alt="avatar" />
+              <img className="avatar" src={avatar ? avatar : <DefaultAvatar />} alt="avatar" />
             </div>
             <div className="info">
               <div className="name">{name}</div>

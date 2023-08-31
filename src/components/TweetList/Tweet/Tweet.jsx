@@ -14,11 +14,21 @@ import { ReactComponent as LikeIcon } from 'assets/icons/like.svg'
 // api
 import { addLike, removeLike } from 'api/like'
 
-export const IconInfo = ({ setShowReplyModal, id, name, account, avatar, description,　createdAt, isLiked, likeCount, replyCount }) => {
+export const IconInfo = ({ setShowReplyModal, id, name, account, avatar, description, createdAt, isLiked, likeCount, replyCount, LikeUsers }) => {
   const navigate = useNavigate()
   const pathname = useLocation().pathname
+  const [liked, setLiked] = useState(false)
 
   const { showReplyModal } = useContext(ModalContext)
+
+  const selfId = JSON.parse(localStorage.getItem("userInfo")).id
+
+  if(pathname === '/user/self/tweet') {
+    const idArray = LikeUsers.map(LikeUser => LikeUser.id)
+    if(idArray.includes(selfId)) {
+      setLiked(true)
+    }
+  }
 
   const [like, setLike] = useState(isLiked)
 
@@ -38,7 +48,7 @@ export const IconInfo = ({ setShowReplyModal, id, name, account, avatar, descrip
   }
 
   return (
-    <div className="iconInfo">
+    <div className="iconInfo" onClick={() => console.log(liked)}>
       <div className="comments">
         <div className="iconBox" onClick={() => {
           setShowReplyModal(true)
@@ -57,7 +67,7 @@ export const IconInfo = ({ setShowReplyModal, id, name, account, avatar, descrip
       </div>
       <div className="likes" onClick={handleLike}>
         <div className="iconBox" >
-          {like ? 
+          {liked ? 
             <LikeIcon className="likeIcon" /> : 
             <LikeHollowIcon className="icon" />}
         </div>

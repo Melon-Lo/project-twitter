@@ -11,8 +11,10 @@ import { PageContext } from 'context/PageContext'
 import { EditModal } from 'components/Modal/EditModal'
 import { Tab } from 'components/Tab/Tab'
 
-// import icons
+// import icons & images
 import { ReactComponent as BackIcon } from 'assets/icons/back.svg'
+import { ReactComponent as DefaultBanner } from 'assets/images/default_banner.svg'
+import { ReactComponent as DefaultAvatar } from 'assets/images/default_avatar.svg'
 
 // import api
 import { getUserData } from 'api/users'
@@ -69,11 +71,11 @@ export const User = () => {
           </div>
         </div>
         {showModal &&
-          <EditModal avatar={avatar} banner={banner}/>
+          <EditModal avatar={avatar ? avatar : <DefaultAvatar />} banner={banner ? banner : <DefaultBanner />}/>
         }
         <div className="userBox">
           <div className="coverBox">
-            <img src={banner} alt="coverImage" />
+            <img src={banner ? banner : <DefaultBanner />} alt="coverImage" />
           </div>
           <div className="infoBox">
             <button onClick={() => {
@@ -83,7 +85,7 @@ export const User = () => {
               編輯個人資料
             </button>
             <div className="avatarBox">
-              <img className="avatar" src={avatar} alt="avatar" />
+              <img className="avatar" src={avatar ? avatar : <DefaultAvatar />} alt="avatar" />
             </div>
             <div className="info">
               <div className="name">{name}</div>

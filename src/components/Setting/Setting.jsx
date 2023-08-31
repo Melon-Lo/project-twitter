@@ -89,13 +89,8 @@ export const Setting = () => {
       return
     }
 
-    // 等api修改完成
-    const introduction = '123'
-    const banner = 'hey'
-    const res = await putUserData({id, name, introduction, banner})
-    
-    // const res = await putUserData({id, account, name, email})
-
+    const res = await putUserData({id, account, name, email, password})
+    console.log(res)
 
     // 認證通過：送出資料，彈出成功視窗
     Swal.fire("修改成功！")

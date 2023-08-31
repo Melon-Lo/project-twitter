@@ -62,7 +62,7 @@ export const ReplyModal = ({ setShowReplyModal }) => {
     // 發佈成功提示
     Swal.fire({
       position: 'top',
-      title: '貼文已發佈！',
+      title: '回覆已發佈！',
       timer: 1000,
       icon: 'success',
       showConfirmButton: false,
@@ -139,7 +139,7 @@ export const ReplyModal = ({ setShowReplyModal }) => {
         }}
       >
       </textarea>
-      {alert && <div className='alert'>推文字數超過上限！（最多160字）</div>}
+      {alert && <div className='alert'>回覆字數超過上限！（最多160字）</div>}
       <div className="wordCount">
         {contentLength}/{contentLimit}
       </div>
@@ -147,7 +147,7 @@ export const ReplyModal = ({ setShowReplyModal }) => {
         className={contentIsValid ? 'submitValid' : 'submitInvalid'}
         onClick={(e) => onSubmit(e)}
       >
-        推文
+        回覆
       </button>
     </div>
   )

@@ -32,6 +32,7 @@ const UserTweet = ({ tweets }) => {
                 likeCount={likeCount}
                 replyCount={replyCount}
                 LikeUsers={LikeUsers}
+                id={id}
               />
               }
               key={id}
@@ -79,6 +80,7 @@ const UserLike = ({ tweets }) => {
                 likeCount={likeCount}
                 replyCount={repliesCount}
                 LikeUsers={LikeUsers}
+                id={id}
               />
               }
               key={id}

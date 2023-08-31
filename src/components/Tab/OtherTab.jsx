@@ -22,15 +22,15 @@ const UserTweet = ({ tweets }) => {
     <>
       {tweets.length !== 0 ? 
         (tweets.map((tweet) => {
-          const { id, createdAt, description, RepliesCount, LikeCount, updatedAt } = tweet
+          const { id, createdAt, description, replyCount, likeCount, updatedAt } = tweet
           const { name, account, avatar } = tweet.User
           return (
             <Tweet 
               children={
               <IconInfo 
                 setShowReplyModal={setShowReplyModal}
-                likeCount={RepliesCount}
-                replyCount={LikeCount}
+                likeCount={likeCount}
+                replyCount={replyCount}
               />
               }
               key={id}

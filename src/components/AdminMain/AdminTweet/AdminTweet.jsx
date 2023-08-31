@@ -18,7 +18,6 @@ export const AdminTweetItem = ({
  }) => {
 
   const authToken = localStorage.getItem("authToken")
-  // const { authToken } = res
 
 
   return (
@@ -30,10 +29,7 @@ export const AdminTweetItem = ({
         <div className="topText">
           <div className="infoText">
             <div className="name">{name}</div>
-            <div className="smallText">
-              <span className="account">@{account}</span>
-              <span className="time">·{time}</span>
-            </div>
+            <span className="smallText">@{account}·{time}</span>
           </div>
           <div className='closeBox'>
             <CloseIcon 

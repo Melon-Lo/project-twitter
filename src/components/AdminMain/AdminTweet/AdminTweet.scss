@@ -17,6 +17,18 @@
     height: 100vh;
     overflow-y: scroll;
 
+    // scrollbar style
+    &::-webkit-scrollbar {
+      width: 8px;
+      background-color: #FAFAFA;
+    }
+    
+    &::-webkit-scrollbar-thumb {
+      background-color: #C1C1C1;
+      border-radius: 4px;
+      border: 2px solid #FAFAFA;
+    }
+
     // adminTweetItem
       .AdminTweetItem {
         outline: 1px solid #E6ECF0;
@@ -47,7 +59,7 @@
             justify-content:space-between;
     
             .infoText {
-              width: 26%;
+              outline: 1px solid tomato;
               height: 26px;
               display: flex;
               align-items: center;
@@ -58,6 +70,7 @@
               .name {
                 font-weight: 700;
                 font-size: 16px;
+                margin-right: 10px;
               }
             }
     
@@ -73,6 +86,7 @@
         }
       }
   }
+
 }
 
 

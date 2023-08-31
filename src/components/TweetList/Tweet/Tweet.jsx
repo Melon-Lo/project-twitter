@@ -30,6 +30,8 @@ export const IconInfo = ({ setShowReplyModal, id, name, account, avatar, descrip
       const mainIdArray = LikeUsers.map(LikeUser => LikeUser.userId)
       if(mainIdArray.includes(selfId)) {
         setLiked(true)
+      } else {
+        setLiked(false)
       }
     }
 
@@ -52,22 +54,42 @@ export const IconInfo = ({ setShowReplyModal, id, name, account, avatar, descrip
   const [like, setLike] = useState(isLiked)
 
   const handleLike = async () => {
-    try {
-      const Token = localStorage.getItem("authToken");
-      let data = []
-      if(like === true) {
-        data = await removeLike(Token, id)
-      } else {
-        data = await addLike(Token, id)
+    if(pathname === '/user/self' || pathname === '/user/other') {
+      try {
+        const Token = localStorage.getItem("authToken");
+        let data = []
+        if(like === true) {
+          data = await removeLike(Token, id)
+          console.log(removeLike)
+
+        } else {
+          data = await addLike(Token, id)
+          console.log(addLike)
+        }
+        setLike(data.isLiked)
+      } catch(err){
+        console.log(err)
       }
-      setLike(data.isLiked)
-    } catch(err){
-      console.log(err)
+    }
+
+    if(pathname === '/main') {
+      try {
+        const Token = localStorage.getItem("authToken");
+        let data = []
+        if(like === true) {
+          data = await removeLike(Token, id)
+        } else {
+          data = await addLike(Token, id)
+        }
+        setLike(data.isLiked)
+      } catch(err){
+        console.log(err)
+      }
     }
   }
 
   return (
-    <div className="iconInfo" onClick={() => console.log(LikeUsers)}>
+    <div className="iconInfo">
       <div className="comments">
         <div className="iconBox" onClick={() => {
           setShowReplyModal(true)

@@ -86,9 +86,9 @@
       .tweetBottom {
 
         .dataCount {
-          width: 25%;
+          width: 100%;
           display: flex;
-          justify-content: space-between;
+          justify-content: flex-start;
           border-bottom: 1px solid #E6ECF0;
           padding: 15px;
 
@@ -96,6 +96,7 @@
             font-size: 19;
             color: #6C757D;
             font-weight: 500;
+            margin-right: 20px;
 
             b {
               color: #000000;

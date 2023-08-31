@@ -26,21 +26,28 @@ export const IconInfo = ({ setShowReplyModal, id, name, account, avatar, descrip
   const [liked, setLiked] = useState(false)
   
   useEffect(() => {
+    if(pathname === '/main') {
+      const mainIdArray = LikeUsers.map(LikeUser => LikeUser.userId)
+      if(mainIdArray.includes(selfId)) {
+        setLiked(true)
+      }
+    }
+
     if(tab === 'tweet') {
       const idArray = LikeUsers.map(LikeUser => LikeUser.id)
       if(pathname === '/user/self') {
-          if(idArray.includes(selfId)) {
+        if(idArray.includes(selfId)) {
           setLiked(true)
         }
       } else if(pathname === '/user/other') {
-          if(idArray.includes(otherId)) {
+        if(idArray.includes(otherId)) {
           setLiked(true)
         }
       }
     } else if(tab === 'like') {
       setLiked(true)
     }
-  }, [])
+  })
 
   const [like, setLike] = useState(isLiked)
 
@@ -60,7 +67,7 @@ export const IconInfo = ({ setShowReplyModal, id, name, account, avatar, descrip
   }
 
   return (
-    <div className="iconInfo" onClick={() => console.log(liked)}>
+    <div className="iconInfo" onClick={() => console.log(LikeUsers)}>
       <div className="comments">
         <div className="iconBox" onClick={() => {
           setShowReplyModal(true)

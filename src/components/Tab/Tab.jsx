@@ -75,8 +75,8 @@ const UserLike = ({ tweets }) => {
               children={
               <IconInfo 
                 setShowReplyModal={setShowReplyModal}
-                likeCount={repliesCount}
-                replyCount={likeCount}
+                likeCount={likeCount}
+                replyCount={repliesCount}
               />
               }
               key={id}
@@ -115,6 +115,8 @@ export const Tab = () => {
     const getUserTweetsAsync = async () => {
       try {
         const tweets = await getUserTweets(selfId)
+        
+        console.log(test)
         if (tweets) {
           setTweets(tweets.map((tweet) => ({ ...tweet })))
         } else {

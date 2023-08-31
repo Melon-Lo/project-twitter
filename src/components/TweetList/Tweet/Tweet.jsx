@@ -18,6 +18,8 @@ export const IconInfo = ({ setShowReplyModal, id, name, account, avatar, descrip
   const navigate = useNavigate()
   const pathname = useLocation().pathname
 
+  const { showReplyModal } = useContext(ModalContext)
+
   const [like, setLike] = useState(isLiked)
 
   const handleLike = async () => {
@@ -40,6 +42,7 @@ export const IconInfo = ({ setShowReplyModal, id, name, account, avatar, descrip
       <div className="comments">
         <div className="iconBox" onClick={() => {
           setShowReplyModal(true)
+          console.log(showReplyModal)
           if(pathname === '/user/self') {
             navigate('reply_list/reply_modal')
             return

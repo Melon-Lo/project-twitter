@@ -1,7 +1,7 @@
 import './Tweet.scss'
 
 // import dependencies
-import { useContext,useState } from 'react'
+import { useContext,useEffect,useState } from 'react'
 import { useNavigate, useLocation } from 'react-router-dom'
 import { PageContext } from 'context/PageContext'
 import { ModalContext } from 'context/ModalContext'
@@ -13,22 +13,27 @@ import { ReactComponent as LikeIcon } from 'assets/icons/like.svg'
 
 // api
 import { addLike, removeLike } from 'api/like'
+import { TabContext } from 'context/TabContext'
 
 export const IconInfo = ({ setShowReplyModal, id, name, account, avatar, description, createdAt, isLiked, likeCount, replyCount, LikeUsers }) => {
   const navigate = useNavigate()
   const pathname = useLocation().pathname
-  const [liked, setLiked] = useState(false)
-
   const { showReplyModal } = useContext(ModalContext)
-
+  const { tab } = useContext(TabContext)
   const selfId = JSON.parse(localStorage.getItem("userInfo")).id
 
-  if(pathname === '/user/self/tweet') {
-    const idArray = LikeUsers.map(LikeUser => LikeUser.id)
-    if(idArray.includes(selfId)) {
+  const [liked, setLiked] = useState(false)
+  
+  useEffect(() => {
+    if(tab === 'tweet') {
+      const idArray = LikeUsers.map(LikeUser => LikeUser.id)
+      if(idArray.includes(selfId)) {
+        setLiked(true)
+      }
+    } else if(tab === 'like') {
       setLiked(true)
     }
-  }
+  }, [])
 
   const [like, setLike] = useState(isLiked)
 

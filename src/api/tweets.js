@@ -112,3 +112,13 @@ export const postTweet = async ({ description }) => {
     console.error("[Post Tweet Failed]", error.response.data.message)
   }
 } 
+
+// 取得追蹤數前十名的用戶
+// GET: /followships/top10
+export const getTop10Users = async () => {
+  try {
+    const res = axiosInstance.get(`${baseURL}/followships/top10`)
+  } catch (error) {
+    console.error("[Get Top10 Users Failed]: ", error.response.data.message)
+  }
+}

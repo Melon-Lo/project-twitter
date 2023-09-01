@@ -89,7 +89,6 @@ export const Setting = () => {
       return
     }
 
-    console.log(passwordCheck)
     const res = await putUserData({id, account, name, email, password, checkPassword: passwordCheck})
     console.log(res)
 
@@ -101,6 +100,7 @@ export const Setting = () => {
     console.log(name)
     console.log(email)
     console.log(password)
+    console.log(passwordCheck)
 
     // 送出後清空
     setAccount('')
@@ -178,11 +178,10 @@ export const Setting = () => {
           <div className="input">
             <div className="inputLabel">密碼再確認</div>
             <input 
-              name="passwordCheck" 
+              name="checkPassword" 
               className="inputBox" 
               type="password" 
               onChange={(e) => {
-                console.log(e.target.value)
                 setPasswordCheck(e.target.value)
               }}
               value={passwordCheck}

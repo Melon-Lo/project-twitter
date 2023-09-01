@@ -35,19 +35,24 @@ export const IconInfo = ({ setShowReplyModal, id, name, account, avatar, descrip
       }
     }
 
-    if(tab === 'tweet') {
-      const idArray = LikeUsers.map(LikeUser => LikeUser.id)
-      if(pathname === '/user/self') {
+    if(pathname === '/user/self') {
+      if(tab === 'tweet') {
+        const idArray = LikeUsers.map(LikeUser => LikeUser.id)
         if(idArray.includes(selfId)) {
           setLiked(true)
         }
-      } else if(pathname === '/user/other') {
-        if(idArray.includes(otherId)) {
+      } else if(tab === 'like') {
+        setLike(true)
+      }
+    }
+
+    if(pathname === '/user/other') {
+      if(tab === 'tweet') {
+        const idArray = LikeUsers.map(LikeUser => LikeUser.id)
+        if(idArray.includes(selfId)) {
           setLiked(true)
         }
       }
-    } else if(tab === 'like') {
-      setLiked(true)
     }
   })
 
@@ -142,7 +147,28 @@ export const IconInfo = ({ setShowReplyModal, id, name, account, avatar, descrip
         </div>
       </>
       }
-      
+      {pathname === '/user/other' &&
+      <>
+        <div className="comments">
+          <div className="UserIconBox">
+            <ChatHollowIcon className="icon" />
+          </div>
+          <div className="number">
+            {replyCount}
+          </div>
+        </div>
+        <div className="likes">
+          <div className="UserIconBox" >
+            {liked ? 
+              <LikeIcon className="userLikeIcon" /> : 
+              <LikeHollowIcon className="userIcon" />}
+          </div>
+          <div className="number">
+            {likeCount}
+          </div>
+        </div>
+      </>
+      }
     </div>
   )
 }
@@ -188,11 +214,12 @@ export const Tweet = ({ children, id, name, account, description, avatar, create
           <div className="account">@{account}</div>
           <div className="time">．{createdAt}</div>
         </div>
-        {pathname === '/user/self' || pathname === '/main/reply_modal' ?
-          // 如果是ReplyModal裡面的Tweet，不能被點擊
+        {pathname === '/user/self' || pathname === '/user/other' || pathname === '/main/reply_modal' ?
           <div className="replyTweetContent" >
             {description}
           </div> :
+
+          // 只有在主頁的tweet貼文方塊可以被點擊
           <div 
             className="tweetContent" 
             onClick={() => navigate('/reply_list', {state: { id, name, account, description, avatar, isLiked }})}

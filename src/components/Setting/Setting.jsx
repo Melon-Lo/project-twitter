@@ -89,7 +89,7 @@ export const Setting = () => {
       return
     }
 
-    const res = await putUserData({id, account, name, email, password})
+    const res = await putUserData({id, account, name, email})
     console.log(res)
 
     // 認證通過：送出資料，彈出成功視窗

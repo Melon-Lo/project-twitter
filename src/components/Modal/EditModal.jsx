@@ -13,13 +13,17 @@ import { ReactComponent as AddPhotoIcon } from 'assets/icons/add_photo_hollow.sv
 // api
 import { putUserData } from 'api/users'
 
-export const EditModal = ({ avatar, banner }) => {
+export const EditModal = ({ avatarImg, bannerImg }) => {
+  const id = JSON.parse(localStorage.getItem("userInfo")).id
+
   const { setShowModal } = useContext(ModalContext)
   const navigate = useNavigate()
 
   // 設置輸入資料的狀態
   const [name, setName] = useState('')
   const [introduction, setIntroduction] = useState('')
+  const [banner, setBanner] = useState('')
+  const [avatar, setAvatar] = useState('')
 
   // 字數限制
   const nameLimit = 50
@@ -36,7 +40,7 @@ export const EditModal = ({ avatar, banner }) => {
   useEffect(() => {
     name ? setNameIsValid(true) : setNameIsValid(false)
     introduction ? setIntroductionIsValid(true) : setIntroductionAlert(false)
-  })
+  }, [name, introduction])
 
   // 表單送出函式，當驗證全通過時才會送出
   const onFormSubmit = async (e) => {
@@ -44,10 +48,19 @@ export const EditModal = ({ avatar, banner }) => {
 
     // 認證不通過：不送出
     if(!nameIsValid || !introductionIsValid) {
+      Swal.fire("「名稱」或「自我介紹」不能為空！")
       return
     }
 
-    // const res = await putUserData({id, name, introduction, banner})
+    const formData = new FormData()
+    formData.append('avatar', avatar)
+    formData.append('banner', banner)
+
+    console.log(avatar)
+    console.log(banner)
+
+    const res = await putUserData({id, name, introduction}, formData)
+    console.log(res)
 
     // 等api修改完成
     // const res = await putUserData({id, account, name, email})
@@ -55,9 +68,15 @@ export const EditModal = ({ avatar, banner }) => {
     // 認證通過：送出資料，彈出成功視窗
     Swal.fire("修改成功！")
 
+    setShowModal(false)
+
     // 送出後清空
     setName('')
     setIntroduction('')
+    setBanner('')
+    setAvatar('')
+
+    navigate('/user/self')
   }
 
   // 驗證函式
@@ -92,16 +111,31 @@ export const EditModal = ({ avatar, banner }) => {
         <div className="title">
           編輯個人資料
         </div>
-        <button className="save">儲存</button>
+        <button 
+          onClick={onFormSubmit}
+          className="save"
+        >
+          儲存
+        </button>
       </div>
       <div className="coverBox">
-        <img src={banner} alt="cover"/>
-        <CloseIcon style={{fill: 'white'}}className="closeIcon" />
+        <img src={bannerImg} alt="cover"/>
+        <CloseIcon className="closeIcon" />
         <AddPhotoIcon className="photoIcon" />
+        <input 
+          type="file" 
+          accept="image/jpeg, image/png"
+          onChange={(e) => {
+            const selectedFile = e.target.files[0];
+            if (selectedFile) {
+              setBanner(selectedFile)
+            }
+          }}
+        />
       </div>
       <div className="editSection">
         <div className="avatarBox">
-          <img src={avatar} alt="avatar"/>
+          <img src={avatarImg} alt="avatar"/>
         </div>
         <div className="avatarBoxCover">
           <AddPhotoIcon className="photoIcon" />
@@ -109,8 +143,10 @@ export const EditModal = ({ avatar, banner }) => {
             type="file" 
             accept="image/jpeg, image/png"
             onChange={(e) => {
-              const selectedFile = e.target.files[0]
-              console.log(selectedFile)
+              const selectedFile = e.target.files[0];
+              if (selectedFile) {
+                setAvatar(selectedFile)
+              }
             }}
           />
         </div>

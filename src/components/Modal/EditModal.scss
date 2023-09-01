@@ -68,7 +68,7 @@
       right: 42%;
       width: 24px;
       height: 24px;
-      fill: #FFFFFF;
+      fill: #000000;
       cursor: pointer;
     }
 
@@ -78,8 +78,19 @@
       left: 42%;
       width: 24px;
       height: 24px;
-      fill: #FFFFFF;
+      fill: #000000;
       cursor: pointer;
+    }
+
+    input {
+      position: absolute;
+      top: 50%;
+      left: 30%;
+      opacity: 0;
+      
+      &:hover {
+        opacity: 1;
+      }
     }
   }
 

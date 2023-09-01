@@ -22,41 +22,41 @@ export const TopIcon = ({ title }) => {
 }
 
 export const AuthInput = (
-  { id, 
-    name, 
-    value, 
-    label, 
-    placeholder, 
+  { id,
+    name,
+    type,
+    value,
+    label,
+    placeholder,
     onChange,
     valuelength,
-    maxLength,
-    type,
+    textlength,
   }) => {
   return (
     <div className='formContainer'>
       <div className='group'>
         <label htmlFor={id}>{label}</label>
-        <input 
+        <input
           id={id}
           name={name}
-          type={type} 
+          type={type}
           value={value}
-          placeholder={placeholder} 
+          placeholder={placeholder}
           onChange={(event) => onChange?.(event.target.value)}
           valuelength={valuelength}
-          maxLength={maxLength}
+          textlength={textlength}
         />
         <div className="alerGroup">
-          {value.length > maxLength && <div className="alertBox">
+          {value.length > textlength && <div className="alertBox">
             <span className='alert'>字數超過上限!</span>
           </div>
           }
-          {value.length >= 1 && <div className="numAlertBox">
+          <div className="numAlertBox">
             <span className='lengthNum'>{valuelength}</span>
             /
-            <span className='fityNum'>{maxLength}</span>
+            <span className='fityNum'>{textlength}</span>
           </div>
-          } 
+
         </div>
 
       </div>
@@ -170,29 +170,6 @@ export const SignUp = () => {
     passwordCheck ? setPasswordCheckIsValid(true) : setPasswordCheckIsValid(false)
   })
 
-  // 註冊按鈕、取消函式功能放一起
-  // const handleSign = (event) => {
-  //     //按下註冊 
-  //   if (event.currentTarget.classList.contains('orange')) {
-  //     Swal.fire({
-  //       icon: 'success',
-  //       title: '註冊成功',
-  //       text: '您已經註冊，即可登入頁面。',
-  //     })
-  //     // 按下取消
-  //   } else if (event.currentTarget.classList.contains('cancel-link')) {
-  //     Swal.fire({
-  //       title: '您確定要取消註冊嗎?',
-  //       showCancelButton: true,
-  //       confirmButtonText: '確定',
-  //     }).then((result) => {
-  //       /* Read more about isConfirmed, isDenied below */
-  //       if (result.isConfirmed) {
-  //         Swal.fire('已取消!', '', 'success')
-  //       }
-  //     })
-  //   }
-  // }
 
   // 表單送出函式，當驗證全通過時才會送出
   const onFormSubmit = async (e) => {
@@ -204,7 +181,7 @@ export const SignUp = () => {
     }
 
     // 「密碼」與「密碼再確認」不相同：不送出，彈出警告視窗
-    if(password !== passwordCheck) {
+    if (password !== passwordCheck) {
       Swal.fire({
         icon: 'error',
         title: '註冊失敗',
@@ -214,7 +191,7 @@ export const SignUp = () => {
     }
 
     // 執行非同步
-    const response = await signup({account, name, email, password, passwordCheck})
+    const response = await signup({ account, name, email, password, passwordCheck })
 
     // 認證通過：送出資料，彈出成功視窗
     Swal.fire({
@@ -222,94 +199,94 @@ export const SignUp = () => {
       title: '註冊成功',
       text: '您已經註冊，即可進入登入頁面登入。',
     })
-         
+
     // 送出後清空
     navigate('/login')
   }
 
 
   return (
-      <div className="SignUpcontainer">
-        <TopIcon title="建立你的帳號"/>
+    <div className="SignUpcontainer">
+      <TopIcon title="建立你的帳號" />
 
-{/* 記得有資料後，使用.map重複渲染 */}
-        <form>
-          <AuthInput 
-            type="text"
-            id="account" 
-            name="account"
-            label="帳號" 
-            value={account}
-            placeholder="請輸入帳號"
-            onChange={(accountInputValue) =>{  
-              checkAccount(accountInputValue)
-              setAccount(accountInputValue) 
-            }}
-            valuelength={account.length}
-            maxLength="20" 
-          />
-          <AuthInput
-            type="text"
-            id="name"
-            name="name"
-            label="名稱"
-            value={name}
-            placeholder="請輸入使用者名稱"
-            onChange={(nameInputValue) => {
-              checkName(nameInputValue)
-              setName(nameInputValue)
-            }}
-            valuelength={name.length}
-            maxLength="50" 
-          />
-          <AuthInput
-            type="text"
-            id="email"
-            name="email"
-            label="Email"
-            value={email}
-            placeholder="請輸入Email"
+      {/* 記得有資料後，使用.map重複渲染 */}
+      <form>
+        <AuthInput
+          type="text"
+          id="account"
+          name="account"
+          label="帳號"
+          value={account}
+          placeholder="請輸入帳號"
+          onChange={(accountInputValue) => {
+            checkAccount(accountInputValue)
+            setAccount(accountInputValue)
+          }}
+          valuelength={account.length}
+          textlength="20"
+        />
+        <AuthInput
+          type="text"
+          id="name"
+          name="name"
+          label="名稱"
+          value={name}
+          placeholder="請輸入使用者名稱"
+          onChange={(nameInputValue) => {
+            checkName(nameInputValue)
+            setName(nameInputValue)
+          }}
+          valuelength={name.length}
+          textlength="50"
+        />
+        <AuthInput
+          type="text"
+          id="email"
+          name="email"
+          label="Email"
+          value={email}
+          placeholder="請輸入Email"
           onChange={(emailInputValue) => {
-             checkEmail(emailInputValue)
-             setEmail(emailInputValue)
-            }}
-            valuelength={email.length}
-            maxLength="50" 
-          />
-          <AuthInput
-            type="password"
-            id="password"
-            name="password"
-            label="密碼"
-            value={password}
-            placeholder="請設定密碼"
-            onChange={(passwordInputValue) => setPassword(passwordInputValue)}
-            valuelength={password.length}
-            maxLength="50" 
+            checkEmail(emailInputValue)
+            setEmail(emailInputValue)
+          }}
+          valuelength={email.length}
+          textlength="50"
+        />
+        <AuthInput
+          type="password"
+          id="password"
+          name="password"
+          label="密碼"
+          value={password}
+          placeholder="請設定密碼"
+          onChange={(passwordInputValue) => setPassword(passwordInputValue)}
+          valuelength={password.length}
+          textlength="50"
 
-          />
-          <AuthInput
-            type="password"
-            id="password-2"
-            name="password-2"
-            label="密碼確認"
-            value={passwordCheck}
-            placeholder="請再次輸入密碼"
-            onChange={(passwordAgnInputValue) => setPasswordCheck(passwordAgnInputValue)}
-            valuelength={passwordCheck.length}
-            maxLength="50" 
-          />
-        </form>
+        />
+        <AuthInput
+          type="password"
+          id="password-2"
+          name="password-2"
+          label="密碼確認"
+          value={passwordCheck}
+          placeholder="請再次輸入密碼"
+          onChange={(passwordAgnInputValue) => setPasswordCheck(passwordAgnInputValue)}
+          valuelength={passwordCheck.length}
+          textlength="50"
+        />
+      </form>
 
-        <div className='btnGroup'>
-          <OrangeBtn 
-            way="註冊"
-            onClick={onFormSubmit}
-          />
-          <div className='aLink'>
-            <a href="http://localhost:3000/login" className='cancel-link'>取消</a>
-          </div>
+      <div className='btnGroup'>
+        <OrangeBtn
+          way="註冊"
+          onClick={onFormSubmit}
+        />
+        <div className='aLink'>
+          <a href="http://localhost:3000/login" className='cancel-link'>取消</a>
         </div>
       </div>
+    </div>
   )
 }

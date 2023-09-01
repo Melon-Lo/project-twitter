@@ -1,6 +1,6 @@
 import './AdminLogin.scss'
 import Swal from 'sweetalert2'
-import { useState, useContext } from 'react'
+import { useState, useContext, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { Link } from 'react-router-dom'
 import { AuthInput } from 'components/SignUp/SignUp'
@@ -20,9 +20,6 @@ export const AdminLogin = () => {
 
   }
 
-  // useEffect = (() => {
-    
-  // })
 
   // 後台登入函式事件
   const handleClick = async () => {
@@ -56,45 +53,8 @@ export const AdminLogin = () => {
     });
     setIsAuthenticated(true)
     navigate('/admin_main')
-  } 
+  }
 
-  // 註冊按鈕、取消函式功能放一起
-  // const handleLogin = (event) => {
-    // 按下登入
-    // if (event.currentTarget.classList.contains('orange')) {
-    //   let timerInterval
-    //   Swal.fire({
-    //     title: '登入中',
-    //     html: '載入登入頁面中，請稍候',
-    //     timer: 2000,
-    //     timerProgressBar: true,
-    //     didOpen: () => {
-    //       Swal.showLoading()
-    //     },
-    //     willClose: () => {
-    //       clearInterval(timerInterval)
-    //     }
-    //   }).then((result) => {
-        /* Read more about handling dismissals below */
-      //   if (result.dismiss === Swal.DismissReason.timer) {
-      //     console.log('I was closed by the timer')
-      //   }
-      // })
-
-      // 按下取消
-    // } else if (event.currentTarget.classList.contains('cancel-link')) {
-    //   Swal.fire({
-    //     title: '您確定要取消註冊嗎?',
-    //     showCancelButton: true,
-    //     confirmButtonText: '確定',
-    //   }).then((result) => {
-        /* Read more about isConfirmed, isDenied below */
-  //       if (result.isConfirmed) {
-  //         Swal.fire('已取消!', '', 'success')
-  //       }
-  //     })
-  //   }
-  // }
 
   return (
     <div className='adminLoginContainer'>
@@ -104,21 +64,24 @@ export const AdminLogin = () => {
       <form onSubmit={handleSubmit}>
         <AuthInput
           id="account"
+          type="text"
           label="帳號"
           value={account}
           placeholder="請輸入帳號"
           onChange={(accountInputValue) => setAccount(accountInputValue)}
           valuelength={account.length}
-          maxlenth="20" 
+          textlength="20"
         />
         <AuthInput
           id="password"
+          name="password"
+          type="password"
           label="密碼"
           value={password}
           placeholder="請輸入密碼"
           onChange={(passwordInputValue) => setPassword(passwordInputValue)}
           valuelength={password.length}
-          maxlenth="50" 
+          textlength="50"
         />
       </form>
       <div className='btnGroup'>

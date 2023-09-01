@@ -2,17 +2,19 @@ import './AdminUser.scss'
 import { ReactComponent as FollowIcon } from 'assets/icons/write.svg'
 import { ReactComponent as LikeIcon } from 'assets/icons/like_hollow.svg'
 import { TweetTitle } from '../AdminTweet/AdminTweet'
-import { useState, useEffect } from 'react' 
+import { useState, useEffect } from 'react'
 import { getAllUsersAdmin } from 'api/tweets'
 // const defaultAvatar = "https://media.istockphoto.com/id/1388253782/photo/positive-successful-millennial-business-professional-man-head-shot-portrait.webp?b=1&s=612x612&w=0&k=20&c=VsTsa0kjyZ7ALe-nyKAUfynyRxZo8H4LRMdu_ecPuOY="
 
 import avatarDefulat from 'assets/images/default.png'
+import bannerDefault from 'assets/images/flowers.png'
 
 // CardItem 子元件
-export const CardItem = ({ 
-  avatar, 
+export const CardItem = ({
+  avatar,
   name,
-  account, 
+  img,
+  account,
   tweetCount,
   likesCount,
   followingsCount,
@@ -23,6 +25,7 @@ export const CardItem = ({
   return (
     <div className='card'>
       <div className="backGroundImg">
+        <img src={img ? img : bannerDefault} alt="banner" />
       </div>
       <div className="avatarSection">
         <div className="avatarBox">
@@ -39,7 +42,7 @@ export const CardItem = ({
             <FollowIcon className='icon' />
           </div>
           <span className="iconNum">
-            {tweetCount}k
+            {tweetCount}
           </span>
         </div>
         <div className="iconGroup">
@@ -47,7 +50,7 @@ export const CardItem = ({
             <LikeIcon className='icon' />
           </div>
           <span className="iconNum">
-            {likesCount}k
+            {likesCount}
           </span>
         </div>
       </div>
@@ -84,9 +87,9 @@ export const CardList = () => {
       }
     }
     getAllUsersAdminAsync()
-  },[])
-    
- 
+  }, [])
+
+
 
   return (
     <div className="cardListWrapper">
@@ -94,10 +97,11 @@ export const CardList = () => {
       <div className="cardListContent">
         <div className="cardListContainer">
           {users.map((user) => (
-            <CardItem 
+            <CardItem
               key={user.id}
               avatar={user.avatar}
               name={user.name}
+              img={user.banner}
               account={user.account}
               tweetCount={user.Tweets}
               likesCount={user.LikeTweets}

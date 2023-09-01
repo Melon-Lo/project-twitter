@@ -166,7 +166,6 @@ export const Tweet = ({ children, id, name, account, description, avatar, create
   const pathname = useLocation().pathname
 
   const { setUser } = useContext(PageContext)
-  const { showReplyModal } = useContext
 
   const selfId = JSON.parse(localStorage.getItem("userInfo")).id
   const clickedUserId = UserId
@@ -194,18 +193,19 @@ export const Tweet = ({ children, id, name, account, description, avatar, create
           <div className="account">@{account}</div>
           <div className="time">．{createdAt}</div>
         </div>
-        {pathname === '/user/self' || pathname === '/user/other' || pathname === '/main/reply_modal' || pathname === 'reply_list/reply_modal' ?
-          <div className="replyTweetContent" >
-            {description}
-          </div> :
-
+        
+        {pathname === '/main' ?
           // 只有在主頁的tweet貼文方塊可以被點擊
           <div 
             className="tweetContent" 
-            onClick={() => navigate('/reply_list', {state: { id, name, account, description, avatar, isLiked }})}
+            onClick={() => navigate('/reply_list', {state: { id, name, account, description, avatar, isLiked, UserId }})}
           >
             {description}
           </div>
+          :
+          <div className="replyTweetContent" >
+            {description}
+          </div> 
         }
         {children}
       </div>

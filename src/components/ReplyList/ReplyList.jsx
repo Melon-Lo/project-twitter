@@ -3,7 +3,7 @@ import './ReplyList.scss'
 // import dependencies
 import { useContext, useState } from 'react'
 import { ModalContext } from 'context/ModalContext'
-import { useNavigate } from 'react-router'
+import { useNavigate, useLocation } from 'react-router'
 
 // import components
 import { ReplyModal } from 'components/Modal/ReplyModal'
@@ -24,6 +24,9 @@ export const ReplyList = (props) => {
 
   const { id, description, absoluteTime, likeCount, replyCount, isLiked, User } = props.tweet
   const { account, avatar, name } = User
+
+  const location = useLocation()
+  const { UserId } = location.state
 
   const replies = props.replies.map(reply => {
     return <Reply key={reply.id} reply={reply} />
@@ -62,7 +65,12 @@ export const ReplyList = (props) => {
         }
         <div className="tweet">
           <div className="tweetTop">
-            <div className="avatarBox">
+            <div className="avatarBox"
+              onClick={() => {
+                localStorage.setItem("otherUserId", UserId)
+                navigate('/user/other')
+              }}
+            >
               <img className="avatar" src={avatar} alt="avatar" />
             </div>
             <div className="info">

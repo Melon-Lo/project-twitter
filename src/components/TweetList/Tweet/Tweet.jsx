@@ -90,32 +90,59 @@ export const IconInfo = ({ setShowReplyModal, id, name, account, avatar, descrip
 
   return (
     <div className="iconInfo">
-      <div className="comments">
-        <div className="iconBox" onClick={() => {
-          setShowReplyModal(true)
-          console.log(showReplyModal)
-          if(pathname === '/user/self') {
-            navigate('reply_list/reply_modal')
-            return
-          }
-          navigate('reply_modal',{state: { id, name, account, avatar, description, createdAt }}) 
-        }}>
-          <ChatHollowIcon className="icon" />
+      {pathname === '/main' &&
+      <>
+        <div className="comments">
+          <div className="iconBox" onClick={() => {
+            setShowReplyModal(true)
+            console.log(showReplyModal)
+            if(pathname === '/user/self') {
+              navigate('reply_list/reply_modal')
+              return
+            }
+            navigate('reply_modal',{state: { id, name, account, avatar, description, createdAt }}) 
+          }}>
+            <ChatHollowIcon className="icon" />
+          </div>
+          <div className="number">
+            {replyCount}
+          </div>
         </div>
-        <div className="number">
-          {replyCount}
+        <div className="likes" onClick={handleLike}>
+          <div className="iconBox" >
+            {liked ? 
+              <LikeIcon className="likeIcon" /> : 
+              <LikeHollowIcon className="icon" />}
+          </div>
+          <div className="number">
+            {likeCount}
+          </div>
         </div>
-      </div>
-      <div className="likes" onClick={handleLike}>
-        <div className="iconBox" >
-          {liked ? 
-            <LikeIcon className="likeIcon" /> : 
-            <LikeHollowIcon className="icon" />}
+      </>
+      }
+      {pathname === '/user/self' &&
+      <>
+        <div className="comments">
+          <div className="UserIconBox">
+            <ChatHollowIcon className="icon" />
+          </div>
+          <div className="number">
+            {replyCount}
+          </div>
         </div>
-        <div className="number">
-          {likeCount}
+        <div className="likes">
+          <div className="UserIconBox" >
+            {liked ? 
+              <LikeIcon className="userLikeIcon" /> : 
+              <LikeHollowIcon className="userIcon" />}
+          </div>
+          <div className="number">
+            {likeCount}
+          </div>
         </div>
-      </div>
+      </>
+      }
+      
     </div>
   )
 }
@@ -130,6 +157,7 @@ export const ReplyInfo = ({ account }) => {
 
 export const Tweet = ({ children, id, name, account, description, avatar, createdAt, UserId, isLiked }) => {
   const navigate = useNavigate()
+  const pathname = useLocation().pathname
 
   const { setUser } = useContext(PageContext)
   const { showReplyModal } = useContext
@@ -160,7 +188,7 @@ export const Tweet = ({ children, id, name, account, description, avatar, create
           <div className="account">@{account}</div>
           <div className="time">．{createdAt}</div>
         </div>
-        {showReplyModal ?
+        {pathname === '/user/self' || pathname === '/main/reply_modal' ?
           // 如果是ReplyModal裡面的Tweet，不能被點擊
           <div className="replyTweetContent" >
             {description}

@@ -21,6 +21,8 @@ import { ReactComponent as DefaultAvatar } from 'assets/images/default_avatar.sv
 
 // import api
 import { getUserData } from 'api/users'
+import { addFollowing, removeFollowing } from 'api/followship'
+import { getUserFollowings } from 'api/users'
 
 export const OtherUser = () => {
   const [following, setFollowing] = useState(false)
@@ -29,8 +31,11 @@ export const OtherUser = () => {
   const navigate = useNavigate()
   const { setUser } = useContext(PageContext)
 
+  // 取得當前使用者ID
+  const id = JSON.parse(localStorage.getItem("userInfo")).id
+
   // 取得使用者ID
-  const id = localStorage.getItem("otherUserId")
+  const otherUserId = Number(localStorage.getItem("otherUserId"))
   const [name, setName] = useState('')
   const [account, setAccount] = useState('')
   const [avatar, setAvatar] = useState('')
@@ -40,14 +45,14 @@ export const OtherUser = () => {
   const [tweetsCount, setTweetsCount] = useState('')
   const [introduction, setIntroduction] = useState('')
 
+  // 設置當前使用者的追蹤狀態
+  const [isFollowing, setIsFollowing] = useState()
+
   // 取得使用者資料
   useEffect(() => async () => {
-    // 他人頁面初始值
-    setUser("other")
-
     const getUserDataAsync = async () => {
       try {
-        const data = await getUserData(id)
+        const data = await getUserData(otherUserId)
         // 儲存使用者資料
         setName(data.name)
         setAccount(data.account)
@@ -63,8 +68,40 @@ export const OtherUser = () => {
       }
     }
 
+    const checkIsFollowing = async () => {
+      try {
+        const followings = await getUserFollowings(id)
+        const followingIdArray = followings.map(following => following.followingId)
+        if(followingIdArray.includes(otherUserId)) {
+          setIsFollowing(true)
+          console.log(isFollowing)
+        } else {
+          setIsFollowing(false)
+          console.log(isFollowing)
+        }
+      } catch (error) {
+        console.error(error)
+      }
+    }
+
+    checkIsFollowing()
     getUserDataAsync()
   }, [])  
+
+  // 串接
+  const handleFollow = async () => {
+    try {
+      if(isFollowing === true) {
+        const res = await removeFollowing(otherUserId)
+        console.log(res.data)
+      } else if(isFollowing === false) {
+        const res = await addFollowing(otherUserId)
+        console.log(res.data)
+      }
+    } catch(err) {
+      console.log(err)
+    }
+  }
 
   return (
     <div className="userContainer">
@@ -95,12 +132,25 @@ export const OtherUser = () => {
                   <NotiHollowIcon className="notiIcon"/>
                 </div> 
               }
-              <button 
-                className={clsx('follow', { following: following })} 
-                onClick={() => setFollowing(!following)}
-              >
-                {following ? '正在跟隨' : '跟隨'}
-              </button>
+              {isFollowing ? 
+                <button 
+                  onClick={() => {
+                    handleFollow()
+                  }}
+                  className="following"
+                >
+                  {isFollowing ? '正在跟隨' : '跟隨'}
+                </button>
+                :
+                <button 
+                  onClick={() => {
+                    handleFollow()
+                  }}
+                  className="follow"
+                >
+                  {isFollowing ? '正在跟隨' : '跟隨'}
+                </button>
+              }
             </div>
             <div className="avatarBox">
               <img className="avatar" src={avatar ? avatar : <DefaultAvatar />} alt="avatar" />

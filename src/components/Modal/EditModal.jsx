@@ -124,13 +124,13 @@ export const EditModal = ({ avatarImg, bannerImg }) => {
         <AddPhotoIcon className="photoIcon" />
         <input 
           type="file" 
-          accept="image/jpeg, image/png"
+          accept=".jpg"
           onChange={(e) => {
             const selectedFile = e.target.files[0];
-            if (selectedFile) {
-              setBanner(selectedFile)
-            }
+            const imageURL = URL.createObjectURL(selectedFile)
+            setBanner({ name: selectedFile.name, url: imageURL})
           }}
+          onClick={() => console.log(banner)}
         />
       </div>
       <div className="editSection">
@@ -141,13 +141,15 @@ export const EditModal = ({ avatarImg, bannerImg }) => {
           <AddPhotoIcon className="photoIcon" />
           <input 
             type="file" 
-            accept="image/jpeg, image/png"
+            accept=".jpg"
             onChange={(e) => {
               const selectedFile = e.target.files[0];
               if (selectedFile) {
                 setAvatar(selectedFile)
+                console.log(selectedFile)
               }
             }}
+            onClick={() => console.log(avatar)}
           />
         </div>
         <div className="edit">

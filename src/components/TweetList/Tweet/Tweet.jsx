@@ -23,8 +23,8 @@ export const IconInfo = ({ setShowReplyModal, id, name, account, avatar, descrip
   const selfId = JSON.parse(localStorage.getItem("userInfo")).id
   const otherId = localStorage.getItem("otherUserId")
 
+  // 渲染
   const [liked, setLiked] = useState(false)
-  
   useEffect(() => {
     if(pathname === '/main') {
       const mainIdArray = LikeUsers.map(LikeUser => LikeUser.userId)
@@ -56,40 +56,20 @@ export const IconInfo = ({ setShowReplyModal, id, name, account, avatar, descrip
     }
   })
 
+  // 串接 addLike API
   const [like, setLike] = useState(isLiked)
-
   const handleLike = async () => {
-    if(pathname === '/user/self' || pathname === '/user/other') {
-      try {
-        const Token = localStorage.getItem("authToken");
-        let data = []
-        if(like === true) {
-          data = await removeLike(Token, id)
-          console.log(removeLike)
-
-        } else {
-          data = await addLike(Token, id)
-          console.log(addLike)
-        }
-        setLike(data.isLiked)
-      } catch(err){
-        console.log(err)
+    try {
+      const Token = localStorage.getItem("authToken");
+      let data = []
+      if(like === true) {
+        data = await removeLike(Token, id)
+      } else {
+        data = await addLike(Token, id)
       }
-    }
-
-    if(pathname === '/main') {
-      try {
-        const Token = localStorage.getItem("authToken");
-        let data = []
-        if(like === true) {
-          data = await removeLike(Token, id)
-        } else {
-          data = await addLike(Token, id)
-        }
-        setLike(data.isLiked)
-      } catch(err){
-        console.log(err)
-      }
+      setLike(data.isLiked)
+    } catch(err) {
+      console.log(err)
     }
   }
 

@@ -62,7 +62,7 @@ export const Login = () => {
 
   }
 
-  useEffect = (() => {
+  useEffect(() => {
     if (role === "user") {
       navigate("/main")
     } else if (role === "admin") {

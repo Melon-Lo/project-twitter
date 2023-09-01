@@ -25,7 +25,7 @@ export const MainPage = () => {
 
   } 
 
-  useEffect = (() => async () => {
+  useEffect(() => async () => {
     const getTweetsAsync = async () => {
       try {
         const tweets = await getAllTweets()

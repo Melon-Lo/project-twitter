@@ -171,14 +171,14 @@ export const Tweet = ({ children, id, name, account, description, avatar, create
   const clickedUserId = UserId
 
   function checkUser() {
-    if(selfId === clickedUserId) {
-      localStorage.setItem("otherUserId", clickedUserId)
-      setUser("self")
-      navigate("/user/self")
-    } else {
-      localStorage.setItem("otherUserId", clickedUserId)
-      setUser("other")
-      navigate("/user/other")
+    if(pathname === '/main' || pathname === '/reply_list') {
+      if(selfId === clickedUserId) {
+        localStorage.setItem("otherUserId", clickedUserId)
+        navigate("/user/self")
+      } else {
+        localStorage.setItem("otherUserId", clickedUserId)
+        navigate("/user/other")
+      }
     }
   }
 

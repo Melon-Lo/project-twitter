@@ -123,6 +123,7 @@ export const EditModal = ({ avatarImg, bannerImg }) => {
         <CloseIcon className="closeIcon" />
         <AddPhotoIcon className="photoIcon" />
         <input 
+          name="avatar"
           type="file" 
           accept=".jpg"
           onChange={(e) => {
@@ -140,6 +141,7 @@ export const EditModal = ({ avatarImg, bannerImg }) => {
         <div className="avatarBoxCover">
           <AddPhotoIcon className="photoIcon" />
           <input 
+            name="banner"
             type="file" 
             accept=".jpg"
             onChange={(e) => {

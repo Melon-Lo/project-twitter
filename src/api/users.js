@@ -63,3 +63,15 @@ export const putUserData = async({ id, account, name, introduction, banner, pass
     console.error('[Put UserData Failed]: ', error)
   }
 }
+
+// 取得追蹤數前十名的用戶
+// GET: /followships/top10
+export const getTop10Users = async () => {
+  try {
+    const res = await axiosInstance.get(`${baseURL}/followships/top10`)
+    // console.log(res.data)
+    return res.data
+  } catch (error) {
+    console.error("[Get Top10 Users Failed]: ", error.response.data.message)
+  }
+}

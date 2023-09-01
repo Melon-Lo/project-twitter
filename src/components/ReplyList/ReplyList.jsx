@@ -15,7 +15,7 @@ import { ReactComponent as ReplyIcon } from 'assets/icons/reply.svg'
 import { ReactComponent as LikeHollowIcon } from 'assets/icons/like_hollow.svg'
 import { ReactComponent as LikeIcon } from 'assets/icons/like.svg'
 
-// api
+// API
 import { addLike, removeLike } from 'api/like'
 
 export const ReplyList = (props) => {

@@ -186,9 +186,6 @@ export const FollowTab = () => {
   const savedUserInfo = JSON.parse(localStorage.getItem("userInfo"))
   const selfId = savedUserInfo.id
 
-  // 先把別人的id拿出來
-  const otherUserId = localStorage.getItem("otherUserId")
-
   const { followTab, setFollowTab } = useContext(TabContext)
   const navigate = useNavigate()
   const { user } = useContext(PageContext)
@@ -218,33 +215,8 @@ export const FollowTab = () => {
       }
     }
 
-    // 拿到別人的追蹤者
-    const getOtherUserFollowingsAsync = async () => {
-      try {
-        const followings = await getUserFollowings(otherUserId)
-        setFollowings(followings.map((following) => ({ ...following })))
-      } catch (error) {
-        console.error(error)
-      }
-    }
-
-    // 拿到別人的追隨者
-    const getOtherUserFollowersAsync = async () => {
-      try {
-        const followers = await getUserFollowers(otherUserId)
-        setFollowers(followers.map((follower) => ({ ...follower })))
-      } catch (error) {
-        console.error(error)
-      }
-    }
-
-    if(user === 'self') {
-      getUserFollowingsAsync()
-      getUserFollowersAsync()
-    } else if(user === 'other') {
-      getOtherUserFollowersAsync()
-      getOtherUserFollowingsAsync()
-    }
+    getUserFollowingsAsync()
+    getUserFollowersAsync()
   }, [])
 
   const Followings = () => {
@@ -253,7 +225,6 @@ export const FollowTab = () => {
         {followings.length !== 0 ? 
           (followings.map((following) => {
             const { followingAvatar, followingIntroduction, followingName, followingId, id } = following
-
             return (
               <Follow 
                 id={id}

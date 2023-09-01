@@ -17,7 +17,7 @@
   }
 
 
-  .iconTitle {
+  .iconTitle{
     font-weight: 700;
     padding-bottom: 20px;
     padding-top: 10px;
@@ -55,13 +55,12 @@
           color: #696974;
           border: 0px solid #F5F8FA;
           background-color: #F5F8FA;
-          border-bottom: 2px solid #657786;
 
           &:focus {
-            // color: #696974;
-            outline: none;
-            border-bottom: 2px solid #50B5FF;
-          }
+              // color: #696974;
+              outline: none;
+              border-bottom: 2px solid #50B5FF;
+            }
 
           &::placeholder {
             color: #B5B5BE;
@@ -82,12 +81,10 @@
             border-top: 2px solid #fC5A5A;
             z-index: 3;
 
-            .alert {
-              color: #fC5A5A;
-              left: 0%;
-              top: 0%;
-            }
-          }
+              .alert {
+                color: #fC5A5A;
+              }
+          } 
 
           .numAlertBox {
             // outline: 1px solid blue;
@@ -114,10 +111,9 @@
       border: 0px solid transparent;
       border-radius: 50px;
       background-color: #FF6600;
-
       &:hover {
-        background-color: #FF7744;
-      }
+          background-color: #FF7744;
+        }
     }
 
     .aLink {

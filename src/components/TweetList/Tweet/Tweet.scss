@@ -142,3 +142,16 @@
   color: #171725;
   font-size: 16px;
 }
+
+// UserPage 和 OtherUserPage 裡面的 icon
+.userLikeIcon {
+  fill: rgb(255, 87, 87);
+}
+
+.UserIconBox {
+  width: 16px;
+  height: 16px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}

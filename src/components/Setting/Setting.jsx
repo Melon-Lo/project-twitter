@@ -95,6 +95,12 @@ export const Setting = () => {
     // 認證通過：送出資料，彈出成功視窗
     Swal.fire("修改成功！")
 
+    // 確認輸入
+    console.log(account)
+    console.log(name)
+    console.log(email)
+    console.log(password)
+
     // 送出後清空
     setAccount('')
     setName('')

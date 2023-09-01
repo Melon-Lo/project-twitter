@@ -1,3 +1,4 @@
+
 // adminTweetList
 .TweetListWrapper {
   outline: 1px solid #E6ECF0;
@@ -13,85 +14,62 @@
   }
 
   .TweetListContent {
-    height: 92vh;
+    height: 100vh;
     overflow-y: scroll;
-    padding-bottom: 10px;
-
-    // scrollbar style
-    &::-webkit-scrollbar {
-      width: 8px;
-      background-color: #FAFAFA;
-    }
-
-    &::-webkit-scrollbar-thumb {
-      background-color: #C1C1C1;
-      border-radius: 4px;
-      border: 2px solid #FAFAFA;
-    }
 
     // adminTweetItem
-    .AdminTweetItem {
-      outline: 1px solid #E6ECF0;
-      width: 100%; // 937px/1140px
-      height: 103px;
-      display: flex;
-      justify-content: end;
-
-      .avatarBox {
-        width: 50px;
-        height: 50px;
-        margin: 10px 10px 0 10px;
-
-        .avatar {
-          width: 100%;
-          height: 100%;
+      .AdminTweetItem {
+        outline: 1px solid #E6ECF0;
+        width: 100%; // 937px/1140px
+        height: 103px;
+        display: flex;
+        justify-content: end;
+    
+        .avatarBox {
+          width: 50px;
+          height: 50px;
+          margin: 10px 10px 0 10px;
+    
+          .avatar {
+            width: 100%;
+            height: 100%;
+          }
         }
-      }
-
-      .tweetText {
-        width: 91%; // 855px/937px
-
-        .topText {
-          width: 100%;
-          padding-top: 7px;
-          display: flex;
-          align-items: center;
-          justify-content: space-between;
-
-          .infoText {
-            height: 26px;
+    
+        .tweetText {
+          width: 91%; // 855px/937px
+    
+          .topText {
+            width: 100%;
+            padding-top: 7px;
             display: flex;
             align-items: center;
-            justify-content: space-between;
-            font-size: 14px;
-            margin-bottom: 6px;
-
-            .name {
-              font-weight: 700;
-              font-size: 16px;
-              margin-right: 10px;
+            justify-content:space-between;
+    
+            .infoText {
+              // outline: 1px solid purple;
+              width: 145px;
+              height: 26px;
+              display: flex;
+              align-items: center;
+              justify-content: space-between;
+              font-size: 14px;
+              margin-bottom: 6px;
             }
-
-            .smallText {
-              color: #6C757D;
-            }
-          }
-
-          .closeBox {
-            padding-right: 6px;
-            cursor: pointer;
-
-            .close {
-              fill: #696974;
+    
+            .closeBox {
+              padding-right: 6px;
             }
           }
-        }
-
-        .tweetContent {
-          height: 52px;
+    
+          .tweetContent {
+            // outline: 1px solid blue;
+            height: 52px;
+          }
         }
       }
-    }
   }
-
 }
+
+
+

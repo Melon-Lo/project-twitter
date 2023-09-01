@@ -26,7 +26,7 @@ export const User = () => {
   const navigate = useNavigate()
 
   // 儲存資料空間
-  const { id, introduction } = JSON.parse(localStorage.getItem("userInfo"))
+  const { id } = JSON.parse(localStorage.getItem("userInfo"))
   const [name, setName] = useState('')
   const [account, setAccount] = useState('')
   const [avatar, setAvatar] = useState('')
@@ -34,6 +34,7 @@ export const User = () => {
   const [followingsCount, setFollowingsCount] = useState('')
   const [followersCount, setFollowersCount] = useState('')
   const [tweetsCount, setTweetsCount] = useState('')
+  const [introduction, setIntroduction] = useState('')
 
   // 取得使用者資料
   useEffect(() => async () => {
@@ -49,6 +50,7 @@ export const User = () => {
         setFollowersCount(data.followersCount)
         setFollowingsCount(data.followingsCount)
         setTweetsCount(data.tweetsCount)
+        setIntroduction(data.introduction)
         // console.log(data)
       } catch (error) {
         console.error(error)
@@ -71,11 +73,11 @@ export const User = () => {
           </div>
         </div>
         {showModal &&
-          <EditModal avatar={avatar ? avatar : <DefaultAvatar />} banner={banner ? banner : <DefaultBanner />}/>
+          <EditModal avatarImg={avatar === null ? <DefaultAvatar /> : avatar } bannerImg={banner === null ? <DefaultBanner /> : banner }/>
         }
         <div className="userBox">
           <div className="coverBox">
-            <img src={banner ? banner : <DefaultBanner />} alt="coverImage" />
+            <img src={banner === null ? <DefaultBanner /> : banner } alt="banner" />
           </div>
           <div className="infoBox">
             <button onClick={() => {
@@ -85,7 +87,7 @@ export const User = () => {
               編輯個人資料
             </button>
             <div className="avatarBox">
-              <img className="avatar" src={avatar ? avatar : <DefaultAvatar />} alt="avatar" />
+              <img className="avatar" src={avatar === null ? <DefaultAvatar /> : avatar } alt="avatar" />
             </div>
             <div className="info">
               <div className="name">{name}</div>

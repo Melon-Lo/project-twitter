@@ -10,7 +10,7 @@ import { PageContext } from 'context/PageContext'
 // import components
 import { Tweet, IconInfo } from 'components/TweetList/Tweet/Tweet'
 import { Reply } from 'components/ReplyList/Reply/Reply'
-import { Follow } from 'components/FollowList/Follow/Follow'
+import { OtherFollow } from 'components/FollowList/Follow/OtherFollow'
 
 // API
 import { getUserFollowers, getUserFollowings } from 'api/users'
@@ -175,6 +175,127 @@ export const OtherTab = () => {
         {tab === 'tweet' && <UserTweet tweets={tweets} />}
         {tab === 'reply' && <UserReply replies={replies}/>}
         {tab === 'like' && <UserLike tweets={likedTweets}/>}
+      </div>
+    </div>
+  )
+}
+
+export const OtherFollowTab = () => {
+  // 先把別人的id拿出來
+  const otherUserId = localStorage.getItem("otherUserId")
+
+  const { followTab, setFollowTab } = useContext(TabContext)
+  const navigate = useNavigate()
+  const { user } = useContext(PageContext)
+
+  // 存放追蹤者和追隨者
+  const [followings, setFollowings] = useState([])
+  const [followers, setFollowers] = useState([])
+
+  useEffect(() => async () => {
+    // 拿到別人的追蹤者
+    const getUserFollowingsAsync = async () => {
+      try {
+        const followings = await getUserFollowings(otherUserId)
+        setFollowings(followings.map((following) => ({ ...following })))
+      } catch (error) {
+        console.error(error)
+      }
+    }
+
+    // 拿到自己的追隨者
+    const getUserFollowersAsync = async () => {
+      try {
+        const followers = await getUserFollowers(otherUserId)
+        setFollowers(followers.map((follower) => ({ ...follower })))
+      } catch (error) {
+        console.error(error)
+      }
+    }
+
+    getUserFollowingsAsync()
+    getUserFollowersAsync()
+  }, [])
+
+  const Followings = () => {
+    return (
+      <>
+        {followings.length !== 0 ? 
+          (followings.map((following) => {
+            const { followingAvatar, followingIntroduction, followingName, followingId, id } = following
+            return (
+              <OtherFollow 
+                id={id}
+                avatar={followingAvatar}
+                description={followingIntroduction}
+                name={followingName}
+                followId={followingId}
+              />
+            )
+          }))
+        : '尚未有任何的追蹤者'}
+      </>
+    )
+  }
+
+  const Followers = () => {
+    return (
+      <>
+        {followers.length !== 0 ? 
+          (followers.map((follower) => {
+            const { followerAvatar, followerIntroduction, followerName, followerId, id } = follower
+
+            return (
+              <OtherFollow
+                id={id}
+                avatar={followerAvatar}
+                description={followerIntroduction}
+                name={followerName}
+                followId={followerId}
+              />
+            )
+          }))
+        : '尚未有任何的追隨者'}
+      </>
+    )
+  }
+
+  return (
+    <div className="tabContainer">
+      <div className="selectionBar">
+        <div 
+          className={followTab === 'follower' ? 'optionActive' : 'option'} 
+          onClick={() => {
+            setFollowTab('follower')
+            if(user === 'self') {
+              navigate('/user/self/follower')
+            } else {
+              navigate('/user/other/follower')
+            }
+          }}
+        >
+          追隨者
+        </div>
+        <div 
+          className={followTab === 'following' ? 'optionActive' : 'option'} 
+          onClick={() => {
+            setFollowTab('following')
+            if(user === 'self') {
+              navigate('/user/self/following')
+            } else {
+              navigate('/user/other/following')
+            }
+          }}
+        >
+          正在追隨
+        </div>
+      </div>
+      <div className="content">
+        {followTab === 'follower' && 
+          <Followers />
+        }
+        {followTab === 'following' && 
+          <Followings />}
       </div>
     </div>
   )

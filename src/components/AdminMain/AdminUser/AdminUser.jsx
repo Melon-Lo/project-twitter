@@ -9,31 +9,20 @@ import { getAllUsersAdmin } from 'api/tweets'
 import avatarDefulat from 'assets/images/default.png'
 import bannerDefault from 'assets/images/flowers.png'
 
+
 // CardItem 子元件
-export const CardItem = ({
-  avatar,
-  name,
-  img,
-  account,
-  tweetCount,
-  likesCount,
-  followingsCount,
-  followersCount,
-}) => {
-
-
+export const CardItem = () => {
   return (
     <div className='card'>
       <div className="backGroundImg">
-        <img src={img ? img : bannerDefault} alt="banner" />
       </div>
       <div className="avatarSection">
         <div className="avatarBox">
-          <img className='avatar' src={avatar ? avatar : avatarDefulat} alt="使用者大頭貼" />
+          <img className='avatar' src="https://media.istockphoto.com/id/1388253782/photo/positive-successful-millennial-business-professional-man-head-shot-portrait.webp?b=1&s=612x612&w=0&k=20&c=VsTsa0kjyZ7ALe-nyKAUfynyRxZo8H4LRMdu_ecPuOY=" alt="" />
         </div>
         <div className="avatarName">
-          <div className='name'>{name}</div>
-          <div className='hashName'>@{account}</div>
+          <div className='name'>John Doe</div>
+          <div className='hashName'>@heyjohn</div>
         </div>
       </div>
       <div className="iconSection">
@@ -42,7 +31,7 @@ export const CardItem = ({
             <FollowIcon className='icon' />
           </div>
           <span className="iconNum">
-            {tweetCount}
+            1.5K
           </span>
         </div>
         <div className="iconGroup">
@@ -50,17 +39,17 @@ export const CardItem = ({
             <LikeIcon className='icon' />
           </div>
           <span className="iconNum">
-            {likesCount}
+            20K
           </span>
         </div>
       </div>
       <div className="followSection">
         <div className="followGroup">
-          <span className="followNum">{followingsCount}個</span>
+          <span className="followNum">34個</span>
           <span className="folloerNum">跟隨中</span>
         </div>
         <div className="followGroup">
-          <span className="followNum">{followersCount}位</span>
+          <span className="followNum">59</span>
           <span className="folloerNum">跟隨者</span>
         </div>
       </div>
@@ -70,45 +59,27 @@ export const CardItem = ({
 
 // CardList 父元件
 export const CardList = () => {
-
-  const [users, setUsers] = useState([])
-
-  // 透過API獲取使用者資料
-  useEffect(() => {
-    const getAllUsersAdminAsync = async () => {
-
-      try {
-        const datas = await getAllUsersAdmin()
-        setUsers(datas.map((data) => ({ ...data })))
-        // console.log('setUser後的值', datas)
-
-      } catch (error) {
-        console.error(error)
-      }
-    }
-    getAllUsersAdminAsync()
-  }, [])
-
-
-
   return (
     <div className="cardListWrapper">
       <TweetTitle title="使用者列表" />
       <div className="cardListContent">
         <div className="cardListContainer">
-          {users.map((user) => (
-            <CardItem
-              key={user.id}
-              avatar={user.avatar}
-              name={user.name}
-              img={user.banner}
-              account={user.account}
-              tweetCount={user.Tweets}
-              likesCount={user.LikeTweets}
-              followingsCount={user.Followings}
-              followersCount={user.Followers}
-            />
-          ))}
+          <CardItem />
+          <CardItem />
+          <CardItem />
+          <CardItem />
+          <CardItem />
+          <CardItem />
+          <CardItem />
+          <CardItem />
+          <CardItem />
+          <CardItem />
+          <CardItem />
+          <CardItem />
+          <CardItem />
+          <CardItem />
+          <CardItem />
+          <CardItem />
         </div>
       </div>
     </div>

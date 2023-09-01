@@ -23,8 +23,8 @@ export const IconInfo = ({ setShowReplyModal, id, name, account, avatar, descrip
   const selfId = JSON.parse(localStorage.getItem("userInfo")).id
   const otherId = localStorage.getItem("otherUserId")
 
+  // 渲染
   const [liked, setLiked] = useState(false)
-  
   useEffect(() => {
     if(pathname === '/main') {
       const mainIdArray = LikeUsers.map(LikeUser => LikeUser.userId)
@@ -35,87 +35,120 @@ export const IconInfo = ({ setShowReplyModal, id, name, account, avatar, descrip
       }
     }
 
-    if(tab === 'tweet') {
-      const idArray = LikeUsers.map(LikeUser => LikeUser.id)
-      if(pathname === '/user/self') {
+    if(pathname === '/user/self') {
+      if(tab === 'tweet') {
+        const idArray = LikeUsers.map(LikeUser => LikeUser.id)
         if(idArray.includes(selfId)) {
           setLiked(true)
         }
-      } else if(pathname === '/user/other') {
-        if(idArray.includes(otherId)) {
+      } else if(tab === 'like') {
+        setLiked(true)
+      }
+    }
+
+    if(pathname === '/user/other') {
+      if(tab === 'tweet') {
+        const idArray = LikeUsers.map(LikeUser => LikeUser.id)
+        if(idArray.includes(selfId)) {
           setLiked(true)
         }
       }
-    } else if(tab === 'like') {
-      setLiked(true)
     }
   })
 
+  // 串接 addLike API
   const [like, setLike] = useState(isLiked)
-
   const handleLike = async () => {
-    if(pathname === '/user/self' || pathname === '/user/other') {
-      try {
-        const Token = localStorage.getItem("authToken");
-        let data = []
-        if(like === true) {
-          data = await removeLike(Token, id)
-          console.log(removeLike)
-
-        } else {
-          data = await addLike(Token, id)
-          console.log(addLike)
-        }
-        setLike(data.isLiked)
-      } catch(err){
-        console.log(err)
+    try {
+      const Token = localStorage.getItem("authToken");
+      let data = []
+      if(like === true) {
+        data = await removeLike(Token, id)
+      } else {
+        data = await addLike(Token, id)
       }
-    }
-
-    if(pathname === '/main') {
-      try {
-        const Token = localStorage.getItem("authToken");
-        let data = []
-        if(like === true) {
-          data = await removeLike(Token, id)
-        } else {
-          data = await addLike(Token, id)
-        }
-        setLike(data.isLiked)
-      } catch(err){
-        console.log(err)
-      }
+      setLike(data.isLiked)
+    } catch(err) {
+      console.log(err)
     }
   }
 
   return (
     <div className="iconInfo">
-      <div className="comments">
-        <div className="iconBox" onClick={() => {
-          setShowReplyModal(true)
-          console.log(showReplyModal)
-          if(pathname === '/user/self') {
-            navigate('reply_list/reply_modal')
-            return
-          }
-          navigate('reply_modal',{state: { id, name, account, avatar, description, createdAt }}) 
-        }}>
-          <ChatHollowIcon className="icon" />
+      {pathname === '/main' &&
+      <>
+        <div className="comments">
+          <div className="iconBox" onClick={() => {
+            setShowReplyModal(true)
+            console.log(showReplyModal)
+            if(pathname === '/user/self') {
+              navigate('reply_list/reply_modal')
+              return
+            }
+            navigate('reply_modal',{state: { id, name, account, avatar, description, createdAt }}) 
+          }}>
+            <ChatHollowIcon className="icon" />
+          </div>
+          <div className="number">
+            {replyCount}
+          </div>
         </div>
-        <div className="number">
-          {replyCount}
+        <div className="likes" onClick={handleLike}>
+          <div className="iconBox" >
+            {liked ? 
+              <LikeIcon className="likeIcon" /> : 
+              <LikeHollowIcon className="icon" />}
+          </div>
+          <div className="number">
+            {likeCount}
+          </div>
         </div>
-      </div>
-      <div className="likes" onClick={handleLike}>
-        <div className="iconBox" >
-          {liked ? 
-            <LikeIcon className="likeIcon" /> : 
-            <LikeHollowIcon className="icon" />}
+      </>
+      }
+      {pathname === '/user/self' &&
+      <>
+        <div className="comments">
+          <div className="UserIconBox">
+            <ChatHollowIcon className="icon" />
+          </div>
+          <div className="number">
+            {replyCount}
+          </div>
         </div>
-        <div className="number">
-          {likeCount}
+        <div className="likes">
+          <div className="UserIconBox" >
+            {liked ? 
+              <LikeIcon className="userLikeIcon" /> : 
+              <LikeHollowIcon className="userIcon" />}
+          </div>
+          <div className="number">
+            {likeCount}
+          </div>
         </div>
-      </div>
+      </>
+      }
+      {pathname === '/user/other' &&
+      <>
+        <div className="comments">
+          <div className="UserIconBox">
+            <ChatHollowIcon className="icon" />
+          </div>
+          <div className="number">
+            {replyCount}
+          </div>
+        </div>
+        <div className="likes">
+          <div className="UserIconBox" >
+            {liked ? 
+              <LikeIcon className="userLikeIcon" /> : 
+              <LikeHollowIcon className="userIcon" />}
+          </div>
+          <div className="number">
+            {likeCount}
+          </div>
+        </div>
+      </>
+      }
     </div>
   )
 }
@@ -130,9 +163,9 @@ export const ReplyInfo = ({ account }) => {
 
 export const Tweet = ({ children, id, name, account, description, avatar, createdAt, UserId, isLiked }) => {
   const navigate = useNavigate()
+  const pathname = useLocation().pathname
 
   const { setUser } = useContext(PageContext)
-  const { showReplyModal } = useContext
 
   const selfId = JSON.parse(localStorage.getItem("userInfo")).id
   const clickedUserId = UserId
@@ -160,17 +193,19 @@ export const Tweet = ({ children, id, name, account, description, avatar, create
           <div className="account">@{account}</div>
           <div className="time">．{createdAt}</div>
         </div>
-        {showReplyModal ?
-          // 如果是ReplyModal裡面的Tweet，不能被點擊
-          <div className="replyTweetContent" >
-            {description}
-          </div> :
+        
+        {pathname === '/main' ?
+          // 只有在主頁的tweet貼文方塊可以被點擊
           <div 
             className="tweetContent" 
-            onClick={() => navigate('/reply_list', {state: { id, name, account, description, avatar, isLiked }})}
+            onClick={() => navigate('/reply_list', {state: { id, name, account, description, avatar, isLiked, UserId }})}
           >
             {description}
           </div>
+          :
+          <div className="replyTweetContent" >
+            {description}
+          </div> 
         }
         {children}
       </div>

@@ -2,6 +2,13 @@ import './AdminUser.scss'
 import { ReactComponent as FollowIcon } from 'assets/icons/write.svg'
 import { ReactComponent as LikeIcon } from 'assets/icons/like_hollow.svg'
 import { TweetTitle } from '../AdminTweet/AdminTweet'
+import { useState, useEffect } from 'react'
+import { getAllUsersAdmin } from 'api/tweets'
+
+
+import avatarDefulat from 'assets/images/default.png'
+import bannerDefault from 'assets/images/flowers.png'
+
 
 // CardItem 子元件
 export const CardItem = () => {

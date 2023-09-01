@@ -176,7 +176,8 @@ export default function AuthContextProvider({ children }) {
             account: data.account,
             password: data.password
           })
-        
+          
+          console.log('adminLogin: ', response)
 
           if (response) {
             if (response.status === "success") {

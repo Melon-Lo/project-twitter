@@ -40,7 +40,8 @@ export const adminLogin = async ({ account, password }) => {
     if (authToken) {
       return { status: "success", ...response.data }
     }
-    
+
+
     return response;
   } catch (error) {
     console.error("[Admin Login Failed]", error);

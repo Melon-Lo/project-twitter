@@ -1,6 +1,6 @@
 import './Login.scss'
 import Swal from 'sweetalert2'
-import { useState, useContext } from 'react'
+import { useState, useContext, useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import { AuthInput } from 'components/SignUp/SignUp'
 import { TopIcon } from 'components/SignUp/SignUp'
@@ -50,57 +50,28 @@ export const Login = () => {
     navigate('/main')
   }
 
-  const handleLogin = (event) => {
+  // const handleSubmit = (e) => {
+  //   e.preventDefault();
+  // }
 
-    // 按下登入
-    if (event.currentTarget.classList.contains('orange')) {
-      // 登入成功訊息
-      Swal.fire({
-        position: 'top',
-        title: '登入成功！',
-        timer: 1000,
-        icon: 'success',
-        showConfirmButton: false,
-      });
+  let userInfo = {}
+  let role = ""
+  if (localStorage.getItem("userInfo")) {
+    userInfo = JSON.parse(localStorage.getItem("userInfo"))
+    role = userInfo.role
 
-      // 等串接API後，會有登入失敗的狀況
-
-      //按下後台登入 
-    // } else if (event.currentTarget.classList.contains('back-signup-link')) {
-    //   setTimeout(event.href='http://localhost:3000/admin-login', 10000)
-
-    //   Swal.fire({
-    //     icon: 'question',
-    //     title: '後台登入確認',
-    //     text: '您確定要登入後台頁面?',
-    //   })
-    } else if (event.currentTarget.classList.contains('cancel-link')) {
-      Swal.fire({
-        title: '您確定要取消註冊嗎?',
-        showCancelButton: true,
-        confirmButtonText: '確定',
-      }).then((result) => {
-        /* Read more about isConfirmed, isDenied below */
-        if (result.isConfirmed) {
-          Swal.fire('已取消!', '', 'success')
-        }
-      })
-    }
   }
 
-   // 可加入context中，重複使用
-  // const handleCancel = () => {
-  //   Swal.fire({
-  //     title: '您確定要取消註冊嗎?',
-  //     showCancelButton: true,
-  //     confirmButtonText: '確定',
-  //   }).then((result) => {
-  //     /* Read more about isConfirmed, isDenied below */
-  //     if (result.isConfirmed) {
-  //       Swal.fire('已取消!', '', 'success')
-  //     }
-  //   })
-  // }
+  useEffect(() => {
+    if (role === "user") {
+      navigate("/main")
+    } else if (role === "admin") {
+      navigate("/admin_main")
+    } else {
+      navigate("/login")
+    }
+  },[])
+
 
 
   return (

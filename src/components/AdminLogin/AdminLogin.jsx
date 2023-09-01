@@ -1,6 +1,6 @@
 import './AdminLogin.scss'
 import Swal from 'sweetalert2'
-import { useState, useContext, useEffect } from 'react'
+import { useState, useContext } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { Link } from 'react-router-dom'
 import { AuthInput } from 'components/SignUp/SignUp'

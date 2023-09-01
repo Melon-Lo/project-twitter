@@ -87,11 +87,11 @@ export const OtherUser = () => {
       if(isFollowing === true) {
         const res = await removeFollowing(otherUserId)
         setIsFollowing(false)
-        console.log(res.data)
+        // console.log(res.data)
       } else if(isFollowing === false) {
         const res = await addFollowing(otherUserId)
         setIsFollowing(true)
-        console.log(res.data)
+        // console.log(res.data)
       }
     } catch(err) {
       console.log(err)

@@ -95,7 +95,7 @@ export const Setting = () => {
     }
 
     const res = await putUserData({id, account, name, email, password, checkPassword: passwordCheck, introduction})
-    console.log(res)
+    // console.log(res)
 
     // 認證通過：送出資料，彈出成功視窗
     Swal.fire("修改成功！")

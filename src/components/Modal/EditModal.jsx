@@ -11,7 +11,8 @@ import { ReactComponent as CloseIcon } from 'assets/icons/close.svg'
 import { ReactComponent as AddPhotoIcon } from 'assets/icons/add_photo_hollow.svg'
 
 // api
-import { putUserData } from 'api/users'
+// import { putUserData } from 'api/users'
+import { putSelfData } from 'api/users'
 
 export const EditModal = ({ avatarImg, bannerImg }) => {
   const id = JSON.parse(localStorage.getItem("userInfo")).id
@@ -55,15 +56,11 @@ export const EditModal = ({ avatarImg, bannerImg }) => {
     const formData = new FormData()
     formData.append('avatar', avatar)
     formData.append('banner', banner)
+    formData.append('name', name)
+    formData.append('introduction', introduction)
 
-    console.log(avatar)
-    console.log(banner)
-
-    const res = await putUserData({id, name, introduction, avatar: formData.avatar, banner: formData.banner})
-    console.log(res)
-
-    // 等api修改完成
-    // const res = await putUserData({id, account, name, email})
+    const res = await putSelfData(id, formData)
+    // console.log(res)
 
     // 認證通過：送出資料，彈出成功視窗
     Swal.fire("修改成功！")
@@ -128,10 +125,13 @@ export const EditModal = ({ avatarImg, bannerImg }) => {
           accept=".jpg"
           onChange={(e) => {
             const selectedFile = e.target.files[0];
-            console.log(selectedFile)
-            setBanner(selectedFile)
+            if(selectedFile) {
+              const selectedFile = e.target.files[0];
+              if (selectedFile) {
+                setBanner(selectedFile)
+              } 
+            }
           }}
-          onClick={() => console.log(banner)}
         />
       </div>
       <div className="editSection">
@@ -148,10 +148,8 @@ export const EditModal = ({ avatarImg, bannerImg }) => {
               const selectedFile = e.target.files[0];
               if (selectedFile) {
                 setAvatar(selectedFile)
-                console.log(selectedFile)
-              }
+              } 
             }}
-            onClick={() => console.log(avatar)}
           />
         </div>
         <div className="edit">

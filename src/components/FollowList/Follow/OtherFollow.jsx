@@ -43,11 +43,11 @@ export const OtherFollow = ({
       if(isFollowing === true) {
         const res = await removeFollowing(followId)
         setIsFollowing(false)
-        console.log(res.data)
+        // console.log(res.data)
       } else if(isFollowing === false) {
         const res = await addFollowing(followId)
         setIsFollowing(true)
-        console.log(res.data)
+        // console.log(res.data)
       }
     } catch(err) {
       console.log(err)

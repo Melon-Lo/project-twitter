@@ -80,7 +80,6 @@ export const IconInfo = ({ setShowReplyModal, id, name, account, avatar, descrip
         <div className="comments">
           <div className="iconBox" onClick={() => {
             setShowReplyModal(true)
-            console.log(showReplyModal)
             if(pathname === '/user/self') {
               navigate('reply_list/reply_modal')
               return

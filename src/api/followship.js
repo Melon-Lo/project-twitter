@@ -25,7 +25,7 @@ axiosInstance.interceptors.request.use(
 export const addFollowing = async (id) => {
   try {
     const { data } = await axiosInstance.post(`${baseURL}/followships`, { id })
-    console.log(data)
+    // console.log(data)
     return data
   } catch (err) {
     console.log(err.response.data.message)

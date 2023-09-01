@@ -1,9 +1,10 @@
 import './Reply.scss'
 
-import { useNavigate } from 'react-router-dom'
+import { useNavigate, useLocation } from 'react-router-dom'
 
 export const Reply = ({ reply }) => {
   const navigate = useNavigate()
+  const pathname = useLocation().pathname
   const { id, UserId, comment, createdAt, poster } = reply
   const { account, name, avatar } = reply.User
 
@@ -18,12 +19,14 @@ export const Reply = ({ reply }) => {
           src={avatar} 
           alt="avatar" 
           onClick={() => {
-            localStorage.setItem("otherUserId", UserId)
-            if(selfId === clickedUserId) {
-              navigate('/user/self')
-            } else {
-              navigate('/user/other')   
-            }    
+            if(pathname === '/main' || pathname === 'reply_list') {
+              localStorage.setItem("otherUserId", UserId)
+              if(selfId === clickedUserId) {
+                navigate('/user/self')
+              } else {
+                navigate('/user/other')   
+              } 
+            }
           }}
         />
       </div>

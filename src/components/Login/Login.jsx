@@ -19,11 +19,22 @@ export const Login = () => {
 
   const handleClick = async () => {
     // 檢查格式是否符合需求
-    if (account.trim().length === 0 || password.trim().length === 0) return
+    if (account.trim().length === 0 || password.trim().length === 0){
+      Swal.fire({
+        position: 'top',
+        title: '請輸入帳號密碼！',
+        timer: 1000,
+        icon: 'error',
+        showConfirmButton: false,
+      });
+
+      return
+    } 
     const response = await login({ account, password })
 
     // 登入失敗
     if (!response.data) {
+
       if (response.response.data.status === "error") 
       setIsAuthenticated(false)
       // 登入失敗訊息

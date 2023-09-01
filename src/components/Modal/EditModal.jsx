@@ -22,8 +22,8 @@ export const EditModal = ({ avatarImg, bannerImg }) => {
   // 設置輸入資料的狀態
   const [name, setName] = useState('')
   const [introduction, setIntroduction] = useState('')
-  const [banner, setBanner] = useState('')
-  const [avatar, setAvatar] = useState('')
+  const [banner, setBanner] = useState(null)
+  const [avatar, setAvatar] = useState(null)
 
   // 字數限制
   const nameLimit = 50
@@ -59,7 +59,7 @@ export const EditModal = ({ avatarImg, bannerImg }) => {
     console.log(avatar)
     console.log(banner)
 
-    const res = await putUserData({id, name, introduction}, formData)
+    const res = await putUserData({id, name, introduction, avatar: formData.avatar, banner: formData.banner})
     console.log(res)
 
     // 等api修改完成
@@ -128,8 +128,8 @@ export const EditModal = ({ avatarImg, bannerImg }) => {
           accept=".jpg"
           onChange={(e) => {
             const selectedFile = e.target.files[0];
-            const imageURL = URL.createObjectURL(selectedFile)
-            setBanner({ name: selectedFile.name, url: imageURL})
+            console.log(selectedFile)
+            setBanner(selectedFile)
           }}
           onClick={() => console.log(banner)}
         />

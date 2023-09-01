@@ -89,7 +89,8 @@ export const Setting = () => {
       return
     }
 
-    const res = await putUserData({id, account, name, email, password})
+    console.log(passwordCheck)
+    const res = await putUserData({id, account, name, email, password, checkPassword: passwordCheck})
     console.log(res)
 
     // 認證通過：送出資料，彈出成功視窗
@@ -180,7 +181,10 @@ export const Setting = () => {
               name="passwordCheck" 
               className="inputBox" 
               type="password" 
-              onChange={(e) => setPasswordCheck(e.target.value)}
+              onChange={(e) => {
+                console.log(e.target.value)
+                setPasswordCheck(e.target.value)
+              }}
               value={passwordCheck}
             />
           </div>

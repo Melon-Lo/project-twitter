@@ -19,7 +19,7 @@ export const Reply = ({ reply }) => {
           src={avatar} 
           alt="avatar" 
           onClick={() => {
-            if(pathname === '/main' || pathname === 'reply_list') {
+            if(pathname === '/main' || pathname === '/reply_list') {
               localStorage.setItem("otherUserId", UserId)
               if(selfId === clickedUserId) {
                 navigate('/user/self')

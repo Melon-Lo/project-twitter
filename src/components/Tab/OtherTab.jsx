@@ -45,7 +45,10 @@ const UserTweet = ({ tweets }) => {
             />
           )
         }))
-        : '尚未發佈任何貼文'}
+        : 
+        <div className='none'>
+          尚未發佈任何貼文
+        </div>}
     </>
   )
 }
@@ -59,7 +62,10 @@ const UserReply = ({ replies }) => {
             <Reply key={reply.id} reply={reply} />
           )
         }))
-      : '尚未發佈任何回覆'}
+      : 
+      <div className='none'>
+        尚未發佈任何回覆
+      </div>}
     </>
   )
 }
@@ -92,7 +98,10 @@ const UserLike = ({ tweets }) => {
             />
           )
         }))
-        : '尚未喜歡任何貼文'}
+        : 
+        <div className='none'>
+        尚未喜歡任何貼文
+        </div>}
     </>
   )
 }
@@ -225,6 +234,7 @@ export const OtherFollowTab = () => {
             const { followingAvatar, followingIntroduction, followingName, followingId, id } = following
             return (
               <OtherFollow 
+                key={id}
                 id={id}
                 avatar={followingAvatar}
                 description={followingIntroduction}
@@ -233,7 +243,10 @@ export const OtherFollowTab = () => {
               />
             )
           }))
-        : '尚未有任何的追蹤者'}
+        : 
+        <div className='none'>
+        尚未有任何追蹤者
+        </div>}
       </>
     )
   }
@@ -247,6 +260,7 @@ export const OtherFollowTab = () => {
 
             return (
               <OtherFollow
+                key={id}
                 id={id}
                 avatar={followerAvatar}
                 description={followerIntroduction}
@@ -255,7 +269,10 @@ export const OtherFollowTab = () => {
               />
             )
           }))
-        : '尚未有任何的追隨者'}
+        : 
+        <div className='none'>
+          尚未有任何追隨者
+        </div>}
       </>
     )
   }

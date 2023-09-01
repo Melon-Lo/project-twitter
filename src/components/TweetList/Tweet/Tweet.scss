@@ -18,6 +18,19 @@
     }
   }
 
+  .invalidAvatarBox {
+    width: 50px;
+    height: 50px;
+    margin: 10px 10px 0 10px;
+    border-radius: 50%;
+    z-index: 5;
+
+    img {
+      width: 100%;
+      height: 100%;
+    }
+  }
+
   .tweetInfo {
     width: 85%;
 
@@ -30,7 +43,6 @@
       .name {
         font-weight: 700;
         font-size: 16px;
-        cursor: pointer;
       }
 
       .account {

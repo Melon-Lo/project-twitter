@@ -1,6 +1,7 @@
 import './Follow.scss'
 
 import { useState, useEffect } from 'react'
+import Swal from 'sweetalert2'
 
 // import API
 import { getUserFollowings } from 'api/users'
@@ -37,6 +38,17 @@ export const Follow = ({
 
   // 串接（取消）追蹤功能
   const handleFollow = async () => {
+    if(selfId === followId) {
+      Swal.fire({
+        position: 'top',
+        title: '不能追蹤自己！',
+        timer: 1000,
+        icon: 'error',
+        showConfirmButton: false,
+      });
+      return
+    }
+
     try {
       if(isFollowing) {
         const res = await removeFollowing(followId)
@@ -53,7 +65,7 @@ export const Follow = ({
   }  
 
   return (
-    <div className="followItem" key={id}>
+    <div className="followItem">
       <div className="name">{name}</div>
       <div className="content">{description}</div>
       <div className="avatarBox">

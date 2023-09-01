@@ -89,7 +89,10 @@ export const TweetList = ({ tweets }) => {
               />
             )
           }))
-          : '尚未發佈任何貼文'}
+          :
+          <div className='loading'>
+            Loading...  
+          </div>}
       </div>
     </div>
   )

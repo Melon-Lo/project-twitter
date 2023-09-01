@@ -184,7 +184,7 @@ export const Tweet = ({ children, id, name, account, description, avatar, create
 
   return (
     <div className="tweetItem" key={id}>
-      <div className="avatarBox" onClick={checkUser}>
+      <div className={pathname === '/main' || pathname === '/reply_list' ? 'avatarBox' : 'invalidAvatarBox'} onClick={checkUser}>
         <img className="avatar" src={avatar} alt="avatar" />
       </div>
       <div className="tweetInfo">

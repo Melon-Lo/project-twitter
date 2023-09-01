@@ -14,8 +14,8 @@ import { ReactComponent as BackIcon } from 'assets/icons/back.svg'
 import { ReactComponent as MailHollowIcon } from 'assets/icons/mail_hollow.svg'
 import { ReactComponent as NotiHollowIcon } from 'assets/icons/noti_hollow.svg'
 import { ReactComponent as NotiActiveIcon } from 'assets/icons/noti_active.svg'
-import { ReactComponent as DefaultBanner } from 'assets/images/default_banner.svg'
-import { ReactComponent as DefaultAvatar } from 'assets/images/default_avatar.svg'
+import DefaultAvatar from 'assets/images/default_avatar.svg'
+import DefaultBanner from 'assets/images/default_banner.svg'
 
 // import api
 import { getUserData } from 'api/users'
@@ -77,9 +77,9 @@ export const OtherUser = () => {
       }
     }
 
-    checkIsFollowing()
     getUserDataAsync()
-  }, [])  
+    checkIsFollowing()
+  }, [otherUserId])  
 
   // 串接
   const handleFollow = async () => {
@@ -112,7 +112,7 @@ export const OtherUser = () => {
         </div>
         <div className="userBox">
           <div className="coverBox">
-            <img src={banner ? banner : <DefaultBanner />} alt="coverImage" />
+            <img src={banner ? banner : DefaultBanner} alt="coverImage" />
           </div>
           <div className="infoBox">
             <div className="buttons">
@@ -148,7 +148,7 @@ export const OtherUser = () => {
               }
             </div>
             <div className="avatarBox">
-              <img className="avatar" src={avatar ? avatar : <DefaultAvatar />} alt="avatar" />
+              <img className="avatar" src={avatar ? avatar : DefaultAvatar} alt="avatar" />
             </div>
             <div className="info">
               <div className="name">{name}</div>

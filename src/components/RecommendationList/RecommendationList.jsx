@@ -15,7 +15,6 @@ export const RecommendationList = () => {
     const getTop10UsersAsync = async () => {
       try {
         const users = await getTop10Users()
-        console.log(users)
         if(users) {
           setUsers(users.map((user) => ({ ...user })))
         } else {
@@ -30,9 +29,7 @@ export const RecommendationList = () => {
   }, [])
 
   return (
-    <div className="recommendationContainer"
-      onClick={() => console.log(users)}
-    >
+    <div className="recommendationContainer">
       <div className="title">推薦跟隨</div>
       <div className="people">
         {users.length !== 0 ?
@@ -40,6 +37,7 @@ export const RecommendationList = () => {
             const { id, name, avatar, Followers, account } = user
             return (
               <Recommendation 
+                key={id}
                 id={id}
                 name={name}
                 avatar={avatar}
@@ -48,7 +46,10 @@ export const RecommendationList = () => {
               />
             )
           }))
-        : '尚未有任何成員'}
+        : 
+        <div className='loading'>
+          Loading...  
+        </div>}
       </div>
     </div>
   )

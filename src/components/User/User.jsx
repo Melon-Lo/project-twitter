@@ -13,8 +13,8 @@ import { Tab } from 'components/Tab/Tab'
 
 // import icons & images
 import { ReactComponent as BackIcon } from 'assets/icons/back.svg'
-import { ReactComponent as DefaultBanner } from 'assets/images/default_banner.svg'
-import { ReactComponent as DefaultAvatar } from 'assets/images/default_avatar.svg'
+import DefaultAvatar from 'assets/images/default_avatar.svg'
+import DefaultBanner from 'assets/images/default_banner.svg'
 
 // import api
 import { getUserData } from 'api/users'
@@ -51,7 +51,6 @@ export const User = () => {
         setFollowingsCount(data.followingsCount)
         setTweetsCount(data.tweetsCount)
         setIntroduction(data.introduction)
-        // console.log(data)
       } catch (error) {
         console.error(error)
       }
@@ -73,11 +72,11 @@ export const User = () => {
           </div>
         </div>
         {showModal &&
-          <EditModal avatarImg={avatar === null ? <DefaultAvatar /> : avatar } bannerImg={banner === null ? <DefaultBanner /> : banner }/>
+          <EditModal avatarImg={avatar === null ? DefaultAvatar : avatar } bannerImg={banner === null ? DefaultBanner : banner }/>
         }
         <div className="userBox">
           <div className="coverBox">
-            <img src={banner === null ? <DefaultBanner /> : banner } alt="banner" />
+            <img src={banner === null ? DefaultBanner : banner } alt="banner" />
           </div>
           <div className="infoBox">
             <button onClick={() => {
@@ -87,7 +86,7 @@ export const User = () => {
               編輯個人資料
             </button>
             <div className="avatarBox">
-              <img className="avatar" src={avatar === null ? <DefaultAvatar /> : avatar } alt="avatar" />
+              <img className="avatar" src={avatar === null ? DefaultAvatar : avatar } alt="avatar" />
             </div>
             <div className="info">
               <div className="name">{name}</div>

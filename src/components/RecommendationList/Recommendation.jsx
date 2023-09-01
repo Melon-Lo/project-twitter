@@ -1,12 +1,16 @@
 import './Recommendation.scss'
 
 import { useEffect, useState } from 'react'
-import clsx from 'clsx'
+import Swal from 'sweetalert2'
+import DefaultAvatar from 'assets/images/default_avatar.svg'
+import { useNavigate } from 'react-router-dom'
 
 // API
 import { addFollowing, removeFollowing } from 'api/followship'
 
 export const Recommendation = ({ id, name, avatar, account, Followers }) => {
+  const navigate = useNavigate()
+
   // 取得當前使用者ID
   const selfId = JSON.parse(localStorage.getItem("userInfo")).id  
 
@@ -28,6 +32,17 @@ export const Recommendation = ({ id, name, avatar, account, Followers }) => {
 
   // 串接（取消）追蹤功能
   const handleFollow = async () => {
+    if(selfId === id) {
+      Swal.fire({
+        position: 'top',
+        title: '不能追蹤自己！',
+        timer: 1000,
+        icon: 'error',
+        showConfirmButton: false,
+      });
+      return
+    }
+
     try {
       if(isFollowing) {
         const res = await removeFollowing(id)
@@ -42,8 +57,10 @@ export const Recommendation = ({ id, name, avatar, account, Followers }) => {
   }
 
   return (
-    <div className="person" key={id}>
-      <div className="avatarBox"><img className="avatar" src={avatar} alt="avatar" /></div>
+    <div className="person">
+      <div className="avatarBox">
+        <img className="avatar" src={avatar ? avatar : DefaultAvatar} alt="avatar" />
+      </div>
       <div className="account">
         <div className="accountTitle">{name}</div>
         <div className="accountContent">@{account}</div>

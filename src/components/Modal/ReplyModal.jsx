@@ -30,7 +30,7 @@ export const ReplyModal = ({ setShowReplyModal }) => {
 
   // 數字統計與字數限制
   const contentLength = content.length
-  const contentLimit = 160
+  const contentLimit = 140
 
   // 設置驗證狀態
   const [contentIsValid, setContentIsValid] = useState(false)
@@ -40,7 +40,7 @@ export const ReplyModal = ({ setShowReplyModal }) => {
 
   // 驗證函式，每次textarea改變時執行
   function checkContent(inputValue) {
-    // 如果推文超過160個字符，不通過
+    // 如果推文超過140個字符，不通過
     if(inputValue.trim().length > contentLimit) {
       return setAlert(true)
     } else {
@@ -140,7 +140,7 @@ export const ReplyModal = ({ setShowReplyModal }) => {
         }}
       >
       </textarea>
-      {alert && <div className='alert'>回覆字數超過上限！（最多160字）</div>}
+      {alert && <div className='alert'>回覆字數超過上限！（最多140字）</div>}
       <div className="wordCount">
         {contentLength}/{contentLimit}
       </div>

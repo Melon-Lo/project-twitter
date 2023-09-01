@@ -2,11 +2,9 @@ import './OtherUser.scss'
 
 // import dependencies
 import { useState, useEffect, useContext } from 'react'
-import { ModalContext } from 'context/ModalContext'
 import { PageContext } from 'context/PageContext'
 import { useNavigate } from 'react-router-dom'
 import { TabContext } from 'context/TabContext'
-import clsx from 'clsx'
 
 // import components
 import { OtherTab } from 'components/Tab/OtherTab'
@@ -25,11 +23,9 @@ import { addFollowing, removeFollowing } from 'api/followship'
 import { getUserFollowings } from 'api/users'
 
 export const OtherUser = () => {
-  const [following, setFollowing] = useState(false)
   const [noti, setNoti] = useState(false)
   const { setFollowTab } = useContext(TabContext)
   const navigate = useNavigate()
-  const { setUser } = useContext(PageContext)
 
   // 取得當前使用者ID
   const id = JSON.parse(localStorage.getItem("userInfo")).id
@@ -62,7 +58,6 @@ export const OtherUser = () => {
         setFollowingsCount(data.followingsCount)
         setTweetsCount(data.tweetsCount)
         setIntroduction(data.introduction)
-        // console.log(data)
       } catch (error) {
         console.error(error)
       }
@@ -74,10 +69,8 @@ export const OtherUser = () => {
         const followingIdArray = followings.map(following => following.followingId)
         if(followingIdArray.includes(otherUserId)) {
           setIsFollowing(true)
-          console.log(isFollowing)
         } else {
           setIsFollowing(false)
-          console.log(isFollowing)
         }
       } catch (error) {
         console.error(error)
@@ -93,9 +86,11 @@ export const OtherUser = () => {
     try {
       if(isFollowing === true) {
         const res = await removeFollowing(otherUserId)
+        setIsFollowing(false)
         console.log(res.data)
       } else if(isFollowing === false) {
         const res = await addFollowing(otherUserId)
+        setIsFollowing(true)
         console.log(res.data)
       }
     } catch(err) {

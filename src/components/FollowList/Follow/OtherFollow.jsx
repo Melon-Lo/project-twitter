@@ -1,12 +1,13 @@
-import './Follow.scss'
+import './OtherFollow.scss'
 
 import { useState, useEffect } from 'react'
+import clsx from 'clsx'
 
 // import API
 import { getUserFollowings } from 'api/users'
 import { addFollowing, removeFollowing } from 'api/followship'
 
-export const Follow = ({
+export const OtherFollow = ({
   avatar,
   description,
   name,
@@ -14,6 +15,7 @@ export const Follow = ({
   // 先拿追蹤者／追隨者的id，之後做使用
   followId,
 }) => {
+  const [following, setFollowing] = useState(false)
 
   // 取得當前使用者ID
   const selfId = JSON.parse(localStorage.getItem("userInfo")).id
@@ -50,10 +52,10 @@ export const Follow = ({
     } catch(err) {
       console.log(err)
     }
-  }  
+  } 
 
   return (
-    <div className="followItem" key={id}>
+    <div className="otherFollowItem" key={id}>
       <div className="name">{name}</div>
       <div className="content">{description}</div>
       <div className="avatarBox">

@@ -13,30 +13,19 @@ export const Login = () => {
   const [account, setAccount] = useState('')
   const [password, setPassword] = useState('')
 
-  const { login, setIsAuthenticated } = useContext(AuthContext) 
+  const { login, setIsAuthenticated } = useContext(AuthContext)
 
   const navigate = useNavigate()
 
   const handleClick = async () => {
     // 檢查格式是否符合需求
-    if (account.trim().length === 0 || password.trim().length === 0){
-      Swal.fire({
-        position: 'top',
-        title: '請輸入帳號密碼！',
-        timer: 1000,
-        icon: 'error',
-        showConfirmButton: false,
-      });
-
-      return
-    } 
+    if (account.trim().length === 0 || password.trim().length === 0) return
     const response = await login({ account, password })
 
     // 登入失敗
     if (!response.data) {
-
-      if (response.response.data.status === "error") 
-      setIsAuthenticated(false)
+      if (response.response.data.status === "error")
+        setIsAuthenticated(false)
       // 登入失敗訊息
       Swal.fire({
         position: 'top',
@@ -45,7 +34,7 @@ export const Login = () => {
         icon: 'error',
         showConfirmButton: false,
       });
-      return 
+      return
     }
 
     // 登入成功
@@ -61,9 +50,9 @@ export const Login = () => {
     navigate('/main')
   }
 
-  // const handleSubmit = (e) => {
-  //   e.preventDefault();
-  // }
+  const handleSubmit = (e) => {
+    e.preventDefault();
+  }
 
   let userInfo = {}
   let role = ""
@@ -81,8 +70,7 @@ export const Login = () => {
     } else {
       navigate("/login")
     }
-  },[])
-
+  }, [])
 
 
   return (
@@ -90,37 +78,42 @@ export const Login = () => {
       <TopIcon title="登入 Alphitter" />
 
       {/* 記得有資料後，使用.map重複渲染 */}
-      {/* <form onSubmit={handleSubmit}> */}
+      <form onSubmit={handleSubmit}>
         <AuthInput
           id="account"
+          name="account"
+          type="text"
           label="帳號"
           value={account}
           placeholder="請輸入帳號"
           onChange={(accountInputValue) => setAccount(accountInputValue)}
+          valuelength={account.length}
+          textlength="20"
         />
         <AuthInput
           id="password"
+          name="account"
           type="password"
           label="密碼"
           value={password}
           placeholder="請輸入密碼"
           onChange={(passwordInputValue) => setPassword(passwordInputValue)}
+          valuelength={password.length}
+          textlength="50"
         />
-      {/* </form> */}
+      </form>
       <div className='btnGroup'>
         <OrangeBtn
           way="登入"
           onClick={handleClick}
         />
         <div className='aLink'>
-          <a href="#" className='cancel-link' onClick={() => navigate('/signup')}>註冊</a>
+          <a href="#" className='cancel-link' onClick={() => navigate('/signup')}>註冊
+          </a>
           <span className='point'>&bull;</span>
           <Link to="http://localhost:3000/admin-login" className='back-signup-link'>
             後台登入
           </Link>
-
-          {/* 不確定這樣寫O不OK */}
-          {/* <a href="http://localhost:3000/admin-login" className='back-signup-link' onClick={handleLogin}>後台登入</a> */}
         </div>
       </div>
     </div>

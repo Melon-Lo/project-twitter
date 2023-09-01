@@ -8,14 +8,15 @@ export const TweetTitle = ({ title }) => {
 }
 
 // TweetItem 子元件
-export const AdminTweetItem = ({ 
+export const AdminTweetItem = ({
+  avatar,
   tweet,
   name,
   account,
   time,
   content,
   onClick,
- }) => {
+}) => {
 
   const authToken = localStorage.getItem("authToken")
 
@@ -23,7 +24,7 @@ export const AdminTweetItem = ({
   return (
     <div className="AdminTweetItem">
       <div className="avatarBox">
-        <img className="avatar" src="https://www.pokemongoplusplus.com/img/img-2.jpg" alt="avatar" />
+        <img className="avatar" src={avatar} alt="avatar" />
       </div>
       <div className="tweetText">
         <div className="topText">
@@ -32,14 +33,14 @@ export const AdminTweetItem = ({
             <span className="smallText">@{account}·{time}</span>
           </div>
           <div className='closeBox'>
-            <CloseIcon 
+            <CloseIcon
               className='close'
-              onClick={() => onClick?.({ authToken: authToken , id: tweet.id })} 
+              onClick={() => onClick?.({ authToken: authToken, id: tweet.id })}
             />
           </div>
         </div>
         <div className="tweetContent">
-          {content} 
+          {content}
         </div>
       </div>
     </div>
@@ -71,23 +72,24 @@ export const AdminTweetList = () => {
     const getAllTweetsAdminAsync = async () => {
       try {
         const datas = await getAllTweetsAdmin()
-        setTweets(datas.map((data) => ({...data})))
+        setTweets(datas.map((data) => ({ ...data })))
         // console.log('setTweets後的值', datas)
 
-      } catch(error) {
+      } catch (error) {
         console.error(error)
       }
     }
     getAllTweetsAdminAsync()
-  },[])
+  }, [])
 
   return (
     <div className='TweetListWrapper'>
-      <TweetTitle title="推特清單" />
+      <TweetTitle title="推文清單" />
       <div className='TweetListContent'>
         {tweets.map((tweet) => (
-          <AdminTweetItem 
+          <AdminTweetItem
             key={tweet.id}
+            avatar={tweet.userAvatar}
             tweet={tweet}
             name={tweet.userName}
             account={tweet.userAccount}

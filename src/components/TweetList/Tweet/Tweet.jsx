@@ -194,7 +194,7 @@ export const Tweet = ({ children, id, name, account, description, avatar, create
           <div className="account">@{account}</div>
           <div className="time">．{createdAt}</div>
         </div>
-        {pathname === '/user/self' || pathname === '/user/other' || pathname === '/main/reply_modal' ?
+        {pathname === '/user/self' || pathname === '/user/other' || pathname === '/main/reply_modal' || pathname === 'reply_list/reply_modal' ?
           <div className="replyTweetContent" >
             {description}
           </div> :

@@ -1,6 +1,6 @@
 import './Setting.scss'
 import Swal from 'sweetalert2';
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useRef } from 'react'
 
 // API
 import { putUserData } from 'api/users';
@@ -10,7 +10,7 @@ const emailRule = /^\w+((-\w+)|(\.\w+))*\@[A-Za-z0-9]+((\.|-)[A-Za-z0-9]+)*\.[A-
 
 export const Setting = () => {
   // 取得當前使用者的id
-  const { id } = JSON.parse(localStorage.getItem("userInfo"))
+  const { id, introduction } = JSON.parse(localStorage.getItem("userInfo"))
 
   // 設置每個 input 的狀態
   const [account, setAccount] = useState('')
@@ -18,6 +18,13 @@ export const Setting = () => {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const [passwordCheck, setPasswordCheck] = useState('')
+
+  // useRef是用來存取當前最新的欄位資料
+  const accountInputRef = useRef(null)
+  const nameInputRef = useRef(null)
+  const emailInputRef = useRef(null)
+  const passwordRef = useRef(null)
+  const checkPasswordRef = useRef(null)
 
   // 字數統計與字數限制
   const accountLength = account.length
@@ -75,9 +82,7 @@ export const Setting = () => {
   })
 
   // 表單送出函式，當驗證全通過時才會送出
-  const onFormSubmit = async (e) => {
-    e.preventDefault()
-
+  const onFormSubmit = async () => {
     // 認證不通過：不送出
     if(!accountIsValid || !nameIsValid || !emailIsValid || !passwordIsValid || !passwordCheckIsValid) {
       return
@@ -89,18 +94,11 @@ export const Setting = () => {
       return
     }
 
-    const res = await putUserData({id, account, name, email, password, checkPassword: passwordCheck})
+    const res = await putUserData({id, account, name, email, password, checkPassword: passwordCheck, introduction})
     console.log(res)
 
     // 認證通過：送出資料，彈出成功視窗
     Swal.fire("修改成功！")
-
-    // 確認輸入
-    console.log(account)
-    console.log(name)
-    console.log(email)
-    console.log(password)
-    console.log(passwordCheck)
 
     // 送出後清空
     setAccount('')

@@ -4,7 +4,7 @@ import { ReactComponent as LikeIcon } from 'assets/icons/like_hollow.svg'
 import { TweetTitle } from '../AdminTweet/AdminTweet'
 import { useState, useEffect } from 'react'
 import { getAllUsersAdmin } from 'api/tweets'
-// const defaultAvatar = "https://media.istockphoto.com/id/1388253782/photo/positive-successful-millennial-business-professional-man-head-shot-portrait.webp?b=1&s=612x612&w=0&k=20&c=VsTsa0kjyZ7ALe-nyKAUfynyRxZo8H4LRMdu_ecPuOY="
+
 
 import avatarDefulat from 'assets/images/default.png'
 import bannerDefault from 'assets/images/flowers.png'

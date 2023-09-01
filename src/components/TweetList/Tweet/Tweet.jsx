@@ -42,7 +42,7 @@ export const IconInfo = ({ setShowReplyModal, id, name, account, avatar, descrip
           setLiked(true)
         }
       } else if(tab === 'like') {
-        setLike(true)
+        setLiked(true)
       }
     }
 

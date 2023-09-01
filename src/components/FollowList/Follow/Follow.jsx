@@ -35,20 +35,20 @@ export const Follow = ({
     checkIsFollowing()
   }, [])
 
-  // 串接
+  // 串接（取消）追蹤功能
   const handleFollow = async () => {
     try {
-      if(isFollowing === true) {
+      if(isFollowing) {
         const res = await removeFollowing(followId)
         setIsFollowing(false)
-        console.log(res.data)
-      } else if(isFollowing === false) {
+        // console.log(res.data)
+      } else if(!isFollowing) {
         const res = await addFollowing(followId)
         setIsFollowing(true)
-        console.log(res.data)
+        // console.log(res.data)
       }
-    } catch(err) {
-      console.log(err)
+    } catch(error) {
+      console.error(error)
     }
   }  
 

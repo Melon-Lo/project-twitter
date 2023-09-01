@@ -103,7 +103,7 @@ export const Modal = ({ setShowModal }) => {
         </div>
       </div>
       <div className="modalAvatarBox">
-        <img className="avatar" src={avatar} alt="avatar" />
+        <img className="loading" src={avatar} alt="loading" />
       </div>
       <textarea 
         name="tweet" 

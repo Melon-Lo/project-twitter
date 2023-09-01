@@ -71,7 +71,7 @@ export const ReplyList = (props) => {
                 navigate('/user/other')
               }}
             >
-              <img className="avatar" src={avatar} alt="avatar" />
+              <img className="avatar" src={avatar} alt="loading" />
             </div>
             <div className="info">
               <div className="name">{name}</div>

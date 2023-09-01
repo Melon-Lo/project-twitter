@@ -17,7 +17,7 @@ export const Reply = ({ reply }) => {
         <img 
           className="avatar" 
           src={avatar} 
-          alt="avatar" 
+          alt="loading" 
           onClick={() => {
             if(pathname === '/main' || pathname === '/reply_list') {
               localStorage.setItem("otherUserId", UserId)

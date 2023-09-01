@@ -59,7 +59,7 @@ export const OtherFollow = ({
       <div className="name">{name}</div>
       <div className="content">{description}</div>
       <div className="avatarBox">
-        <img src={avatar} alt="avatar" />
+        <img src={avatar} alt="loading" />
       </div>
       {isFollowing ?
         <button 

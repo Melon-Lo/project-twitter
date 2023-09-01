@@ -38,7 +38,7 @@ export const TweetList = ({ tweets }) => {
           />
         }
         <div className="AddTweetBox">
-          <div className="avatarBox"><img className="avatar" src={avatar} alt="avatar" /></div>
+          <div className="avatarBox"><img className="avatar" src={avatar} alt="loading" /></div>
           <div className="addTweetContent" onClick={addTweet}>
             有什麼新鮮事？
           </div>

@@ -148,7 +148,7 @@ export const OtherUser = () => {
               }
             </div>
             <div className="avatarBox">
-              <img className="avatar" src={avatar ? avatar : DefaultAvatar} alt="avatar" />
+              <img className="avatar" src={avatar ? avatar : DefaultAvatar} alt="loading" />
             </div>
             <div className="info">
               <div className="name">{name}</div>

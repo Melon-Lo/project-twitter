@@ -127,7 +127,7 @@ export const ReplyModal = ({ setShowReplyModal }) => {
         children={<ReplyInfo account={account} />} 
       />
       <div className="modalAvatarBox">
-        <img className="avatar" src={userAvatar} alt="avatar" />
+        <img className="avatar" src={userAvatar} alt="loading" />
       </div>
       <textarea 
         name="tweet"

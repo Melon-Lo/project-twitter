@@ -24,7 +24,7 @@ export const AdminTweetItem = ({
   return (
     <div className="AdminTweetItem">
       <div className="avatarBox">
-        <img className="avatar" src={avatar} alt="avatar" />
+        <img className="loading" src={avatar} alt="loading" />
       </div>
       <div className="tweetText">
         <div className="topText">

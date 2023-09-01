@@ -59,7 +59,7 @@ export const Recommendation = ({ id, name, avatar, account, Followers }) => {
   return (
     <div className="person">
       <div className="avatarBox">
-        <img className="avatar" src={avatar ? avatar : DefaultAvatar} alt="avatar" />
+        <img className="avatar" src={avatar ? avatar : DefaultAvatar} alt="loading" />
       </div>
       <div className="account">
         <div className="accountTitle">{name}</div>

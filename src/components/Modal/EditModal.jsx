@@ -119,7 +119,7 @@ export const EditModal = ({ avatarImg, bannerImg }) => {
         </button>
       </div>
       <div className="coverBox">
-        <img src={bannerImg} alt="cover"/>
+        <img src={bannerImg} alt="loading"/>
         <CloseIcon className="closeIcon" />
         <AddPhotoIcon className="photoIcon" />
         <input 
@@ -136,7 +136,7 @@ export const EditModal = ({ avatarImg, bannerImg }) => {
       </div>
       <div className="editSection">
         <div className="avatarBox">
-          <img src={avatarImg} alt="avatar"/>
+          <img src={avatarImg} alt="loading"/>
         </div>
         <div className="avatarBoxCover">
           <AddPhotoIcon className="photoIcon" />

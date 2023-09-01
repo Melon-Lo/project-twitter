@@ -76,7 +76,7 @@ export const User = () => {
         }
         <div className="userBox">
           <div className="coverBox">
-            <img src={banner === null ? DefaultBanner : banner } alt="banner" />
+            <img src={banner === null ? DefaultBanner : banner } alt="loading" />
           </div>
           <div className="infoBox">
             <button onClick={() => {
@@ -86,7 +86,7 @@ export const User = () => {
               編輯個人資料
             </button>
             <div className="avatarBox">
-              <img className="avatar" src={avatar === null ? DefaultAvatar : avatar } alt="avatar" />
+              <img className="avatar" src={avatar === null ? DefaultAvatar : avatar } alt="loading" />
             </div>
             <div className="info">
               <div className="name">{name}</div>

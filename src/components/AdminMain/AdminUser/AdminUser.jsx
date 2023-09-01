@@ -25,7 +25,7 @@ export const CardItem = ({
   return (
     <div className='card'>
       <div className="backGroundImg">
-        <img src={img ? img : bannerDefault} alt="banner" />
+        <img src={img ? img : bannerDefault} alt="loading" />
       </div>
       <div className="avatarSection">
         <div className="avatarBox">

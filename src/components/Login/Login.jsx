@@ -13,7 +13,7 @@ export const Login = () => {
   const [account, setAccount] = useState('')
   const [password, setPassword] = useState('')
 
-  const { login, setIsAuthenticated } = useContext(AuthContext) 
+  const { login, setIsAuthenticated } = useContext(AuthContext)
 
   const navigate = useNavigate()
 
@@ -24,8 +24,8 @@ export const Login = () => {
 
     // 登入失敗
     if (!response.data) {
-      if (response.response.data.status === "error") 
-      setIsAuthenticated(false)
+      if (response.response.data.status === "error")
+        setIsAuthenticated(false)
       // 登入失敗訊息
       Swal.fire({
         position: 'top',
@@ -34,7 +34,7 @@ export const Login = () => {
         icon: 'error',
         showConfirmButton: false,
       });
-      return 
+      return
     }
 
     // 登入成功
@@ -50,45 +50,49 @@ export const Login = () => {
     navigate('/main')
   }
 
-  const handleLogin = (event) => {
+  // const handleSubmit = (e) => {
+  //   e.preventDefault();
+  // }
 
-    // 按下登入
-    if (event.currentTarget.classList.contains('orange')) {
-      // 登入成功訊息
-      Swal.fire({
-        position: 'top',
-        title: '登入成功！',
-        timer: 1000,
-        icon: 'success',
-        showConfirmButton: false,
-      });
+  // const handleLogin = (event) => {
 
-      // 等串接API後，會有登入失敗的狀況
+  // 按下登入
+  // if (event.currentTarget.classList.contains('orange')) {
+  //   // 登入成功訊息
+  //   Swal.fire({
+  //     position: 'top',
+  //     title: '登入成功！',
+  //     timer: 1000,
+  //     icon: 'success',
+  //     showConfirmButton: false,
+  //   });
 
-      //按下後台登入 
-    // } else if (event.currentTarget.classList.contains('back-signup-link')) {
-    //   setTimeout(event.href='http://localhost:3000/admin-login', 10000)
+  // 等串接API後，會有登入失敗的狀況
 
-    //   Swal.fire({
-    //     icon: 'question',
-    //     title: '後台登入確認',
-    //     text: '您確定要登入後台頁面?',
-    //   })
-    } else if (event.currentTarget.classList.contains('cancel-link')) {
-      Swal.fire({
-        title: '您確定要取消註冊嗎?',
-        showCancelButton: true,
-        confirmButtonText: '確定',
-      }).then((result) => {
-        /* Read more about isConfirmed, isDenied below */
-        if (result.isConfirmed) {
-          Swal.fire('已取消!', '', 'success')
-        }
-      })
-    }
-  }
+  //按下後台登入 
+  // } else if (event.currentTarget.classList.contains('back-signup-link')) {
+  //   setTimeout(event.href='http://localhost:3000/admin-login', 10000)
 
-   // 可加入context中，重複使用
+  //   Swal.fire({
+  //     icon: 'question',
+  //     title: '後台登入確認',
+  //     text: '您確定要登入後台頁面?',
+  //   })
+  // } else if (event.currentTarget.classList.contains('cancel-link')) {
+  //   Swal.fire({
+  //     title: '您確定要取消註冊嗎?',
+  //     showCancelButton: true,
+  //     confirmButtonText: '確定',
+  //   }).then((result) => {
+  /* Read more about isConfirmed, isDenied below */
+  //       if (result.isConfirmed) {
+  //         Swal.fire('已取消!', '', 'success')
+  //       }
+  //     })
+  //   }
+  // }
+
+  // 可加入context中，重複使用
   // const handleCancel = () => {
   //   Swal.fire({
   //     title: '您確定要取消註冊嗎?',
@@ -111,18 +115,25 @@ export const Login = () => {
       {/* <form onSubmit={handleSubmit}> */}
         <AuthInput
           id="account"
+          name="account"
+          type="text"
           label="帳號"
           value={account}
           placeholder="請輸入帳號"
           onChange={(accountInputValue) => setAccount(accountInputValue)}
+          valuelength={account.length}
+          textLength="50"
         />
         <AuthInput
           id="password"
+          name="account"
           type="password"
           label="密碼"
           value={password}
           placeholder="請輸入密碼"
           onChange={(passwordInputValue) => setPassword(passwordInputValue)}
+          valuelength={password.length}
+          textLength="50"
         />
       {/* </form> */}
       <div className='btnGroup'>
@@ -131,14 +142,12 @@ export const Login = () => {
           onClick={handleClick}
         />
         <div className='aLink'>
-          <a href="#" className='cancel-link' onClick={() => navigate('/signup')}>註冊</a>
+          <a href="#" className='cancel-link' onClick={() => navigate('/signup')}>註冊
+          </a>
           <span className='point'>&bull;</span>
           <Link to="http://localhost:3000/admin-login" className='back-signup-link'>
             後台登入
           </Link>
-
-          {/* 不確定這樣寫O不OK */}
-          {/* <a href="http://localhost:3000/admin-login" className='back-signup-link' onClick={handleLogin}>後台登入</a> */}
         </div>
       </div>
     </div>

@@ -1,5 +1,5 @@
 import axios from "axios";
-const authURL = 'https://simple-twitter-0827-5fac12a34439.herokuapp.com/api'
+const authURL = 'https://simple-twitter-0901-98d00e19f6cc.herokuapp.com/api'
 
 
 // 使用者登入

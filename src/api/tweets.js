@@ -111,14 +111,46 @@ export const postTweet = async ({ description }) => {
   } catch (error) {
     console.error("[Post Tweet Failed]", error.response.data.message)
   }
-} 
+}
 
-// 取得追蹤數前十名的用戶
-// GET: /followships/top10
-export const getTop10Users = async () => {
+
+// admin取得所有使用者
+export const getAllUsersAdmin = async () => {
   try {
-    const res = axiosInstance.get(`${baseURL}/followships/top10`)
+    const res = await axiosInstance.get(`${baseURL}/admin/users`)
+    // console.log('getAllUsersAdmin回傳值', res.data)
+
+    return res.data
   } catch (error) {
-    console.error("[Get Top10 Users Failed]: ", error.response.data.message)
+    console.log("[Get Admin all users Failed]", error.response.data.message)
+  }
+}
+
+//admin瀏覽所有的tweets
+export const getAllTweetsAdmin = async () => {
+  try {
+    const res = await axiosInstance.get(`${baseURL}/admin/tweets`)
+    // console.log('getAllTweetsAdmin', res.data)
+
+    return res.data
+  } catch (error) {
+    console.error("[Get Admin all tweets Failed]")
+  }
+}
+
+//admin 刪除特定推文
+export const deleteTweetAdmin = async (authToken, id) => {
+  try {
+    const res = await axios.delete(`${baseURL}/admin/tweets/${id}`, {
+      headers: {
+        Authorization: 'Bearer ' + authToken
+      },
+    })
+
+    // console.log("deleteTweetAdmin:", res)
+
+    return res.data
+  } catch (error) {
+    console.error("[DeleteTweetAdmin failed]", error)
   }
 }

@@ -71,6 +71,7 @@ export const ReplyModal = ({ setShowReplyModal }) => {
     // 關閉modal並清空content
     setShowReplyModal(false)
     setContent('')
+    
     navigate('/main')
   }
 

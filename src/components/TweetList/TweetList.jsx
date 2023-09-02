@@ -10,6 +10,9 @@ import { Modal } from 'components/Modal/Modal'
 import { ReplyModal } from 'components/Modal/ReplyModal'
 import { useNavigate } from 'react-router-dom'
 
+// import icons & images
+import DefaultAvatar from 'assets/images/default_avatar.svg'
+
 export const TweetList = ({ tweets }) => {
   const { showModal, setShowModal, showReplyModal, setShowReplyModal } = useContext(ModalContext)
   const navigate = useNavigate()
@@ -38,7 +41,7 @@ export const TweetList = ({ tweets }) => {
           />
         }
         <div className="AddTweetBox">
-          <div className="avatarBox"><img className="avatar" src={avatar} alt="loading" /></div>
+          <div className="avatarBox"><img className="avatar" src={avatar ? avatar : DefaultAvatar} alt="loading" /></div>
           <div className="addTweetContent" onClick={addTweet}>
             有什麼新鮮事？
           </div>

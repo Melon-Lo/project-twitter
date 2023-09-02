@@ -23,38 +23,44 @@ export const IconInfo = ({ setShowReplyModal, id, name, account, avatar, descrip
   const selfId = JSON.parse(localStorage.getItem("userInfo")).id
   const otherId = localStorage.getItem("otherUserId")
 
+  const [likes, setLikes] = useState(likeCount)
+
   // 渲染
   const [liked, setLiked] = useState(false)
   useEffect(() => {
-    if(pathname === '/main') {
-      const mainIdArray = LikeUsers.map(LikeUser => LikeUser.userId)
-      if(mainIdArray.includes(selfId)) {
-        setLiked(true)
-      } else {
-        setLiked(false)
-      }
-    }
-
-    if(pathname === '/user/self') {
-      if(tab === 'tweet') {
-        const idArray = LikeUsers.map(LikeUser => LikeUser.id)
-        if(idArray.includes(selfId)) {
+    const checkLiked = async () => {
+      if(pathname === '/main') {
+        const mainIdArray = LikeUsers.map(LikeUser => LikeUser.userId)
+        if(mainIdArray.includes(selfId)) {
           setLiked(true)
+        } else {
+          setLiked(false)
         }
-      } else if(tab === 'like') {
-        setLiked(true)
       }
-    }
 
-    if(pathname === '/user/other') {
-      if(tab === 'tweet') {
-        const idArray = LikeUsers.map(LikeUser => LikeUser.id)
-        if(idArray.includes(selfId)) {
+      if(pathname === '/user/self') {
+        if(tab === 'tweet') {
+          const idArray = LikeUsers.map(LikeUser => LikeUser.id)
+          if(idArray.includes(selfId)) {
+            setLiked(true)
+          }
+        } else if(tab === 'like') {
           setLiked(true)
         }
       }
+
+      if(pathname === '/user/other') {
+        if(tab === 'tweet') {
+          const idArray = LikeUsers.map(LikeUser => LikeUser.id)
+          if(idArray.includes(selfId)) {
+            setLiked(true)
+          }
+        }
+      }
     }
-  })
+
+    checkLiked()
+  }, [])
 
   // 串接 addLike API
   const [like, setLike] = useState(isLiked)
@@ -64,10 +70,18 @@ export const IconInfo = ({ setShowReplyModal, id, name, account, avatar, descrip
       let data = []
       if(like === true) {
         data = await removeLike(Token, id)
+        setLiked(false)
+        setLikes(likes - 1)
+        console.log(data)
       } else {
         data = await addLike(Token, id)
+        setLiked(true)
+        setLikes(likes + 1)
+        console.log(data)
       }
       setLike(data.isLiked)
+      console.log(liked)
+      console.log(likeCount)
     } catch(err) {
       console.log(err)
     }
@@ -99,7 +113,7 @@ export const IconInfo = ({ setShowReplyModal, id, name, account, avatar, descrip
               <LikeHollowIcon className="icon" />}
           </div>
           <div className="number">
-            {likeCount}
+            {likes}
           </div>
         </div>
       </>

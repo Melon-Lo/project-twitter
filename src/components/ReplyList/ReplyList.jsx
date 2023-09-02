@@ -102,7 +102,12 @@ export const ReplyList = (props) => {
         </div>
       </div>
       <div className="bottomSection">
-        {replies}
+        { replies ?
+          replies :
+          <div className='none'>
+            尚無任何回覆
+          </div>
+        }
       </div>
     </div>
   )

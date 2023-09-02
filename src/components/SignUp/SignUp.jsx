@@ -193,6 +193,15 @@ export const SignUp = () => {
     // 執行非同步
     const response = await signup({ account, name, email, password, passwordCheck })
 
+    if(!response) {
+      Swal.fire({
+        icon: 'error',
+        title: '註冊失敗',
+        text: '帳號已重複註冊',
+      })
+      return
+    }
+
     // 認證通過：送出資料，彈出成功視窗
     Swal.fire({
       icon: 'success',

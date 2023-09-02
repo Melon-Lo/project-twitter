@@ -74,6 +74,7 @@ export const EditModal = ({ avatarImg, bannerImg }) => {
     setAvatar('')
 
     navigate('/user/self')
+    window.location.reload()
   }
 
   // 驗證函式

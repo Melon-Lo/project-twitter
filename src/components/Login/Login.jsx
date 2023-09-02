@@ -59,7 +59,6 @@ export const Login = () => {
   if (localStorage.getItem("userInfo")) {
     userInfo = JSON.parse(localStorage.getItem("userInfo"))
     role = userInfo.role
-
   }
 
   useEffect(() => {

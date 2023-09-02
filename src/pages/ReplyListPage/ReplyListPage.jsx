@@ -34,7 +34,7 @@ export const ReplyListPage = () => {
     } catch (err) {
       console.error(err)
     }
-  })
+  }, [])
 
   return (
     <div className="replyListPageContainer">

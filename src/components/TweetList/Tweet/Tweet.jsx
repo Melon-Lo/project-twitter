@@ -72,16 +72,14 @@ export const IconInfo = ({ setShowReplyModal, id, name, account, avatar, descrip
         data = await removeLike(Token, id)
         setLiked(false)
         setLikes(likes - 1)
-        console.log(data)
+        // console.log(data)
       } else {
         data = await addLike(Token, id)
         setLiked(true)
         setLikes(likes + 1)
-        console.log(data)
+        // console.log(data)
       }
       setLike(data.isLiked)
-      console.log(liked)
-      console.log(likeCount)
     } catch(err) {
       console.log(err)
     }

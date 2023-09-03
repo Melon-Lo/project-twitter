@@ -1,70 +1,85 @@
-# Getting Started with Create React App
+ALPHACamp-Third Semester-Simple-Twitter
+============================================
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## Introduction
+<p>This is a project conducted in the third semester of ALPHA Camp, developed in a frontend-backend separation mode. The frontend is developed using the React framework.</p>
 
-## Available Scripts
+![image](https://github.com/Melon-Lo/project-twitter/blob/main/src/assets/images/%E7%99%BB%E5%85%A5%E7%95%AB%E9%9D%A2.png)
+![image](https://github.com/Melon-Lo/project-twitter/blob/main/src/assets/images/%E7%99%BB%E5%85%A5%E5%BE%8C%E9%A0%81%E9%9D%A2.gif)
 
-In the project directory, you can run:
 
-### `npm start`
+## Feature
+<p>This project is similar to the Twitter website and has the following functions</p>
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+### Regular Users can use the following features:
+- **Registration:** users can register a new account by providing account information, username, email, password, and password confirmation, totaling five input fields.
+- **Login:** Registered users can enter their account credentials in the login form to access the frontend and use the platform.</li>
+- **Profile Viewing:** Users can view their own information, including profile picture, background image, number of following and followers, tweet content, reply content, and liked content.
+- **Follow:** Users can follow other recommended users on the website.
+- **Post Tweets:** Users can publish tweet content.
+- **Reply to Tweets:** Users can reply to other users' tweets.
+- **Like Functionality:** Users can like tweets they appreciate by clicking the heart icon.
+- **Edit Profile:** Users can edit their personal information, including profile picture, background image, name, and self-introduction.
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+### Administrators can use the following features:
+- **Browse Tweets:** Administrators can browse tweets posted by frontend users (Tweet List).
+- **Browse User Data:** Administrators can browse user data from the frontend (User List).
+- **Delete Tweets:** Administrators can delete tweets by clicking the 'X' button in the tweet list.
 
-### `npm test`
+## If you just want to have a taste of this project
+   <p>You are welcome to directly visit https://melon-lo.github.io/login without downloading any thing. Alternatively, look at the right part of this GitHub repo, you can find github-pages with rocket and active icons near it. Press it and you will be directed to Deployments page, then press "View deployment" on the right side.</p>
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+## Test Accounts
 
-### `npm run build`
+<ol>
+  <li><strong>As Regular Users</strong><ul>
+    <li><strong>Username: </strong> user1</li>
+    <li><strong>Password: </strong> 12345678</li>
+  </ul>
+  <li><strong>As Administrators</strong><ul>
+    <li><strong>Username: </strong>root</li>
+    <li><strong>Password: </strong>12345678</li>
+  </ul></li>
+</ol>
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+## Dependencies description
+- axios 1.4.0
+- clsx 2.0.0
+- jsonwebtoken 8.5.1
+- jwt-decode 3.1.2
+- react-dom 18.2.0
+- react-router-dom 6.15.0
+- sweetalert2 11.7.26
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+## Installation and Execution
+1. Please ensure that Node.js and npm are well installed in your local environment.
+2. Find a folder where you want to put this project, open Terminal, and run the command for cloning:
+   
+   ```
+   git clone https://github.com/Melon-Lo/project-twitter.git
+   ```
+3. Then, you'll see a directory called "simple-twitter". Enter the directory and run the command (would take a while, be patient):
 
-### `npm run eject`
+   ```
+   npm install
+   ```
+4. After installment, run:
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+   ```
+   npm start
+   ```
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+5. The project is ran successfully while seeing the following info in Terminal:
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+   ```
+   webpack compiled successfully
+   ```
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+6. Usually, your browser will run automatically and show the project. If it doesn't, please open your browser, type "http://localhost:3000/project-twitter", then enjoy the project.
+7. Press ```ctrl + c``` in Terminal if you want to stop running the project.
 
-## Learn More
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+## Dear Project Team Members
+- **Front-end:** [Andrew](https://github.com/andrewye0128), [Melon](https://github.com/Melon-Lo)
+- **Back-end:** [蘇潔](https://github.com/susu725),  [Astor](https://github.com/TCY1020)
